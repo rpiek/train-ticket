@@ -10,7 +10,6 @@ import org.apache.skywalking.apm.toolkit.trace.TraceCrossThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -40,9 +39,6 @@ public class TravelServiceImpl implements TravelService {
 
     @Autowired
     private RestTemplate restTemplate;
-
-    @Autowired
-    private DiscoveryClient discoveryClient;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TravelServiceImpl.class);
 
@@ -519,7 +515,7 @@ public class TravelServiceImpl implements TravelService {
         HttpEntity requestEntity = new HttpEntity(null);
         String route_service_url = getServiceUrl("ts-route-service");
         ResponseEntity<Response> re = restTemplate.exchange(
-                route_service_url + "/api/v1/routeservice/routes/" + routeId,
+                route_service_url + ":11178/api/v1/routeservice/routes/" + routeId,
                 HttpMethod.GET,
                 requestEntity,
                 Response.class);

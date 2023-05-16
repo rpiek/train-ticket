@@ -3,17 +3,28 @@ server:
   port: 12346  # HTTP (Tomcat) port
 
 spring:
-  cloud:
-    nacos:
-      discovery:
-        server-addr: ${NACOS_ADDRS:nacos-0.nacos-headless.default.svc.cluster.local,nacos-1.nacos-headless.default.svc.cluster.local,nacos-2.nacos-headless.default.svc.cluster.local}
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: ${NACOS_ADDRS:nacos-0.nacos-headless.default.svc.cluster.local,nacos-1.nacos-headless.default.svc.cluster.local,nacos-2.nacos-headless.default.svc.cluster.local}
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: ts-travel-service
+  zipkin:
+    base-url: http://zipkin:9411
   datasource:
     url: jdbc:mysql://${TRAVEL_MYSQL_HOST:ts-travel-mysql}:${TRAVEL_MYSQL_PORT:3306}/${TRAVEL_MYSQL_DATABASE:ts-travel-mysql}?useSSL=false
     username: ${TRAVEL_MYSQL_USER:root}
     password: ${TRAVEL_MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
+  sleuth:
+    otel:
+      config:
+        trace-id-ration-based: 1.0
+#      export:
+#        otlp:
+#          endpoint: http://collector:4317
 
   jpa:
     hibernate:
@@ -26,16 +37,16 @@ swagger:
   controllerPackage: travel.controller
 
 train-service:
-  url: http://${TRAIN_SERVICE_HOST:ts-train-service}:${TRAIN_SERVICE_PORT:14567}
+  url: http://${TRAIN_SERVICE_HOST:localhost}:${TRAIN_SERVICE_PORT:14567}
 
 order-service:
-  url: http://${ORDER_SERVICE_HOST:ts-order-service}:${ORDER_SERVICE_PORT:12031}
+  url: http://${ORDER_SERVICE_HOST:localhost}:${ORDER_SERVICE_PORT:12031}
 
 route-service:
-  url: http://${ROUTE_SERVICE_HOST:ts-route-service}:${ROUTE_SERVICE_PORT:11178}
+  url: http://${ROUTE_SERVICE_HOST:localhost}:${ROUTE_SERVICE_PORT:11178}
 
 basic-service:
-  url: http://${BASIC_SERVICE_HOST:ts-basic-service}:${BASIC_SERVICE_PORT:15680}
+  url: http://${BASIC_SERVICE_HOST:localhost}:${BASIC_SERVICE_PORT:15680}
 
 seat-service:
-  url: http://${SEAT_SERVICE_HOST:ts-seat-service}:${SEAT_SERVICE_PORT:18898}
+  url: http://${SEAT_SERVICE_HOST:localhost}:${SEAT_SERVICE_PORT:18898}
