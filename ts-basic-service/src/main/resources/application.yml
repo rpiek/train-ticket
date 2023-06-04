@@ -8,6 +8,8 @@ spring:
 #        server-addr: ${NACOS_ADDRS:nacos-0.nacos-headless.default.svc.cluster.local,nacos-1.nacos-headless.default.svc.cluster.local,nacos-2.nacos-headless.default.svc.cluster.local}
   application:
     name: ts-basic-service
+  zipkin:
+    base-url: http://zipkin:9411
 
 swagger:
   controllerPackage: fdse.microservice.controller

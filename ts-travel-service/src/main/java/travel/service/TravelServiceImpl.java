@@ -341,7 +341,7 @@ public class TravelServiceImpl implements TravelService {
         HttpEntity requestEntity = new HttpEntity(infos, null);
         String basic_service_url = getServiceUrl("ts-basic-service");
         ResponseEntity<Response> re = restTemplate.exchange(
-                basic_service_url + "/api/v1/basicservice/basic/travels",
+                basic_service_url + ":15680/api/v1/basicservice/basic/travels",
                 HttpMethod.POST,
                 requestEntity,
                 Response.class);
@@ -390,7 +390,7 @@ public class TravelServiceImpl implements TravelService {
         HttpEntity requestEntity = new HttpEntity(query, null);
         String basic_service_url = getServiceUrl("ts-basic-service");
         ResponseEntity<Response> re = restTemplate.exchange(
-                basic_service_url + "/api/v1/basicservice/basic/travel",
+                basic_service_url + ":15680/api/v1/basicservice/basic/travel",
                 HttpMethod.POST,
                 requestEntity,
                 Response.class);
@@ -520,6 +520,8 @@ public class TravelServiceImpl implements TravelService {
                 requestEntity,
                 Response.class);
         Response routeRes = re.getBody();
+
+        repository.findAll();
 
         Route route1 = new Route();
         TravelServiceImpl.LOGGER.info("[getRouteByRouteId][Get Route By Id][Routes Response is : {}]", routeRes.toString());
