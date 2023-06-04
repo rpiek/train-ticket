@@ -374,7 +374,7 @@ public class BasicServiceImpl implements BasicService {
         HttpEntity requestEntity = new HttpEntity(trainTypeNames, null);
         String train_service_url=getServiceUrl("ts-train-service");
         ResponseEntity<Response> re = restTemplate.exchange(
-                train_service_url + "/api/v1/trainservice/trains/byNames",
+                train_service_url + ":14567/api/v1/trainservice/trains/byNames",
                 HttpMethod.POST,
                 requestEntity,
                 Response.class);
@@ -391,7 +391,7 @@ public class BasicServiceImpl implements BasicService {
         HttpEntity requestEntity = new HttpEntity(null);
         String train_service_url=getServiceUrl("ts-train-service");
         ResponseEntity<Response> re = restTemplate.exchange(
-                train_service_url + "/api/v1/trainservice/trains/byName/" + trainTypeName,
+                train_service_url + ":14567/api/v1/trainservice/trains/byName/" + trainTypeName,
                 HttpMethod.GET,
                 requestEntity,
                 Response.class);
@@ -444,7 +444,7 @@ public class BasicServiceImpl implements BasicService {
         HttpEntity requestEntity = new HttpEntity(null, null);
         String price_service_url=getServiceUrl("ts-price-service");
         ResponseEntity<Response> re = restTemplate.exchange(
-                price_service_url + "/api/v1/priceservice/prices/" + routeId + "/" + trainType,
+                price_service_url + ":16579/api/v1/priceservice/prices/" + routeId + "/" + trainType,
                 HttpMethod.GET,
                 requestEntity,
                 Response.class);
@@ -459,7 +459,7 @@ public class BasicServiceImpl implements BasicService {
         HttpEntity requestEntity = new HttpEntity(routeIdsTypes, null);
         String price_service_url=getServiceUrl("ts-price-service");
         ResponseEntity<Response> re = restTemplate.exchange(
-                price_service_url + "/api/v1/priceservice/prices/byRouteIdsAndTrainTypes",
+                price_service_url + ":16579/api/v1/priceservice/prices/byRouteIdsAndTrainTypes",
                 HttpMethod.POST,
                 requestEntity,
                 Response.class);

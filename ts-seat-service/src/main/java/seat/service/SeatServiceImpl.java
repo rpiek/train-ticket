@@ -5,8 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -27,9 +25,6 @@ import java.util.Set;
 public class SeatServiceImpl implements SeatService {
     @Autowired
     RestTemplate restTemplate;
-
-    @Autowired
-    private DiscoveryClient discoveryClient;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SeatServiceImpl.class);
 
@@ -58,7 +53,7 @@ public class SeatServiceImpl implements SeatService {
             requestEntity = new HttpEntity(seatRequest, null);
             String order_service_url=getServiceUrl("ts-order-service");
             re3 = restTemplate.exchange(
-                    order_service_url + "/api/v1/orderservice/order/tickets",
+                    order_service_url + ":12031/api/v1/orderservice/order/tickets",
                     HttpMethod.POST,
                     requestEntity,
                     new ParameterizedTypeReference<Response<LeftTicketInfo>>() {
@@ -71,7 +66,7 @@ public class SeatServiceImpl implements SeatService {
             HttpEntity requestEntity = new HttpEntity(seatRequest, null);
             String order_other_service_url=getServiceUrl("ts-order-other-service");
             re3 = restTemplate.exchange(
-                    order_other_service_url + "/api/v1/orderOtherService/orderOther/tickets",
+                    order_other_service_url + ":12031/api/v1/orderOtherService/orderOther/tickets",
                     HttpMethod.POST,
                     requestEntity,
                     new ParameterizedTypeReference<Response<LeftTicketInfo>>() {
@@ -142,7 +137,7 @@ public class SeatServiceImpl implements SeatService {
             HttpEntity requestEntity = new HttpEntity(seatRequest, null);
             String order_service_url=getServiceUrl("ts-order-service");
             re3 = restTemplate.exchange(
-                    order_service_url + "/api/v1/orderservice/order/tickets",
+                    order_service_url + ":12031/api/v1/orderservice/order/tickets",
                     HttpMethod.POST,
                     requestEntity,
                     new ParameterizedTypeReference<Response<LeftTicketInfo>>() {
@@ -158,7 +153,7 @@ public class SeatServiceImpl implements SeatService {
             requestEntity = new HttpEntity(seatRequest, null);
             String order_other_service_url=getServiceUrl("ts-order-other-service");
             re3 = restTemplate.exchange(
-                    order_other_service_url + "/api/v1/orderOtherService/orderOther/tickets",
+                    order_other_service_url + ":12031/api/v1/orderOtherService/orderOther/tickets",
                     HttpMethod.POST,
                     requestEntity,
                     new ParameterizedTypeReference<Response<LeftTicketInfo>>() {
@@ -208,7 +203,7 @@ public class SeatServiceImpl implements SeatService {
         HttpEntity requestEntity = new HttpEntity(null);
         String config_service_url = getServiceUrl("ts-config-service");
         ResponseEntity<Response<Config>> re = restTemplate.exchange(
-                config_service_url + "/api/v1/configservice/configs/" + configName,
+                config_service_url + ":15679/api/v1/configservice/configs/" + configName,
                 HttpMethod.GET,
                 requestEntity,
                 new ParameterizedTypeReference<Response<Config>>() {

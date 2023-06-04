@@ -1,6 +1,7 @@
 package config.repository;
 
 import config.entity.Config;
+import org.springframework.cloud.sleuth.annotation.NewSpan;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public interface ConfigRepository extends CrudRepository<Config, String> {
      * @param name name
      * @return Config
      */
+    @NewSpan("database")
     Config findByName(String name);
 
     /**
@@ -23,6 +25,7 @@ public interface ConfigRepository extends CrudRepository<Config, String> {
      *
      * @return List<Config>
      */
+    @NewSpan("database")
     @Override
     List<Config> findAll();
 
@@ -32,5 +35,6 @@ public interface ConfigRepository extends CrudRepository<Config, String> {
      * @param name name
      * @return null
      */
+    @NewSpan("database")
     void deleteByName(String name);
 }

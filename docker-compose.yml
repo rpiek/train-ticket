@@ -25,12 +25,12 @@ services:
     networks:
       - my-network
 
-  redis:
-    image: redis
-    ports:
-      - 6379:6379
-    networks:
-      - my-network
+#  redis:
+#    image: redis
+#    ports:
+#      - 6379:6379
+#    networks:
+#      - my-network
 #
 #  ts-ui-dashboard:
 #    build: ts-ui-dashboard
@@ -92,10 +92,10 @@ services:
     networks:
       - my-network
 
-  ts-route-mongo:
-    image: mongo
-    networks:
-      - my-network
+#  ts-route-mongo:
+#    image: mongo
+#    networks:
+#      - my-network
 #
 #  ts-contacts-service:
 #    build: ts-contacts-service
@@ -111,14 +111,14 @@ services:
 #    networks:
 #      - my-network
 #
-#  ts-order-service:
-#    build: ts-order-service
-#    image: thesis/ts-order-service:${IMG_TAG}
-#    restart: always
-#    ports:
-#      - 12031:12031
-#    networks:
-#      - my-network
+  ts-order-service:
+    build: ts-order-service
+    image: thesis/ts-order-service:${IMG_TAG}
+    restart: always
+    ports:
+      - 12031:12031
+    networks:
+      - my-network
 #
 #  ts-order-mongo:
 #    image: mongo
@@ -139,14 +139,14 @@ services:
 #    networks:
 #      - my-network
 #
-#  ts-config-service:
-#    build: ts-config-service
-#    image: thesis/ts-config-service:${IMG_TAG}
-#    restart: always
-#    ports:
-#      - 15679:15679
-#    networks:
-#      - my-network
+  ts-config-service:
+    build: ts-config-service
+    image: thesis/ts-config-service:0.2.0
+    restart: always
+    ports:
+      - 15679:15679
+    networks:
+      - my-network
 #
 #  ts-config-mongo:
 #    image: mongo
@@ -162,19 +162,19 @@ services:
     networks:
       - my-network
 
-  ts-station-mongo:
-    image: mongo
-    networks:
-      - my-network
-#
-#  ts-train-service:
-#    build: ts-train-service
-#    image: thesis/ts-train-service:${IMG_TAG}
-#    restart: always
-#    ports:
-#      - 14567:14567
+#  ts-station-mongo:
+#    image: mongo
 #    networks:
 #      - my-network
+#
+  ts-train-service:
+    build: ts-train-service
+    image: thesis/ts-train-service:0.2.0
+    restart: always
+    ports:
+      - 14567:14567
+    networks:
+      - my-network
 #
 #  ts-train-mongo:
 #    image: mongo
@@ -246,14 +246,14 @@ services:
 #        networks:
 #          - my-network
 #
-#  ts-price-service:
-#        build: ts-price-service
-#        image: thesis/ts-price-service:${IMG_TAG}
-#        restart: always
-#        ports:
-#          - 16579:16579
-#        networks:
-#          - my-network
+  ts-price-service:
+        build: ts-price-service
+        image: thesis/ts-price-service:0.2.0
+        restart: always
+        ports:
+          - 16579:16579
+        networks:
+          - my-network
 #
 #
 #  ts-price-mongo:
@@ -358,14 +358,14 @@ services:
 #    networks:
 #      - my-network
 #
-#  ts-seat-service:
-#        build: ts-seat-service
-#        image: thesis/ts-seat-service:${IMG_TAG}
-#        restart: always
-#        ports:
-#          - 18898:18898
-#        networks:
-#          - my-network
+  ts-seat-service:
+        build: ts-seat-service
+        image: thesis/ts-seat-service:0.2.0
+        restart: always
+        ports:
+          - 18898:18898
+        networks:
+          - my-network
 #
 #  ts-travel-plan-service:
 #        build: ts-travel-plan-service
@@ -556,23 +556,23 @@ services:
 ##    networks:
 ##      - my-network
 #
-
-  otelcol:
-    image: otel/opentelemetry-collector-contrib:latest
-    container_name: otel-col
-    deploy:
-      resources:
-        limits:
-          memory: 125M
-    restart: "no"
-    command: [ "--config=/etc/otelcol-config.yml" ]
-    volumes:
-      - ./otelcollector/otelcol-config.yml:/etc/otelcol-config.yml
-    ports:
-      - "4317"          # OTLP over gRPC receiver
-      - "4318:4318"     # OTLP over HTTP receiver
-    depends_on:
-      - zipkin
+#
+#  otelcol:
+#    image: otel/opentelemetry-collector-contrib:latest
+#    container_name: otel-col
+#    deploy:
+#      resources:
+#        limits:
+#          memory: 125M
+#    restart: "no"
+#    command: [ "--config=/etc/otelcol-config.yml" ]
+#    volumes:
+#      - ./otelcollector/otelcol-config.yml:/etc/otelcol-config.yml
+#    ports:
+#      - "4317"          # OTLP over gRPC receiver
+#      - "4318:4318"     # OTLP over HTTP receiver
+#    depends_on:
+#      - zipkin
 
 networks:
   my-network:

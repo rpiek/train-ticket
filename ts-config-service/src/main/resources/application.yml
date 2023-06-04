@@ -1,12 +1,14 @@
 spring:
-  cloud:
-    nacos:
-      discovery:
-        server-addr: ${NACOS_ADDRS:nacos-0.nacos-headless.default.svc.cluster.local,nacos-1.nacos-headless.default.svc.cluster.local,nacos-2.nacos-headless.default.svc.cluster.local}
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: ${NACOS_ADDRS:nacos-0.nacos-headless.default.svc.cluster.local,nacos-1.nacos-headless.default.svc.cluster.local,nacos-2.nacos-headless.default.svc.cluster.local}
   application:
     name: ts-config-service
+  zipkin:
+    base-url: http://zipkin:9411
   datasource:
-    url: jdbc:mysql://${CONFIG_MYSQL_HOST:ts-config-mysql}:${CONFIG_MYSQL_PORT:3306}/${CONFIG_MYSQL_DATABASE:ts-config-mysql}?useSSL=false
+    url: jdbc:mysql://${CONFIG_MYSQL_HOST:ts-config-mysql}:${CONFIG_MYSQL_PORT:3312}/${CONFIG_MYSQL_DATABASE:ts-config-mysql}?useSSL=false
     username: ${CONFIG_MYSQL_USER:root}
     password: ${CONFIG_MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -16,6 +18,10 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
+  sleuth:
+    otel:
+      config:
+        trace-id-ration-based: 1.0
 
 
 # HTTP Server

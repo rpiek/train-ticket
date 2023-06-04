@@ -3,10 +3,10 @@ server:
   port: 12031  # HTTP (Tomcat) port
 
 spring:
-  cloud:
-    nacos:
-      discovery:
-        server-addr: ${NACOS_ADDRS:127.0.0.1:8848}
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: ${NACOS_ADDRS:127.0.0.1:8848}
   application:
     name: ts-order-service
   datasource:
@@ -20,6 +20,12 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
+  zipkin:
+    base-url: http://zipkin:9411
+  sleuth:
+    otel:
+      config:
+        trace-id-ration-based: 1.0
 
 swagger:
   controllerPackage: order.controller
