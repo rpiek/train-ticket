@@ -113,7 +113,7 @@ services:
 #
   ts-order-service:
     build: ts-order-service
-    image: thesis/ts-order-service:${IMG_TAG}
+    image: thesis/ts-order-service:0.2.0
     restart: always
     ports:
       - 12031:12031

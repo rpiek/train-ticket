@@ -22,8 +22,13 @@ public interface TripRepository extends CrudRepository<Trip, TripId> {
 
     @NewSpan("database")
     @Override
-    ArrayList<Trip> findAll();
+    ArrayList<Trip>  findAll();
 
     @NewSpan("database")
     ArrayList<Trip> findByRouteId(String routeId);
+
+    @NewSpan("database")
+    @Override
+    <S extends Trip> S save(S entity);
+
 }

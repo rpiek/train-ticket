@@ -15,6 +15,8 @@ services:
       - 11178:11178
     networks:
       - my-network
+    depends_on:
+      - ts-route-mysql
 
   ts-route-mysql:
     image: mysql:5.7
@@ -39,6 +41,8 @@ services:
       - 12345:12345
     networks:
       - my-network
+    depends_on:
+      - ts-station-mysql
 
   ts-station-mysql:
     image: mysql:5.7
@@ -63,6 +67,8 @@ services:
       - 12346:12346
     networks:
       - my-network
+    depends_on:
+      - ts-travel-mysql
 
   ts-travel-mysql:
     image: mysql:5.7
@@ -89,22 +95,22 @@ services:
       - my-network
 
   ts-seat-service:
-    build: ts-seat-service
     image: thesis/ts-seat-service:0.2.0
-    restart: always
+    restart: no
     ports:
       - 18898:18898
     networks:
       - my-network
 
   ts-config-service:
-    build: ts-config-service
     image: thesis/ts-config-service:0.2.0
-    restart: always
+    restart: no
     ports:
       - 15679:15679
     networks:
       - my-network
+    depends_on:
+      - ts-config-mysql
 
   ts-config-mysql:
     image: mysql:5.7
@@ -123,13 +129,14 @@ services:
       - my-network
 
   ts-train-service:
-    build: ts-train-service
     image: thesis/ts-train-service:0.2.0
     restart: always
     ports:
       - 14567:14567
     networks:
       - my-network
+    depends_on:
+      - ts-train-mysql
 
   ts-train-mysql:
     image: mysql:5.7
@@ -155,6 +162,8 @@ services:
       - 16579:16579
     networks:
       - my-network
+    depends_on:
+      - ts-price-mysql
 
   ts-price-mysql:
     image: mysql:5.7
@@ -173,13 +182,14 @@ services:
       - my-network
 
   ts-order-service:
-    build: ts-order-service
     image: thesis/ts-order-service:0.2.0
-    restart: always
+    restart: no
     ports:
       - 12031:12031
     networks:
       - my-network
+    depends_on:
+      - ts-order-mysql
 
   ts-order-mysql:
     image: mysql:5.7

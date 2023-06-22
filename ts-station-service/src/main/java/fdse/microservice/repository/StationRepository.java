@@ -12,6 +12,7 @@ import java.util.Optional;
 @Repository
 public interface StationRepository extends CrudRepository<Station,String> {
 
+    @NewSpan("database")
     Station findByName(String name);
 
     @NewSpan("database")
@@ -24,4 +25,12 @@ public interface StationRepository extends CrudRepository<Station,String> {
     @NewSpan("database")
     @Override
     List<Station> findAll();
+
+    @NewSpan("database")
+    @Override
+    <S extends Station> S save(S entity);
+
+    @NewSpan("database")
+    @Override
+    void delete(Station entity);
 }

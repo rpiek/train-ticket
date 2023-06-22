@@ -61,4 +61,8 @@ public interface RouteRepository extends CrudRepository<Route, String> {
     @NewSpan("database")
     ArrayList<Route> findByStartStationAndEndStation(String startStation, String endStation);
 
+    @NewSpan("database")
+    @Override
+    <S extends Route> S save(S entity);
+
 }

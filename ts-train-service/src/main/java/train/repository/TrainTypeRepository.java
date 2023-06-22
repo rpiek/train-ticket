@@ -25,4 +25,8 @@ public interface TrainTypeRepository extends CrudRepository<TrainType,String> {
     @NewSpan("database")
     @Query(value="SELECT * from train_type where name in ?1", nativeQuery = true)
     List<TrainType> findByNames(List<String> names);
+
+    @NewSpan("database")
+    @Override
+    <S extends TrainType> S save(S entity);
 }

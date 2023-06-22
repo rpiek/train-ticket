@@ -29,4 +29,12 @@ public interface PriceConfigRepository extends CrudRepository<PriceConfig, Strin
     @Override
     List<PriceConfig> findAll();
 
+    @NewSpan("database")
+    @Override
+    <S extends PriceConfig> S save(S entity);
+
+    @NewSpan("database")
+    @Override
+    void delete(PriceConfig entity);
+
 }

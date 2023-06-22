@@ -37,4 +37,9 @@ public interface ConfigRepository extends CrudRepository<Config, String> {
      */
     @NewSpan("database")
     void deleteByName(String name);
+
+    @NewSpan("database")
+    @Override
+    <S extends Config> S save(S entity);
+
 }

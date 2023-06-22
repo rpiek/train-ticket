@@ -33,4 +33,9 @@ public interface OrderRepository extends JpaRepository<Order, String> {
     @NewSpan("database")
     @Override
     void deleteById(String id);
+
+    @NewSpan("database")
+    @Override
+    <S extends Order> S save(S entity);
+
 }
