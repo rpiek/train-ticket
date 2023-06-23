@@ -1,6 +1,8 @@
 package consign.repository;
 
+import consign.entity.Consign;
 import consign.entity.ConsignRecord;
+import org.springframework.cloud.sleuth.annotation.NewSpan;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +21,7 @@ public interface ConsignRepository extends CrudRepository<ConsignRecord, String>
      * @param accountId account id
      * @return ArrayList<ConsignRecord>
      */
+    @NewSpan("database")
     ArrayList<ConsignRecord> findByAccountId(String accountId);
 
     /**
@@ -27,6 +30,7 @@ public interface ConsignRepository extends CrudRepository<ConsignRecord, String>
      * @param accountId account id
      * @return ConsignRecord
      */
+    @NewSpan("database")
     ConsignRecord findByOrderId(String accountId);
 
     /**
@@ -35,6 +39,7 @@ public interface ConsignRepository extends CrudRepository<ConsignRecord, String>
      * @param consignee consignee
      * @return ArrayList<ConsignRecord>
      */
+    @NewSpan("database")
     ArrayList<ConsignRecord> findByConsignee(String consignee);
 
     /**
@@ -43,5 +48,10 @@ public interface ConsignRepository extends CrudRepository<ConsignRecord, String>
      * @param id id
      * @return ConsignRecord
      */
+    @NewSpan("database")
     Optional<ConsignRecord> findById(String id);
+
+    @NewSpan("database")
+    @Override
+    <S extends ConsignRecord> S save(S entity);
 }

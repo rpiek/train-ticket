@@ -2,10 +2,6 @@ server:
   port: 18856
 
 spring:
-  cloud:
-    nacos:
-      discovery:
-        server-addr: ${NACOS_ADDRS:nacos-0.nacos-headless.default.svc.cluster.local,nacos-1.nacos-headless.default.svc.cluster.local,nacos-2.nacos-headless.default.svc.cluster.local}
   application:
     name: ts-food-service
   datasource:
@@ -22,6 +18,9 @@ spring:
   rabbitmq:
     host: ${rabbitmq_host:localhost}
     port: 5672
+  zipkin:
+    base-url: http://zipkin:9411
+
 swagger:
   controllerPackage: foodsearch.controller
 

@@ -20,14 +20,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableAsync
 @IntegrationComponentScan
 @EnableSwagger2
-@EnableDiscoveryClient
 public class AssuranceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AssuranceApplication.class, args);
     }
 
-    @LoadBalanced
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();

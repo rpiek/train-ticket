@@ -3,10 +3,6 @@ server:
   port: 12032  # HTTP (Tomcat) port
 
 spring:
-  cloud:
-    nacos:
-      discovery:
-        server-addr: ${NACOS_ADDRS:nacos-0.nacos-headless.default.svc.cluster.local,nacos-1.nacos-headless.default.svc.cluster.local,nacos-2.nacos-headless.default.svc.cluster.local}
   application:
     name: ts-order-other-service
   datasource:
@@ -23,6 +19,8 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
 #    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
+  zipkin:
+    base-url: http://zipkin:9411
 
 #  rabbitmq:
 #    host: rabbitmq

@@ -65,7 +65,7 @@ public class ConsignServiceImpl implements ConsignService {
         HttpEntity requestEntity = new HttpEntity(null, headers);
         String consign_price_service_url = getServiceUrl("ts-consign-price-service");
         ResponseEntity<Response<Double>> re = restTemplate.exchange(
-                consign_price_service_url + "/api/v1/consignpriceservice/consignprice/" + consignRequest.getWeight() + "/" + consignRequest.isWithin(),
+                consign_price_service_url + ":16110/api/v1/consignpriceservice/consignprice/" + consignRequest.getWeight() + "/" + consignRequest.isWithin(),
                 HttpMethod.GET,
                 requestEntity,
                 new ParameterizedTypeReference<Response<Double>>() {

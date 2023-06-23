@@ -138,12 +138,12 @@ public class FoodServiceImpl implements FoodService {
             delivery.setStoreName(addFoodOrder.getStoreName());
 
             String deliveryJson = JsonUtils.object2Json(delivery);
-            LOGGER.info("[createFoodOrder][AddFoodOrder, delivery info send to mq][delivery info: {}]", deliveryJson);
-            try {
-                sender.send(deliveryJson);
-            } catch (Exception e) {
-                LOGGER.error("[createFoodOrder][AddFoodOrder][send delivery info to mq error][exception: {}]", e.toString());
-            }
+//            LOGGER.info("[createFoodOrder][AddFoodOrder, delivery info send to mq][delivery info: {}]", deliveryJson);
+//            try {
+//                sender.send(deliveryJson);
+//            } catch (Exception e) {
+//                LOGGER.error("[createFoodOrder][AddFoodOrder][send delivery info to mq error][exception: {}]", e.toString());
+//            }
 
             return new Response<>(1, success, fo);
         }

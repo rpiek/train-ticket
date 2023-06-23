@@ -1,6 +1,7 @@
 package assurance.repository;
 
 import assurance.entity.Assurance;
+import org.springframework.cloud.sleuth.annotation.NewSpan;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +21,7 @@ public interface AssuranceRepository  extends CrudRepository<Assurance, String> 
      * @param id id
      * @return Assurance
      */
+    @NewSpan("database")
     Optional<Assurance> findById(String id);
 
     /**
@@ -28,6 +30,7 @@ public interface AssuranceRepository  extends CrudRepository<Assurance, String> 
      * @param orderId order id
      * @return Assurance
      */
+    @NewSpan("database")
     Assurance findByOrderId(String orderId);
 
     /**
@@ -36,6 +39,7 @@ public interface AssuranceRepository  extends CrudRepository<Assurance, String> 
      * @param id id
      * @return null
      */
+    @NewSpan("database")
     @Transactional
     void deleteById(String id);
 
@@ -45,6 +49,7 @@ public interface AssuranceRepository  extends CrudRepository<Assurance, String> 
      * @param orderId order id
      * @return null
      */
+    @NewSpan("database")
     @Transactional
     void removeAssuranceByOrderId(String orderId);
 
@@ -53,6 +58,12 @@ public interface AssuranceRepository  extends CrudRepository<Assurance, String> 
      *
      * @return ArrayList<Assurance>
      */
+    @NewSpan("database")
     @Override
     ArrayList<Assurance> findAll();
+
+    @NewSpan("database")
+    @Override
+    <S extends Assurance> S save(S entity);
+
 }
