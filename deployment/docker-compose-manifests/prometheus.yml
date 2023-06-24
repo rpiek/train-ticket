@@ -1,71 +1,8 @@
 global:
-  scrape_interval: 5s
+  scrape_interval:     1s
+  evaluation_interval: 1s
 
 scrape_configs:
-  - job_name: 'prometheus'
+  - job_name: 'cadvisor'
     static_configs:
-      - targets: ['localhost:9090']
-
-  - job_name: 'ts-route-service'
-    static_configs:
-      - targets: ['ts-route-service:11178']
-
-  - job_name: 'ts-station-service'
-    static_configs:
-      - targets: ['ts-station-service:12345']
-
-  - job_name: 'ts-travel-service'
-    static_configs:
-      - targets: ['ts-travel-service:12346']
-
-  - job_name: 'ts-basic-service'
-    static_configs:
-      - targets: ['ts-basic-service:15680']
-
-  - job_name: 'ts-seat-service'
-    static_configs:
-      - targets: ['ts-seat-service:18898']
-
-  - job_name: 'ts-config-service'
-    static_configs:
-      - targets: ['ts-config-service:15679']
-
-  - job_name: 'ts-train-service'
-    static_configs:
-      - targets: ['ts-train-service:14567']
-
-  - job_name: 'ts-price-service'
-    static_configs:
-      - targets: ['ts-price-service:16579']
-
-  - job_name: 'ts-order-service'
-    static_configs:
-      - targets: ['ts-order-service:12031']
-
-  - job_name: 'ts-route-mysql'
-    static_configs:
-      - targets: ['ts-route-mysql:3306']
-
-  - job_name: 'ts-station-mysql'
-    static_configs:
-      - targets: ['ts-station-mysql:3306']
-
-  - job_name: 'ts-travel-mysql'
-    static_configs:
-      - targets: ['ts-travel-mysql:3306']
-
-  - job_name: 'ts-config-mysql'
-    static_configs:
-      - targets: ['ts-config-mysql:3306']
-
-  - job_name: 'ts-train-mysql'
-    static_configs:
-      - targets: ['ts-train-mysql:3306']
-
-  - job_name: 'ts-price-mysql'
-    static_configs:
-      - targets: ['ts-price-mysql:3306']
-
-  - job_name: 'ts-order-mysql'
-    static_configs:
-      - targets: ['ts-order-mysql:3306']
+      - targets: ['cadvisor:8080']
