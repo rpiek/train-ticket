@@ -18,7 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import static org.springframework.web.cors.CorsConfiguration.ALL;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebsecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

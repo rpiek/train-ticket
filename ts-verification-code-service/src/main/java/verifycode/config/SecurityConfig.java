@@ -21,7 +21,7 @@ import static org.springframework.web.cors.CorsConfiguration.ALL;
  * @author LeBW
  */
 @Configuration
-@EnableWebSecurity
+//@EnableWebsecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

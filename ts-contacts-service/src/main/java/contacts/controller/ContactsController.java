@@ -20,7 +20,6 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping("api/v1/contactservice")
 public class ContactsController {
 
-
     @Autowired
     private ContactsService contactsService;
 

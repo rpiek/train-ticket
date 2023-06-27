@@ -22,7 +22,7 @@ import static org.springframework.web.cors.CorsConfiguration.ALL;
  * @author fdse
  */
 @Configuration
-@EnableWebSecurity
+//@EnableWebsecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -71,17 +71,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // close session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.POST, order).hasAnyRole(admin, "USER")
-                .antMatchers(HttpMethod.PUT, order).hasAnyRole(admin, "USER")
-                .antMatchers(HttpMethod.DELETE, order).hasAnyRole(admin, "USER")
-                .antMatchers(HttpMethod.POST, "/api/v1/orderservice/order/admin").hasAnyRole(admin)
-                .antMatchers(HttpMethod.PUT, "/api/v1/orderservice/order/admin").hasAnyRole(admin)
-                .antMatchers("/api/v1/orderservice/order/**").permitAll()
-                .antMatchers("/swagger-ui.html", "/webjars/**", "/images/**",
-                        "/configuration/**", "/swagger-resources/**", "/v2/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
+//                .authorizeRequests()
+//                .antMatchers(HttpMethod.POST, order).hasAnyRole(admin, "USER")
+//                .antMatchers(HttpMethod.PUT, order).hasAnyRole(admin, "USER")
+//                .antMatchers(HttpMethod.DELETE, order).hasAnyRole(admin, "USER")
+//                .antMatchers(HttpMethod.POST, "/api/v1/orderservice/order/admin").hasAnyRole(admin)
+//                .antMatchers(HttpMethod.PUT, "/api/v1/orderservice/order/admin").hasAnyRole(admin)
+//                .antMatchers("/api/v1/orderservice/order/**").permitAll()
+//                .antMatchers("/swagger-ui.html", "/webjars/**", "/images/**",
+//                        "/configuration/**", "/swagger-resources/**", "/v2/**").permitAll()
+//                .anyRequest().authenticated()
                 .addFilterBefore(new JWTFilter(), UsernamePasswordAuthenticationFilter.class);
 
         // close cache

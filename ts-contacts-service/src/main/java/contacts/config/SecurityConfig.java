@@ -3,6 +3,7 @@ package contacts.config;
 import edu.fudan.common.security.jwt.JWTFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,7 +22,7 @@ import static org.springframework.web.cors.CorsConfiguration.ALL;
  * @author fdse
  */
 @Configuration
-@EnableWebSecurity
+//@EnableWebsecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -67,15 +68,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // close session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests()
-                .antMatchers("/api/v1/contactservice/**").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/swagger-ui.html", "/webjars/**", "/images/**",
-                        "/configuration/**", "/swagger-resources/**", "/v2/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
+//                .authorizeRequests()
+//
+//                .antMatchers(HttpMethod.PUT, "/api/v1/travelservice/trips").hasAnyRole("ADMIN")
+//                .antMatchers(HttpMethod.DELETE, "/api/v1/travelservice/trips/*").hasAnyRole("ADMIN")
+//                .antMatchers("/api/v1/travelservice/**").permitAll()
+//                .antMatchers("/swagger-ui.html", "/webjars/**", "/images/**",
+//                        "/configuration/**", "/swagger-resources/**", "/v2/**").permitAll()
+//                .anyRequest().authenticated()
+//                .and()
                 .addFilterBefore(new JWTFilter(), UsernamePasswordAuthenticationFilter.class);
 
         // close cache
         httpSecurity.headers().cacheControl();
     }
 }
+

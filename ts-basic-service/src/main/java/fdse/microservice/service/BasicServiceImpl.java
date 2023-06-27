@@ -425,7 +425,7 @@ public class BasicServiceImpl implements BasicService {
         HttpEntity requestEntity = new HttpEntity(null);
         String route_service_url=getServiceUrl("ts-route-service");
         ResponseEntity<Response> re = restTemplate.exchange(
-                route_service_url + "11178/api/v1/routeservice/routes/" + routeId,
+                route_service_url + ":11178/api/v1/routeservice/routes/" + routeId,
                 HttpMethod.GET,
                 requestEntity,
                 Response.class);

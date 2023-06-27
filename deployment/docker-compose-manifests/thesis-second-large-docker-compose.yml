@@ -60,7 +60,6 @@ services:
       - my-network
 
   ts-contacts-service:
-    build: ts-contacts-service
     image: thesis/ts-contacts-service:0.2.0
     restart: always
     ports:
@@ -84,30 +83,30 @@ services:
     networks:
       - my-network
 
-  ts-order-other-service:
-    build: ts-order-other-service
-    image: thesis/ts-order-other-service:0.2.0
-    restart: no
-    ports:
-      - 12032:12032
-    networks:
-      - my-network
+#  ts-order-other-service:
+#    build: ts-order-other-service
+#    image: thesis/ts-order-other-service:0.2.0
+#    restart: no
+#    ports:
+#      - 12032:12032
+#    networks:
+#      - my-network
 
-  ts-order-other-mysql:
-    image: mysql:5.7
-    environment:
-      MYSQL_DATABASE: 'ts-order-other-mysql'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'user'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'password'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'root'
-    ports:
-      # <Port exposed> : <MySQL Port running inside container>
-      - '3302:3306'
-    networks:
-      - my-network
+#  ts-order-other-mysql:
+#    image: mysql:5.7
+#    environment:
+#      MYSQL_DATABASE: 'ts-order-other-mysql'
+#      # So you don't have to use root, but you can if you like
+#      MYSQL_USER: 'user'
+#      # You can use whatever password you like
+#      MYSQL_PASSWORD: 'password'
+#      # Password for root access
+#      MYSQL_ROOT_PASSWORD: 'root'
+#    ports:
+#      # <Port exposed> : <MySQL Port running inside container>
+#      - '3302:3306'
+#    networks:
+#      - my-network
 
   ts-preserve-service:
     build: ts-preserve-service
@@ -115,31 +114,6 @@ services:
     restart: always
     ports:
       - 14568:14568
-    networks:
-      - my-network
-
-  ts-security-service:
-    build: ts-security-service
-    image: thesis/ts-security-service:0.2.0
-    restart: always
-    ports:
-      - 11188:11188
-    networks:
-      - my-network
-
-  ts-security-mysql:
-    image: mysql:5.7
-    environment:
-      MYSQL_DATABASE: 'ts-security-mysql'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'user'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'password'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'root'
-    ports:
-      # <Port exposed> : <MySQL Port running inside container>
-      - '3303:3306'
     networks:
       - my-network
 
@@ -338,6 +312,43 @@ services:
     ports:
       # <Port exposed> : <MySQL Port running inside container>
       - '3312:3306'
+    networks:
+      - my-network
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    networks:
+      - my-network
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    networks:
+      - my-network
+
+  container-exporter:
+    image: prom/container-exporter
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9323:9323
+    networks:
+      - my-network
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.39.0
+    ports:
+      - 8080:8080
+    volumes:
+      - /:/rootfs:ro
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
     networks:
       - my-network
 
