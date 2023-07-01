@@ -20,7 +20,7 @@ public interface ContactsRepository extends CrudRepository<Contacts, String> {
      * @param id id
      * @return Contacts
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     Optional<Contacts> findById(String id);
 
     /**
@@ -29,7 +29,7 @@ public interface ContactsRepository extends CrudRepository<Contacts, String> {
      * @param accountId account id
      * @return ArrayList<Contacts>
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
 //    @Query("{ 'accountId' : ?0 }")
     ArrayList<Contacts> findByAccountId(String accountId);
 
@@ -39,7 +39,7 @@ public interface ContactsRepository extends CrudRepository<Contacts, String> {
      * @param id id
      * @return null
      */
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     void deleteById(String id);
 
     /**
@@ -48,14 +48,14 @@ public interface ContactsRepository extends CrudRepository<Contacts, String> {
      * @return ArrayList<Contacts>
      */
     @Override
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     ArrayList<Contacts> findAll();
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     @Query(value="SELECT * FROM contacts WHERE account_id = ?1 AND document_number = ?2 AND document_type = ?3", nativeQuery = true)
     Contacts findByAccountIdAndDocumentTypeAndDocumentType(String account_id, String document_number, int document_type);
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     @Override
     <S extends Contacts> S save(S entity);
 }

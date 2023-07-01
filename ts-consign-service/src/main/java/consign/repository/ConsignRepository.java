@@ -21,7 +21,7 @@ public interface ConsignRepository extends CrudRepository<ConsignRecord, String>
      * @param accountId account id
      * @return ArrayList<ConsignRecord>
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     ArrayList<ConsignRecord> findByAccountId(String accountId);
 
     /**
@@ -30,7 +30,7 @@ public interface ConsignRepository extends CrudRepository<ConsignRecord, String>
      * @param accountId account id
      * @return ConsignRecord
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     ConsignRecord findByOrderId(String accountId);
 
     /**
@@ -39,7 +39,7 @@ public interface ConsignRepository extends CrudRepository<ConsignRecord, String>
      * @param consignee consignee
      * @return ArrayList<ConsignRecord>
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     ArrayList<ConsignRecord> findByConsignee(String consignee);
 
     /**
@@ -48,10 +48,10 @@ public interface ConsignRepository extends CrudRepository<ConsignRecord, String>
      * @param id id
      * @return ConsignRecord
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     Optional<ConsignRecord> findById(String id);
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     @Override
     <S extends ConsignRecord> S save(S entity);
 }

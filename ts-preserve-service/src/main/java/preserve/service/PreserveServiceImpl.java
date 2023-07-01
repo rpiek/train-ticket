@@ -59,12 +59,12 @@ public class PreserveServiceImpl implements PreserveService {
         //PreserveServiceImpl.LOGGER.info("[Step 2] Find contacts");
         //PreserveServiceImpl.LOGGER.info("[Step 2] Contacts Id: {}", oti.getContactsId());
 
-        Response<Contacts> gcr = getContactsById(oti.getContactsId(), headers);
-        if (gcr.getStatus() == 0) {
-            PreserveServiceImpl.LOGGER.error("[preserve][Step 2][Find Contacts Fail][ContactsId: {},message: {}]",oti.getContactsId(),gcr.getMsg());
-            return new Response<>(0, gcr.getMsg(), null);
-        }
-        PreserveServiceImpl.LOGGER.info("[preserve][Step 2][Find contacts Complete][ContactsId: {}]",oti.getContactsId());
+//        Response<Contacts> gcr = getContactsById(oti.getContactsId(), headers);
+//        if (gcr.getStatus() == 0) {
+//            PreserveServiceImpl.LOGGER.error("[preserve][Step 2][Find Contacts Fail][ContactsId: {},message: {}]",oti.getContactsId(),gcr.getMsg());
+//            return new Response<>(0, gcr.getMsg(), null);
+//        }
+//        PreserveServiceImpl.LOGGER.info("[preserve][Step 2][Find contacts Complete][ContactsId: {}]",oti.getContactsId());
         //3.Check the info of train and the number of remaining tickets
         //PreserveServiceImpl.LOGGER.info("[Step 3] Check tickets num");
         TripAllDetailInfo gtdi = new TripAllDetailInfo();
@@ -100,7 +100,7 @@ public class PreserveServiceImpl implements PreserveService {
         PreserveServiceImpl.LOGGER.info("[preserve][Step 3][Check tickets num][Tickets Enough]");
         //4.send the order request and set the order information
         //PreserveServiceImpl.LOGGER.info("[Step 4] Do Order");
-        Contacts contacts = gcr.getData();
+//        Contacts contacts = new Contacts();
         Order order = new Order();
         UUID orderId = UUID.randomUUID();
         order.setId(orderId.toString());
@@ -114,9 +114,9 @@ public class PreserveServiceImpl implements PreserveService {
         order.setTo(toStationName);
         order.setBoughtDate(StringUtils.Date2String(new Date()));
         order.setStatus(OrderStatus.NOTPAID.getCode());
-        order.setContactsDocumentNumber(contacts.getDocumentNumber());
-        order.setContactsName(contacts.getName());
-        order.setDocumentType(contacts.getDocumentType());
+        order.setContactsDocumentNumber("123");
+        order.setContactsName("John Doe");
+        order.setDocumentType(DocumentType.ID_CARD.getCode());
 
         Travel query = new Travel();
         query.setTrip(trip);
@@ -242,20 +242,20 @@ public class PreserveServiceImpl implements PreserveService {
 
         //8.send notification
 
-        User getUser = getAccount(order.getAccountId().toString(), headers);
-
-        NotifyInfo notifyInfo = new NotifyInfo();
-        notifyInfo.setDate(new Date().toString());
-
-        notifyInfo.setEmail(getUser.getEmail());
-        notifyInfo.setStartPlace(order.getFrom());
-        notifyInfo.setEndPlace(order.getTo());
-        notifyInfo.setUsername(getUser.getUserName());
-        notifyInfo.setSeatNumber(order.getSeatNumber());
-        notifyInfo.setOrderNumber(order.getId().toString());
-        notifyInfo.setPrice(order.getPrice());
-        notifyInfo.setSeatClass(SeatClass.getNameByCode(order.getSeatClass()));
-        notifyInfo.setStartTime(order.getTravelTime().toString());
+//        User getUser = getAccount(order.getAccountId().toString(), headers);
+//
+//        NotifyInfo notifyInfo = new NotifyInfo();
+//        notifyInfo.setDate(new Date().toString());
+//
+//        notifyInfo.setEmail(getUser.getEmail());
+//        notifyInfo.setStartPlace(order.getFrom());
+//        notifyInfo.setEndPlace(order.getTo());
+//        notifyInfo.setUsername(getUser.getUserName());
+//        notifyInfo.setSeatNumber(order.getSeatNumber());
+//        notifyInfo.setOrderNumber(order.getId().toString());
+//        notifyInfo.setPrice(order.getPrice());
+//        notifyInfo.setSeatClass(SeatClass.getNameByCode(order.getSeatClass()));
+//        notifyInfo.setStartTime(order.getTravelTime().toString());
 
         // TODO: change to async message serivce
         // sendEmail(notifyInfo, headers);
@@ -372,19 +372,19 @@ public class PreserveServiceImpl implements PreserveService {
     }
 
 
-    private Response<Contacts> getContactsById(String contactsId, HttpHeaders httpHeaders) {
+    private void getContactsById(String contactsId, HttpHeaders httpHeaders) {
         PreserveServiceImpl.LOGGER.info("[getContactsById][Preserve Other Service][Get Contacts By Id is]");
+//
+//        HttpEntity requestGetContactsResult = new HttpEntity(httpHeaders);
+//        String contacts_service_url = getServiceUrl("ts-contacts-service");
+//        ResponseEntity<Response<Contacts>> reGetContactsResult = restTemplate.exchange(
+//                contacts_service_url + ":12347/api/v1/contactservice/contacts/" + contactsId,
+//                HttpMethod.GET,
+//                requestGetContactsResult,
+//                new ParameterizedTypeReference<Response<Contacts>>() {
+//                });
 
-        HttpEntity requestGetContactsResult = new HttpEntity(httpHeaders);
-        String contacts_service_url = getServiceUrl("ts-contacts-service");
-        ResponseEntity<Response<Contacts>> reGetContactsResult = restTemplate.exchange(
-                contacts_service_url + ":12347/api/v1/contactservice/contacts/" + contactsId,
-                HttpMethod.GET,
-                requestGetContactsResult,
-                new ParameterizedTypeReference<Response<Contacts>>() {
-                });
-
-        return reGetContactsResult.getBody();
+//        return reGetContactsResult.getBody();
     }
 
     private Response createOrder(Order coi, HttpHeaders httpHeaders) {

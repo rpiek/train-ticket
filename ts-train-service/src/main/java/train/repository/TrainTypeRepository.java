@@ -12,21 +12,21 @@ import java.util.Optional;
 @Repository
 public interface TrainTypeRepository extends CrudRepository<TrainType,String> {
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     Optional<TrainType> findById(String id);
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     @Override
     List<TrainType> findAll();
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     void deleteById(String id);
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     TrainType findByName(String name);
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     @Query(value="SELECT * from train_type where name in ?1", nativeQuery = true)
     List<TrainType> findByNames(List<String> names);
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     @Override
     <S extends TrainType> S save(S entity);
 }

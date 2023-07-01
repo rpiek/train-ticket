@@ -62,7 +62,7 @@ public class OrderServiceImpl implements OrderService {
             }
             LeftTicketInfo leftTicketInfo = new LeftTicketInfo();
             leftTicketInfo.setSoldTickets(ticketSet);
-            OrderServiceImpl.LOGGER.info("[getSoldTickets][Left ticket info][info is: {}]", leftTicketInfo.toString());
+//            OrderServiceImpl.LOGGER.info("[getSoldTickets][Left ticket info][info is: {}]", leftTicketInfo.toString());
             return new Response<>(1, success, leftTicketInfo);
         } else {
             OrderServiceImpl.LOGGER.warn("[getSoldTickets][Seat][Left ticket info is empty][seat from date: {}, train number: {}]",seatRequest.getTravelDate(),seatRequest.getTrainNumber()); //warn级别，获取资源但资源为空

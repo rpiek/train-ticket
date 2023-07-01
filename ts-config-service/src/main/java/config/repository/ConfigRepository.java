@@ -17,7 +17,7 @@ public interface ConfigRepository extends CrudRepository<Config, String> {
      * @param name name
      * @return Config
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     Config findByName(String name);
 
     /**
@@ -25,7 +25,7 @@ public interface ConfigRepository extends CrudRepository<Config, String> {
      *
      * @return List<Config>
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     @Override
     List<Config> findAll();
 
@@ -35,10 +35,10 @@ public interface ConfigRepository extends CrudRepository<Config, String> {
      * @param name name
      * @return null
      */
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     void deleteByName(String name);
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     @Override
     <S extends Config> S save(S entity);
 

@@ -16,25 +16,25 @@ import java.util.UUID;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, String> {
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     @Override
     Optional<Order> findById(String id);
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     @Override
     ArrayList<Order> findAll();
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     ArrayList<Order> findByAccountId(String accountId);
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     ArrayList<Order> findByTravelDateAndTrainNumber(String travelDate,String trainNumber);
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     @Override
     void deleteById(String id);
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     @Override
     <S extends Order> S save(S entity);
 

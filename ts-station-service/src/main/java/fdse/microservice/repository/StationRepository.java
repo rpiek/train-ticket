@@ -12,25 +12,25 @@ import java.util.Optional;
 @Repository
 public interface StationRepository extends CrudRepository<Station,String> {
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     Station findByName(String name);
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     @Query(value="SELECT * from station where name in ?1", nativeQuery = true)
     List<Station> findByNames(List<String> names);
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     Optional<Station> findById(String id);
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     @Override
     List<Station> findAll();
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     @Override
     <S extends Station> S save(S entity);
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     @Override
     void delete(Station entity);
 }

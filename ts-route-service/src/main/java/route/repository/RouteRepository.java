@@ -21,7 +21,7 @@ public interface RouteRepository extends CrudRepository<Route, String> {
      * @param id id
      * @return Route
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     Optional<Route> findById(String id);
 
     /**
@@ -30,7 +30,7 @@ public interface RouteRepository extends CrudRepository<Route, String> {
      * @param ids ids
      * @return Route
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     @Query(value="SELECT * from route where id in ?1", nativeQuery = true)
     List<Route> findByIds(List<String> ids);
 
@@ -39,7 +39,7 @@ public interface RouteRepository extends CrudRepository<Route, String> {
      *
      * @return ArrayList<Route>
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     @Override
     ArrayList<Route> findAll();
 
@@ -48,7 +48,7 @@ public interface RouteRepository extends CrudRepository<Route, String> {
      *
      * @param id id
      */
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     void removeRouteById(String id);
 
     /**
@@ -58,10 +58,10 @@ public interface RouteRepository extends CrudRepository<Route, String> {
      * @param endStation  end Station Name
      * @return ArrayList<Route>
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     ArrayList<Route> findByStartStationAndEndStation(String startStation, String endStation);
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     @Override
     <S extends Route> S save(S entity);
 

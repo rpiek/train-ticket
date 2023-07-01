@@ -18,11 +18,11 @@ public interface SecurityRepository extends CrudRepository<SecurityConfig,String
     SecurityConfig findByName(String name);
 
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     Optional<SecurityConfig> findById(String id);
 
     @Override
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     ArrayList<SecurityConfig> findAll();
 
     void deleteById(String id);

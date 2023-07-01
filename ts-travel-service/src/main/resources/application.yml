@@ -3,10 +3,6 @@ server:
   port: 12346  # HTTP (Tomcat) port
 
 spring:
-#  cloud:
-#    nacos:
-#      discovery:
-#        server-addr: ${NACOS_ADDRS:nacos-0.nacos-headless.default.svc.cluster.local,nacos-1.nacos-headless.default.svc.cluster.local,nacos-2.nacos-headless.default.svc.cluster.local}
   main:
     allow-bean-definition-overriding: true
   application:
@@ -18,13 +14,12 @@ spring:
     username: ${TRAVEL_MYSQL_USER:root}
     password: ${TRAVEL_MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
   sleuth:
     otel:
       config:
         trace-id-ration-based: 1.0
-#      export:
-#        otlp:
-#          endpoint: http://collector:4317
 
   jpa:
     hibernate:

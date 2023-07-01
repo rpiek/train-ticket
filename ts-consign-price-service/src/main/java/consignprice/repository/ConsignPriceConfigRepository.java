@@ -18,10 +18,10 @@ public interface ConsignPriceConfigRepository extends CrudRepository<ConsignPric
      * @return ConsignPrice
      */
 //    @Query("{ 'index': ?0 }")
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     ConsignPrice findByIndex(int index);
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     @Override
     <S extends ConsignPrice> S save(S entity);
 

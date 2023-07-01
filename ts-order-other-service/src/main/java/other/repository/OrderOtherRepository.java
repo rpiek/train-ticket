@@ -23,7 +23,7 @@ public interface OrderOtherRepository extends CrudRepository<Order, String> {
      * @return Order
      */
 //    @Query("{ 'id': ?0 }")
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     @Override
     Optional<Order> findById(String id);
 
@@ -32,7 +32,7 @@ public interface OrderOtherRepository extends CrudRepository<Order, String> {
      *
      * @return ArrayList<Order>
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     @Override
     ArrayList<Order> findAll();
 
@@ -42,7 +42,7 @@ public interface OrderOtherRepository extends CrudRepository<Order, String> {
      * @param accountId account id
      * @return ArrayList<Order>
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
 //    @Query("{ 'accountId' : ?0 }")
     ArrayList<Order> findByAccountId(String accountId);
 
@@ -53,7 +53,7 @@ public interface OrderOtherRepository extends CrudRepository<Order, String> {
      * @param trainNumber train number
      * @return ArrayList<Order>
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
 //    @Query("{ 'travelDate' : ?0 , trainNumber : ?1 }")
     ArrayList<Order> findByTravelDateAndTrainNumber(String travelDate, String trainNumber);
 
@@ -63,7 +63,7 @@ public interface OrderOtherRepository extends CrudRepository<Order, String> {
      * @param id id
      * @return null
      */
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     @Override
     void deleteById(String id);
 }

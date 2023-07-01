@@ -4,6 +4,7 @@ import edu.fudan.common.entity.TripId;
 import org.springframework.cloud.sleuth.annotation.NewSpan;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import travel.entity.Trip;
 
 import java.util.ArrayList;
@@ -14,20 +15,21 @@ import java.util.ArrayList;
 @Repository
 public interface TripRepository extends CrudRepository<Trip, TripId> {
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
+    @Transactional
     Trip findByTripId(TripId tripId);
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     void deleteByTripId(TripId tripId);
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     @Override
     ArrayList<Trip>  findAll();
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     ArrayList<Trip> findByRouteId(String routeId);
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     @Override
     <S extends Trip> S save(S entity);
 

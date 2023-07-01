@@ -21,7 +21,7 @@ public interface AssuranceRepository  extends CrudRepository<Assurance, String> 
      * @param id id
      * @return Assurance
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     Optional<Assurance> findById(String id);
 
     /**
@@ -30,7 +30,7 @@ public interface AssuranceRepository  extends CrudRepository<Assurance, String> 
      * @param orderId order id
      * @return Assurance
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     Assurance findByOrderId(String orderId);
 
     /**
@@ -39,7 +39,7 @@ public interface AssuranceRepository  extends CrudRepository<Assurance, String> 
      * @param id id
      * @return null
      */
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     @Transactional
     void deleteById(String id);
 
@@ -49,7 +49,7 @@ public interface AssuranceRepository  extends CrudRepository<Assurance, String> 
      * @param orderId order id
      * @return null
      */
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     @Transactional
     void removeAssuranceByOrderId(String orderId);
 
@@ -58,11 +58,11 @@ public interface AssuranceRepository  extends CrudRepository<Assurance, String> 
      *
      * @return ArrayList<Assurance>
      */
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     @Override
     ArrayList<Assurance> findAll();
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     @Override
     <S extends Assurance> S save(S entity);
 

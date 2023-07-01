@@ -11,17 +11,17 @@ import java.util.UUID;
 @Repository
 public interface TrainFoodRepository extends CrudRepository<TrainFood, String> {
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     TrainFood findById(UUID id);
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     @Override
     List<TrainFood> findAll();
 
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     TrainFood findByTripId(String tripId);
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     void deleteById(UUID id);
 }

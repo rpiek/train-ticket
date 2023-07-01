@@ -14,16 +14,16 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends CrudRepository<User, String> {
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     User findByUserName(String userName);
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     User findByUserId(String userId);
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     void deleteByUserId(String userId);
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     @Override
     List<User> findAll();
 }

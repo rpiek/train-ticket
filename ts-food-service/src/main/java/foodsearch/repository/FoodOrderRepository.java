@@ -13,23 +13,23 @@ import java.util.UUID;
 @Repository
 public interface FoodOrderRepository extends CrudRepository<FoodOrder, String> {
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     Optional<FoodOrder> findById(String id);
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     FoodOrder findByOrderId(String orderId);
 
-    @NewSpan("database")
+    @NewSpan("databaseRead")
     @Override
     List<FoodOrder> findAll();
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     void deleteById(UUID id);
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     void deleteFoodOrderByOrderId(String id);
 
-    @NewSpan("database")
+    @NewSpan("databaseWrite")
     @Override
     <S extends FoodOrder> S save(S var1);
 
