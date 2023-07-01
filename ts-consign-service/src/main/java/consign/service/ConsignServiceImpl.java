@@ -2,13 +2,11 @@ package consign.service;
 
 import consign.entity.ConsignRecord;
 import consign.entity.Consign;
-import consign.repository.ConsignRepository;
 import edu.fudan.common.util.Response;
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -19,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -27,8 +24,6 @@ import java.util.UUID;
  */
 @Service
 public class ConsignServiceImpl implements ConsignService {
-    @Autowired
-    ConsignRepository repository;
 
     @Autowired
     RestTemplate restTemplate;
@@ -73,19 +68,43 @@ public class ConsignServiceImpl implements ConsignService {
         consignRecord.setPrice(re.getBody().getData());
 
         LOGGER.info("[insertConsignRecord][SAVE consign info][consignRecord : {}]", consignRecord.toString());
-        ConsignRecord result = repository.save(consignRecord);
+
+        ResponseEntity<ConsignRecord> result = restTemplate.exchange(
+                consign_price_service_url + ":16110/api/v1/consign",
+                HttpMethod.POST,
+                new HttpEntity<>(consignRecord, headers),
+                new ParameterizedTypeReference<ConsignRecord>() {
+                });
+
         LOGGER.info("[insertConsignRecord][SAVE consign result][result: {}]", result.toString());
-        return new Response<>(1, "You have consigned successfully! The price is " + result.getPrice(), result);
+        return new Response<>(1, "You have consigned successfully! The price is " + result.getBody().getPrice(), result);
     }
 
     @Override
     public Response updateConsignRecord(Consign consignRequest, HttpHeaders headers) {
         ConsignServiceImpl.LOGGER.info("[updateConsignRecord][Update Start]");
+        String consign_price_service_url = getServiceUrl("ts-consign-price-service");
+        HttpEntity requestEntity = new HttpEntity<>(null, headers);
 
-        if (!repository.findById(consignRequest.getId()).isPresent()) {
+        ResponseEntity<ConsignRecord> consignRecord = restTemplate.exchange(
+                consign_price_service_url + "/api/v1/consign/" + consignRequest.getId(),
+                HttpMethod.GET,
+                requestEntity,
+                new ParameterizedTypeReference<ConsignRecord>() {
+                });
+
+        if (consignRecord.getBody() == null) {
             return insertConsignRecord(consignRequest, headers);
         }
-        ConsignRecord originalRecord = repository.findById(consignRequest.getId()).get();
+
+        ResponseEntity<ConsignRecord> consignRecord2 = restTemplate.exchange(
+                consign_price_service_url + "/api/v1/consign/" + consignRequest.getId(),
+                HttpMethod.GET,
+                requestEntity,
+                new ParameterizedTypeReference<ConsignRecord>() {
+                });
+
+        ConsignRecord originalRecord = consignRecord2.getBody();
         originalRecord.setAccountId(consignRequest.getAccountId().toString());
         originalRecord.setHandleDate(consignRequest.getHandleDate());
         originalRecord.setTargetDate(consignRequest.getTargetDate());
@@ -95,8 +114,6 @@ public class ConsignServiceImpl implements ConsignService {
         originalRecord.setPhone(consignRequest.getPhone());
         //Recalculate price
         if (originalRecord.getWeight() != consignRequest.getWeight()) {
-            HttpEntity requestEntity = new HttpEntity<>(null, headers);
-            String consign_price_service_url = getServiceUrl("ts-consign-price-service");
             ResponseEntity<Response<Double>> re = restTemplate.exchange(
                     consign_price_service_url + "/api/v1/consignpriceservice/consignprice/" + consignRequest.getWeight() + "/" + consignRequest.isWithin(),
                     HttpMethod.GET,
@@ -111,14 +128,29 @@ public class ConsignServiceImpl implements ConsignService {
         originalRecord.setConsignee(consignRequest.getConsignee());
         originalRecord.setPhone(consignRequest.getPhone());
         originalRecord.setWeight(consignRequest.getWeight());
-        repository.save(originalRecord);
+
+        ResponseEntity<ConsignRecord> res = restTemplate.exchange(
+                consign_price_service_url + ":16110/api/v1/consign",
+                HttpMethod.POST,
+                new HttpEntity<>(originalRecord, headers),
+                new ParameterizedTypeReference<ConsignRecord>() {
+                });
+
         return new Response<>(1, "Update consign success", originalRecord);
     }
 
     @Override
     public Response queryByAccountId(UUID accountId, HttpHeaders headers) {
-        List<ConsignRecord> consignRecords = repository.findByAccountId(accountId.toString());
-        if (consignRecords != null && !consignRecords.isEmpty()) {
+        String consign_price_service_url = getServiceUrl("ts-consign-price-service");
+        HttpEntity requestEntity = new HttpEntity<>(null, headers);
+
+        ResponseEntity<List<ConsignRecord>> consignRecords = restTemplate.exchange(
+                consign_price_service_url + "/api/v1/consign/account/" + accountId.toString(),
+                HttpMethod.GET,
+                requestEntity,
+                new ParameterizedTypeReference<List<ConsignRecord>>() {
+                });
+        if (!Objects.requireNonNull(consignRecords.getBody()).isEmpty()) {
             return new Response<>(1, "Find consign by account id success", consignRecords);
         }else {
             LOGGER.warn("[queryByAccountId][No Content according to accountId][accountId: {}]", accountId);
@@ -128,8 +160,17 @@ public class ConsignServiceImpl implements ConsignService {
 
     @Override
     public Response queryByOrderId(UUID orderId, HttpHeaders headers) {
-        ConsignRecord consignRecords = repository.findByOrderId(orderId.toString());
-        if (consignRecords != null ) {
+        String consign_price_service_url = getServiceUrl("ts-consign-price-service");
+        HttpEntity requestEntity = new HttpEntity<>(null, headers);
+
+        ResponseEntity<List<ConsignRecord>> consignRecords = restTemplate.exchange(
+                consign_price_service_url + "/api/v1/consign/order/" + orderId.toString(),
+                HttpMethod.GET,
+                requestEntity,
+                new ParameterizedTypeReference<List<ConsignRecord>>() {
+                });
+
+        if (!Objects.requireNonNull(consignRecords.getBody()).isEmpty()) {
             return new Response<>(1, "Find consign by order id success", consignRecords);
         }else {
             LOGGER.warn("[queryByOrderId][No Content according to orderId][orderId: {}]", orderId);
@@ -139,8 +180,17 @@ public class ConsignServiceImpl implements ConsignService {
 
     @Override
     public Response queryByConsignee(String consignee, HttpHeaders headers) {
-        List<ConsignRecord> consignRecords = repository.findByConsignee(consignee);
-        if (consignRecords != null && !consignRecords.isEmpty()) {
+        String consign_price_service_url = getServiceUrl("ts-consign-price-service");
+        HttpEntity requestEntity = new HttpEntity<>(null, headers);
+
+        ResponseEntity<List<ConsignRecord>> consignRecords = restTemplate.exchange(
+                consign_price_service_url + "/api/v1/consign/consignee/" + consignee,
+                HttpMethod.GET,
+                requestEntity,
+                new ParameterizedTypeReference<List<ConsignRecord>>() {
+                });
+
+        if (!Objects.requireNonNull(consignRecords.getBody()).isEmpty()) {
             return new Response<>(1, "Find consign by consignee success", consignRecords);
         }else {
             LOGGER.warn("[queryByConsignee][No Content according to consignee][consignee: {}]", consignee);

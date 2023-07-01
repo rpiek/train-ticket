@@ -33,4 +33,5 @@ public class InitData implements CommandLineRunner {
 
         service.createAndModifyPrice(config, null);
     }
+
 }

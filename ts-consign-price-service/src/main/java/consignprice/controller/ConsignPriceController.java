@@ -1,6 +1,8 @@
 package consignprice.controller;
 
+import consignprice.entity.ConsignRecord;
 import consignprice.entity.ConsignPrice;
+import consignprice.repository.ConsignRepository;
 import consignprice.service.ConsignPriceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,4 +56,5 @@ public class ConsignPriceController {
         logger.info("[modifyPriceConfig][Create and modify price][config: {}]", priceConfig);
         return ok(service.createAndModifyPrice(priceConfig, headers));
     }
+
 }

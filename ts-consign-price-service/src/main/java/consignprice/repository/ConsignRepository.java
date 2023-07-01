@@ -1,7 +1,6 @@
-package consign.repository;
+package consignprice.repository;
 
-import consign.entity.Consign;
-import consign.entity.ConsignRecord;
+import consignprice.entity.ConsignRecord;
 import org.springframework.cloud.sleuth.annotation.NewSpan;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

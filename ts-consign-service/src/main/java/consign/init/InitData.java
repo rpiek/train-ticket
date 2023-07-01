@@ -1,22 +1,14 @@
 package consign.init;
 
-import consign.entity.Consign;
-import consign.entity.ConsignRecord;
-import consign.repository.ConsignRepository;
 import consign.service.ConsignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-
 @Component
 public class InitData implements CommandLineRunner {
     @Autowired
     ConsignService service;
-
-    @Autowired
-    ConsignRepository repository;
 
     @Override
     public void run(String... args) throws Exception {
