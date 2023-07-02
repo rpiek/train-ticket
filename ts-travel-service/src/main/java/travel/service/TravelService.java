@@ -4,6 +4,7 @@ import edu.fudan.common.entity.TravelInfo;
 import edu.fudan.common.entity.TripAllDetailInfo;
 import edu.fudan.common.entity.TripInfo;
 import edu.fudan.common.util.Response;
+import java.util.List;
 import org.springframework.http.HttpHeaders;
 
 
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 public interface TravelService {
 
     Response create(TravelInfo info, HttpHeaders headers);
+
+    Response createBulk(List<TravelInfo> infoList, HttpHeaders headers);
 
     Response retrieve(String tripId, HttpHeaders headers);
 

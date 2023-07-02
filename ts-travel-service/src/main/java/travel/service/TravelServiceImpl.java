@@ -67,6 +67,25 @@ public class TravelServiceImpl implements TravelService {
     }
 
     @Override
+    public Response createBulk(List<TravelInfo> infoList, HttpHeaders headers) {
+        List<Trip> trips = new ArrayList<>();
+        for (TravelInfo info : infoList) {
+            TripId ti = new TripId(info.getTripId());
+            if (repository.findByTripId(ti) == null) {
+                Trip trip = new Trip(ti, info.getTrainTypeName(), info.getStartStationName(),
+                        info.getStationsName(), info.getTerminalStationName(), info.getStartTime(), info.getEndTime());
+                trip.setRouteId(info.getRouteId());
+                trips.add(trip);
+            } else {
+                TravelServiceImpl.LOGGER.error("[create][Create trip error][Trip already exists][TripId: {}]", info.getTripId());
+            }
+        }
+        repository.saveAll(trips);
+
+        return new Response<>(1, "Created trips.", null);
+    }
+
+    @Override
     public Response getRouteByTripId(String tripId, HttpHeaders headers) {
         Route route = null;
         if (null != tripId && tripId.length() >= 2) {

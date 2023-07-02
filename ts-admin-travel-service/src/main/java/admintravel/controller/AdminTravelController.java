@@ -2,6 +2,7 @@ package admintravel.controller;
 
 import admintravel.service.AdminTravelService;
 import edu.fudan.common.entity.TravelInfo;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,16 @@ public class AdminTravelController {
         logger.info("[addTravel][Add travel][trip id: {}, train type name: {}, form station {} to station {}, login id: {}]",
                 request.getTripId(), request.getTrainTypeName(), request.getStartStationName(), request.getStationsName(), request.getLoginId());
         return ok(adminTravelService.addTravel(request, headers));
+    }
+
+    @PostMapping(value = "/admintravelsEst")
+    public HttpEntity addTravelsEst(@RequestBody List<TravelInfo> request, @RequestHeader HttpHeaders headers) {
+        return ok(adminTravelService.addTravelsEst(request, headers));
+    }
+
+    @PostMapping(value = "/admintravels")
+    public HttpEntity addTravels(@RequestBody List<TravelInfo> request, @RequestHeader HttpHeaders headers) {
+        return ok(adminTravelService.addTravels(request, headers));
     }
 
     @PutMapping(value = "/admintravel")

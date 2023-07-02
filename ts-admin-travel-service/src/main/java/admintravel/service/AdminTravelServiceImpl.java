@@ -121,6 +121,47 @@ public class AdminTravelServiceImpl implements AdminTravelService {
     }
 
     @Override
+    public Response addTravelsEst(List<TravelInfo> request, HttpHeaders headers) {
+        Response result = new Response();
+        String requestUrl;
+
+        String travel_service_url = getServiceUrl("ts-travel-service");
+        requestUrl = travel_service_url + "/api/v1/travelservice/trips";
+
+        for (TravelInfo travelInfo : request) {
+            HttpEntity requestEntity = new HttpEntity(travelInfo, headers);
+            ResponseEntity<Response> re = restTemplate.exchange(
+                    requestUrl,
+                    HttpMethod.POST,
+                    requestEntity,
+                    Response.class);
+            result = re.getBody();
+        }
+
+
+        return result;
+    }
+
+    @Override
+    public Response addTravels(List<TravelInfo> request, HttpHeaders headers) {
+        Response result;
+        String requestUrl;
+
+        String travel_service_url = getServiceUrl("ts-travel-service");
+        requestUrl = travel_service_url + "/api/v1/travelservice/trips//bulk";
+
+        HttpEntity requestEntity = new HttpEntity(request, headers);
+        ResponseEntity<Response> re = restTemplate.exchange(
+                requestUrl,
+                HttpMethod.POST,
+                requestEntity,
+                Response.class);
+        result = re.getBody();
+
+        return result;
+    }
+
+    @Override
     public Response updateTravel(TravelInfo request, HttpHeaders headers) {
         // check for travel info
         Response response = checkTravelInfo(request, headers);

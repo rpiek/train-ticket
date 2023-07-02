@@ -4,6 +4,7 @@ import edu.fudan.common.entity.TravelInfo;
 import edu.fudan.common.entity.TripAllDetailInfo;
 import edu.fudan.common.entity.TripInfo;
 import edu.fudan.common.entity.TripResponse;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +70,13 @@ public class TravelController {
         // null
         TravelController.LOGGER.info("[create][Create trip][TripId: {}]", routeIds.getTripId());
         return new ResponseEntity<>(travelService.create(routeIds, headers), HttpStatus.CREATED);
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(value = "/trips/bulk")
+    public HttpEntity<?> createTrips(@RequestBody List<TravelInfo> routeIds, @RequestHeader HttpHeaders headers) {
+        // null
+        return new ResponseEntity<>(travelService.createBulk(routeIds, headers), HttpStatus.CREATED);
     }
 
     /**
