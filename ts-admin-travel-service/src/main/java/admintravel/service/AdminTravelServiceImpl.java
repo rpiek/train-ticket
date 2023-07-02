@@ -126,7 +126,7 @@ public class AdminTravelServiceImpl implements AdminTravelService {
         String requestUrl;
 
         String travel_service_url = getServiceUrl("ts-travel-service");
-        requestUrl = travel_service_url + "/api/v1/travelservice/trips";
+        requestUrl = travel_service_url + ":12346/api/v1/travelservice/trips";
 
         for (TravelInfo travelInfo : request) {
             HttpEntity requestEntity = new HttpEntity(travelInfo, headers);
@@ -138,7 +138,6 @@ public class AdminTravelServiceImpl implements AdminTravelService {
             result = re.getBody();
         }
 
-
         return result;
     }
 
@@ -148,7 +147,7 @@ public class AdminTravelServiceImpl implements AdminTravelService {
         String requestUrl;
 
         String travel_service_url = getServiceUrl("ts-travel-service");
-        requestUrl = travel_service_url + "/api/v1/travelservice/trips//bulk";
+        requestUrl = travel_service_url + ":12346/api/v1/travelservice/trips//bulk";
 
         HttpEntity requestEntity = new HttpEntity(request, headers);
         ResponseEntity<Response> re = restTemplate.exchange(
