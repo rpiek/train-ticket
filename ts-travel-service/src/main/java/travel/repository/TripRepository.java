@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public interface TripRepository extends CrudRepository<Trip, TripId> {
 
     @NewSpan("databaseRead")
-    @Transactional
     Trip findByTripId(TripId tripId);
 
     @NewSpan("databaseWrite")
