@@ -87,7 +87,7 @@ public class ConsignServiceImpl implements ConsignService {
         HttpEntity requestEntity = new HttpEntity<>(null, headers);
 
         ResponseEntity<ConsignRecord> consignRecord = restTemplate.exchange(
-                consign_price_service_url + "/api/v1/consign/" + consignRequest.getId(),
+                consign_price_service_url + ":16110/api/v1/consign/" + consignRequest.getId(),
                 HttpMethod.GET,
                 requestEntity,
                 new ParameterizedTypeReference<ConsignRecord>() {
@@ -98,7 +98,7 @@ public class ConsignServiceImpl implements ConsignService {
         }
 
         ResponseEntity<ConsignRecord> consignRecord2 = restTemplate.exchange(
-                consign_price_service_url + "/api/v1/consign/" + consignRequest.getId(),
+                consign_price_service_url + ":16110/api/v1/consign/" + consignRequest.getId(),
                 HttpMethod.GET,
                 requestEntity,
                 new ParameterizedTypeReference<ConsignRecord>() {
@@ -115,7 +115,7 @@ public class ConsignServiceImpl implements ConsignService {
         //Recalculate price
         if (originalRecord.getWeight() != consignRequest.getWeight()) {
             ResponseEntity<Response<Double>> re = restTemplate.exchange(
-                    consign_price_service_url + "/api/v1/consignpriceservice/consignprice/" + consignRequest.getWeight() + "/" + consignRequest.isWithin(),
+                    consign_price_service_url + ":16110/api/v1/consignpriceservice/consignprice/" + consignRequest.getWeight() + "/" + consignRequest.isWithin(),
                     HttpMethod.GET,
                     requestEntity,
                     new ParameterizedTypeReference<Response<Double>>() {
@@ -145,7 +145,7 @@ public class ConsignServiceImpl implements ConsignService {
         HttpEntity requestEntity = new HttpEntity<>(null, headers);
 
         ResponseEntity<List<ConsignRecord>> consignRecords = restTemplate.exchange(
-                consign_price_service_url + "/api/v1/consign/account/" + accountId.toString(),
+                consign_price_service_url + ":16110/api/v1/consign/account/" + accountId.toString(),
                 HttpMethod.GET,
                 requestEntity,
                 new ParameterizedTypeReference<List<ConsignRecord>>() {
@@ -163,15 +163,15 @@ public class ConsignServiceImpl implements ConsignService {
         String consign_price_service_url = getServiceUrl("ts-consign-price-service");
         HttpEntity requestEntity = new HttpEntity<>(null, headers);
 
-        ResponseEntity<List<ConsignRecord>> consignRecords = restTemplate.exchange(
-                consign_price_service_url + "/api/v1/consign/order/" + orderId.toString(),
+        ResponseEntity<ConsignRecord> consignRecord = restTemplate.exchange(
+                consign_price_service_url + ":16110/api/v1/consign/order/" + orderId.toString(),
                 HttpMethod.GET,
                 requestEntity,
-                new ParameterizedTypeReference<List<ConsignRecord>>() {
+                new ParameterizedTypeReference<ConsignRecord>() {
                 });
 
-        if (!Objects.requireNonNull(consignRecords.getBody()).isEmpty()) {
-            return new Response<>(1, "Find consign by order id success", consignRecords);
+        if (consignRecord.getBody() != null) {
+            return new Response<>(1, "Find consign by order id success", consignRecord.getBody());
         }else {
             LOGGER.warn("[queryByOrderId][No Content according to orderId][orderId: {}]", orderId);
             return new Response<>(0, "No Content according to order id", null);
@@ -184,7 +184,7 @@ public class ConsignServiceImpl implements ConsignService {
         HttpEntity requestEntity = new HttpEntity<>(null, headers);
 
         ResponseEntity<List<ConsignRecord>> consignRecords = restTemplate.exchange(
-                consign_price_service_url + "/api/v1/consign/consignee/" + consignee,
+                consign_price_service_url + ":16110/api/v1/consign/consignee/" + consignee,
                 HttpMethod.GET,
                 requestEntity,
                 new ParameterizedTypeReference<List<ConsignRecord>>() {

@@ -3,7 +3,6 @@ package consign.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -14,7 +13,6 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@GenericGenerator(name="jpa-uuid",strategy ="uuid")
 public class Consign {
     @Id
     @GeneratedValue(generator = "jpa-uuid")

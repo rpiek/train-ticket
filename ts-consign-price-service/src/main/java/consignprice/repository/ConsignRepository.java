@@ -26,11 +26,11 @@ public interface ConsignRepository extends CrudRepository<ConsignRecord, String>
     /**
      * find by order id
      *
-     * @param accountId account id
+     * @param orderId order id
      * @return ConsignRecord
      */
     @NewSpan("databaseRead")
-    ConsignRecord findByOrderId(String accountId);
+    ConsignRecord findByOrderId(String orderId);
 
     /**
      * find by consignee
