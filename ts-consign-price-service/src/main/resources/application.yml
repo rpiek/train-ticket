@@ -12,6 +12,10 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
+  sleuth:
+    otel:
+      config:
+        trace-id-ration-based: 1.0
   zipkin:
     base-url: http://zipkin:9411
 

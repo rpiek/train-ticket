@@ -10,20 +10,42 @@ services:
     networks:
       - my-network
 
-  ts-route-service:
-    image: thesis/ts-route-service:0.2.0
+  ts-consign-service:
+    image: thesis/ts-consign-service:0.2.0
     restart: "no"
     ports:
-      - 11178:11178
+      - 16111:16111
     networks:
       - my-network
-    depends_on:
-      - ts-route-mysql
 
-  ts-route-mysql:
+  ts-consign-mysql:
     image: mysql:5.7
     environment:
-      MYSQL_DATABASE: 'ts-route-mysql'
+      MYSQL_DATABASE: 'ts-consign-mysql'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'user'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'password'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      # <Port exposed> : <MySQL Port running inside container>
+      - '3306:3306'
+    networks:
+      - my-network
+
+  ts-consign-price-service:
+    image: thesis/ts-consign-price-service:0.2.0
+    restart: "no"
+    ports:
+      - 16110:16110
+    networks:
+      - my-network
+
+  ts-consign-price-mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: 'ts-consign-price-mysql'
       # So you don't have to use root, but you can if you like
       MYSQL_USER: 'user'
       # You can use whatever password you like
@@ -33,264 +55,6 @@ services:
     ports:
       # <Port exposed> : <MySQL Port running inside container>
       - '3307:3306'
-    networks:
-      - my-network
-
-#  ts-contacts-service:
-#    image: thesis/ts-contacts-service:0.2.0
-#    restart: always
-#    ports:
-#      - 12347:12347
-#    networks:
-#      - my-network
-#
-#  ts-contacts-mysql:
-#    image: mysql:5.7
-#    environment:
-#      MYSQL_DATABASE: 'ts-contacts-mysql'
-#      # So you don't have to use root, but you can if you like
-#      MYSQL_USER: 'user'
-#      # You can use whatever password you like
-#      MYSQL_PASSWORD: 'password'
-#      # Password for root access
-#      MYSQL_ROOT_PASSWORD: 'root'
-#    ports:
-#      # <Port exposed> : <MySQL Port running inside container>
-#      - '3301:3306'
-#    networks:
-#      - my-network
-
-#  ts-order-other-service:
-#    build: ts-order-other-service
-#    image: thesis/ts-order-other-service:0.2.0
-#    restart: no
-#    ports:
-#      - 12032:12032
-#    networks:
-#      - my-network
-
-#  ts-order-other-mysql:
-#    image: mysql:5.7
-#    environment:
-#      MYSQL_DATABASE: 'ts-order-other-mysql'
-#      # So you don't have to use root, but you can if you like
-#      MYSQL_USER: 'user'
-#      # You can use whatever password you like
-#      MYSQL_PASSWORD: 'password'
-#      # Password for root access
-#      MYSQL_ROOT_PASSWORD: 'root'
-#    ports:
-#      # <Port exposed> : <MySQL Port running inside container>
-#      - '3302:3306'
-#    networks:
-#      - my-network
-
-  ts-preserve-service:
-    build: ts-preserve-service
-    image: thesis/ts-preserve-service:0.2.0
-    restart: always
-    ports:
-      - 14568:14568
-    networks:
-      - my-network
-
-  ts-food-service:
-    build: ts-food-service
-    image: thesis/ts-food-service:0.2.0
-    restart: always
-    ports:
-      - 18856:18856
-    networks:
-      - my-network
-
-  ts-food-mysql:
-    image: mysql:5.7
-    environment:
-      MYSQL_DATABASE: 'ts-food-mysql'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'user'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'password'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'root'
-    ports:
-      # <Port exposed> : <MySQL Port running inside container>
-      - '3298:3306'
-    networks:
-      - my-network
-
-  ts-station-service:
-    image: thesis/ts-station-service:0.2.0
-    restart: "no"
-    ports:
-      - 12345:12345
-    networks:
-      - my-network
-    depends_on:
-      - ts-station-mysql
-
-  ts-station-mysql:
-    image: mysql:5.7
-    environment:
-      MYSQL_DATABASE: 'ts-station-mysql'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'user'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'password'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'root'
-    ports:
-      # <Port exposed> : <MySQL Port running inside container>
-      - '3308:3306'
-    networks:
-      - my-network
-
-  ts-travel-service:
-    image: thesis/ts-travel-service:0.2.0
-    restart: "no"
-    ports:
-      - 12346:12346
-    networks:
-      - my-network
-    depends_on:
-      - ts-travel-mysql
-
-  ts-travel-mysql:
-    image: mysql:5.7
-    command: --max-connections=500
-    environment:
-      MYSQL_DATABASE: 'ts-travel-mysql'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'user'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'password'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'root'
-      MYSQL_MAX_CONNECTIONS: 500
-    ports:
-      # <Port exposed> : <MySQL Port running inside container>
-      - '3320:3306'
-    networks:
-      - my-network
-
-  ts-basic-service:
-    image: thesis/ts-basic-service:0.2.0
-    restart: "no"
-    ports:
-      - 15680:15680
-    networks:
-      - my-network
-
-  ts-seat-service:
-    image: thesis/ts-seat-service:0.2.0
-    restart: no
-    ports:
-      - 18898:18898
-    networks:
-      - my-network
-
-  ts-config-service:
-    image: thesis/ts-config-service:0.2.0
-    restart: no
-    ports:
-      - 15679:15679
-    networks:
-      - my-network
-    depends_on:
-      - ts-config-mysql
-
-  ts-config-mysql:
-    image: mysql:5.7
-    environment:
-      MYSQL_DATABASE: 'ts-config-mysql'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'user'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'password'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'root'
-    ports:
-      # <Port exposed> : <MySQL Port running inside container>
-      - '3309:3306'
-    networks:
-      - my-network
-
-  ts-train-service:
-    image: thesis/ts-train-service:0.2.0
-    restart: no
-    ports:
-      - 14567:14567
-    networks:
-      - my-network
-    depends_on:
-      - ts-train-mysql
-
-  ts-train-mysql:
-    image: mysql:5.7
-    environment:
-      MYSQL_DATABASE: 'ts-train-mysql'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'user'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'password'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'root'
-    ports:
-      # <Port exposed> : <MySQL Port running inside container>
-      - '3310:3306'
-    networks:
-      - my-network
-
-  ts-price-service:
-    build: ts-price-service
-    image: thesis/ts-price-service:0.2.0
-    restart: always
-    ports:
-      - 16579:16579
-    networks:
-      - my-network
-    depends_on:
-      - ts-price-mysql
-
-  ts-price-mysql:
-    image: mysql:5.7
-    environment:
-      MYSQL_DATABASE: 'ts-price-mysql'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'user'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'password'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'root'
-    ports:
-      # <Port exposed> : <MySQL Port running inside container>
-      - '3311:3306'
-    networks:
-      - my-network
-
-  ts-order-service:
-    image: thesis/ts-order-service:0.2.0
-    restart: no
-    ports:
-      - 12031:12031
-    networks:
-      - my-network
-    depends_on:
-      - ts-order-mysql
-
-  ts-order-mysql:
-    image: mysql:5.7
-    environment:
-      MYSQL_DATABASE: 'ts-order-mysql'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'user'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'password'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'root'
-    ports:
-      # <Port exposed> : <MySQL Port running inside container>
-      - '3312:3306'
     networks:
       - my-network
 
