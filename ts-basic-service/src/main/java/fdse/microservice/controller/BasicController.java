@@ -35,14 +35,14 @@ public class BasicController {
     @PostMapping(value = "/basic/travel")
     public HttpEntity queryForTravel(@RequestBody Travel info, @RequestHeader HttpHeaders headers) {
         // TravelResult
-        logger.info("[queryForTravel][Query for travel][Travel: {}]", info.toString());
+//        logger.info("[queryForTravel][Query for travel][Travel: {}]", info.toString());
         return ok(service.queryForTravel(info, headers));
     }
 
     @PostMapping(value = "/basic/travels")
     public HttpEntity queryForTravels(@RequestBody List<Travel> infos, @RequestHeader HttpHeaders headers) {
         // TravelResult
-        logger.info("[queryForTravels][Query for travels][Travels: {}]", infos);
+//        logger.info("[queryForTravels][Query for travels][Travels: {}]", infos);
         return ok(service.queryForTravels(infos, headers));
     }
 

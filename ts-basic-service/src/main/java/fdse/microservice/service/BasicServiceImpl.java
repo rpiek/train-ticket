@@ -316,7 +316,7 @@ public class BasicServiceImpl implements BasicService {
             trMap.put(tripNumber, result);
         }
         response.setData(trMap);
-        BasicServiceImpl.LOGGER.info("[queryForTravels][all done][result map: {}]", trMap);
+//        BasicServiceImpl.LOGGER.info("[queryForTravels][all done][result map: {}]", trMap);
         return response;
     }
 

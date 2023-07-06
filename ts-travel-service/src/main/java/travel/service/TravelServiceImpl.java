@@ -336,7 +336,7 @@ public class TravelServiceImpl implements TravelService {
             tripMap.put(trip.getTripId().toString(), trip);
         }
 
-        TravelServiceImpl.LOGGER.info("[getTicketsByBatch][before get basic][trips: {}]", trips);
+//        TravelServiceImpl.LOGGER.info("[getTicketsByBatch][before get basic][trips: {}]", trips);
 
         HttpEntity requestEntity = new HttpEntity(infos, null);
         String basic_service_url = getServiceUrl("ts-basic-service");
