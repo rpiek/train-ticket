@@ -460,7 +460,7 @@ services:
 #
   ts-consign-service:
             build: ts-consign-service
-            image: thesis/ts-consign-service:0.3.0
+            image: thesis/ts-consign-service:0.2.0-blob
             restart: always
             ports:
               - 16111:16111
@@ -474,7 +474,7 @@ services:
 #
   ts-consign-price-service:
             build: ts-consign-price-service
-            image: thesis/ts-consign-price-service:0.3.0
+            image: thesis/ts-consign-price-service:0.2.0-blob
             restart: always
             ports:
               - 16110:16110
