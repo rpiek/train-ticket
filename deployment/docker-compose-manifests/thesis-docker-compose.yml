@@ -3,10 +3,11 @@ services:
 
   zipkin:
     image: openzipkin/zipkin
+    container_name: zipkin
     ports:
-      - 9411:9411
+      - "9411:9411"
     environment:
-      - JAVA_OPTS=-Xmx2g
+      - JAVA_OPTS=-Xmx4g
     networks:
       - my-network
 
@@ -39,7 +40,7 @@ services:
       - my-network
     command: --init-file /docker-entrypoint-initdb.d/route.sql
 
-  #  ts-contacts-service:
+#  ts-contacts-service:
 #    image: thesis/ts-contacts-service:0.2.0
 #    restart: always
 #    ports:
@@ -71,7 +72,7 @@ services:
 #      - 12032:12032
 #    networks:
 #      - my-network
-
+#
 #  ts-order-other-mysql:
 #    image: mysql:5.7
 #    environment:
@@ -91,7 +92,7 @@ services:
   ts-preserve-service:
     build: ts-preserve-service
     image: thesis/ts-preserve-service:0.2.0
-    restart: always
+    restart: no
     ports:
       - 14568:14568
     networks:
@@ -100,7 +101,7 @@ services:
   ts-food-service:
     build: ts-food-service
     image: thesis/ts-food-service:0.2.0
-    restart: always
+    restart: no
     ports:
       - 18856:18856
     networks:
@@ -254,7 +255,7 @@ services:
   ts-price-service:
     build: ts-price-service
     image: thesis/ts-price-service:0.2.0
-    restart: always
+    restart: no
     ports:
       - 16579:16579
     networks:

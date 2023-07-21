@@ -10,6 +10,9 @@ spring:
     name: ts-basic-service
   zipkin:
     base-url: http://zipkin:9411
+  sleuth:
+    sampler:
+      probability: 1.0
 
 swagger:
   controllerPackage: fdse.microservice.controller

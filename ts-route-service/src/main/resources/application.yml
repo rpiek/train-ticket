@@ -18,13 +18,9 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
   zipkin:
     base-url: http://zipkin:9411
-#  sleuth:
-#    otel:
-#      config:
-#        trace-id-ration-based: 1.0
-#      export:
-#        otlp:
-#          endpoint: http://collector:4318
+  sleuth:
+    sampler:
+      probability: 1.0
 
 # HTTP Server
 server:

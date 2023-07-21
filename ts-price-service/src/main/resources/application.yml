@@ -19,9 +19,8 @@ spring:
   zipkin:
     base-url: http://zipkin:9411
   sleuth:
-    otel:
-      config:
-        trace-id-ration-based: 1.0
+    sampler:
+      probability: 1.0
 
 
 # HTTP Server
