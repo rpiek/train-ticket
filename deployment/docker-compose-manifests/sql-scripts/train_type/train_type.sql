@@ -5,7 +5,7 @@ create table train_type
     average_speed int          null,
     confort_class int          null,
     economy_class int          null,
-    name          varchar(255) null,
+    name          varchar(191) null,
     constraint UK_3ayk8fx1ak7c37s5udyh8n3s2
         unique (name)
 )

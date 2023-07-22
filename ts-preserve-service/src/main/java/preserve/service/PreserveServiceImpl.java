@@ -229,13 +229,13 @@ public class PreserveServiceImpl implements PreserveService {
             consignRequest.setWeight(oti.getConsigneeWeight());
             consignRequest.setWithin(oti.isWithin());
             LOGGER.info("CONSIGN INFO : " +consignRequest.toString());
-//            Response icresult = createConsign(consignRequest, headers);
-//            if (icresult.getStatus() == 1) {
-//                PreserveServiceImpl.LOGGER.info("[preserve][Step 7][Add Consign][Consign Success]");
-//            } else {
-//                PreserveServiceImpl.LOGGER.error("[preserve][Step 7][Add Consign][Preserve Consign Fail][OrderId: {}]", cor.getData().getId());
-//                returnResponse.setMsg("Consign Fail.");
-//            }
+            Response icresult = createConsign(consignRequest, headers);
+            if (icresult.getStatus() == 1) {
+                PreserveServiceImpl.LOGGER.info("[preserve][Step 7][Add Consign][Consign Success]");
+            } else {
+                PreserveServiceImpl.LOGGER.error("[preserve][Step 7][Add Consign][Preserve Consign Fail][OrderId: {}]", cor.getData().getId());
+                returnResponse.setMsg("Consign Fail.");
+            }
         } else {
             PreserveServiceImpl.LOGGER.info("[preserve][Step 7][Add Consign][Do not need to consign]");
         }

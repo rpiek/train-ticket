@@ -6,8 +6,8 @@ spring:
   application:
     name: ts-order-other-service
   datasource:
-#    url: jdbc:mysql://localhost:3306/ts-order-other-mysql?useSSL=false
-    url: jdbc:mysql://${ORDER_OTHER_MYSQL_HOST:ts-order-other-mysql}:${ORDER_OTHER_MYSQL_PORT:3306}/${ORDER_OTHER_MYSQL_DATABASE:ts-order-other-mysql}?useSSL=false
+#    url: jdbc:mysql://localhost:3306/ts-order-other-mysql
+    url: jdbc:mysql://${ORDER_OTHER_MYSQL_HOST:ts-order-other-mysql}:${ORDER_OTHER_MYSQL_PORT:3306}/${ORDER_OTHER_MYSQL_DATABASE:ts-order-other-mysql}
     username: ${ORDER_OTHER_MYSQL_USER:root}
     password: ${ORDER_OTHER_MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -16,8 +16,8 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
-#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
+#    database-platform: org.hibernate.dialect.MySQL8InnoDBDialect
     show-sql: true
   zipkin:
     base-url: http://zipkin:9411

@@ -21,8 +21,16 @@ services:
     depends_on:
       - ts-route-mysql
 
+  ts-route-plan-service:
+    image: thesis/ts-route-plan-service:0.2.0
+    restart: "no"
+    ports:
+      - 14578:14578
+    networks:
+      - my-network
+
   ts-route-mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     environment:
       MYSQL_DATABASE: 'ts-route-mysql'
       # So you don't have to use root, but you can if you like
@@ -38,9 +46,8 @@ services:
       - ./sql-scripts/route:/docker-entrypoint-initdb.d
     networks:
       - my-network
-    command: --init-file /docker-entrypoint-initdb.d/route.sql
 
-#  ts-contacts-service:
+  #  ts-contacts-service:
 #    image: thesis/ts-contacts-service:0.2.0
 #    restart: always
 #    ports:
@@ -49,7 +56,7 @@ services:
 #      - my-network
 #
 #  ts-contacts-mysql:
-#    image: mysql:5.7
+#    image: mysql:8.0
 #    environment:
 #      MYSQL_DATABASE: 'ts-contacts-mysql'
 #      # So you don't have to use root, but you can if you like
@@ -74,7 +81,7 @@ services:
 #      - my-network
 #
 #  ts-order-other-mysql:
-#    image: mysql:5.7
+#    image: mysql:8.0
 #    environment:
 #      MYSQL_DATABASE: 'ts-order-other-mysql'
 #      # So you don't have to use root, but you can if you like
@@ -108,7 +115,7 @@ services:
       - my-network
 
   ts-food-mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     environment:
       MYSQL_DATABASE: 'ts-food-mysql'
       # So you don't have to use root, but you can if you like
@@ -134,7 +141,7 @@ services:
       - ts-station-mysql
 
   ts-station-mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     environment:
       MYSQL_DATABASE: 'ts-station-mysql'
       # So you don't have to use root, but you can if you like
@@ -150,7 +157,6 @@ services:
       - ./sql-scripts/station:/docker-entrypoint-initdb.d
     networks:
       - my-network
-    command: --init-file /docker-entrypoint-initdb.d/station.sql
 
   ts-travel-service:
     image: thesis/ts-travel-service:0.2.0
@@ -163,23 +169,18 @@ services:
       - ts-travel-mysql
 
   ts-travel-mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     environment:
       MYSQL_DATABASE: 'ts-travel-mysql'
-      # So you don't have to use root, but you can if you like
       MYSQL_USER: 'user'
-      # You can use whatever password you like
       MYSQL_PASSWORD: 'password'
-      # Password for root access
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
-      # <Port exposed> : <MySQL Port running inside container>
-      - '3320:3306'
+      - '3306:3306'
     volumes:
       - ./sql-scripts/trip:/docker-entrypoint-initdb.d
     networks:
       - my-network
-    command: --init-file /docker-entrypoint-initdb.d/trip.sql
 
   ts-basic-service:
     image: thesis/ts-basic-service:0.2.0
@@ -208,7 +209,7 @@ services:
       - ts-config-mysql
 
   ts-config-mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     environment:
       MYSQL_DATABASE: 'ts-config-mysql'
       # So you don't have to use root, but you can if you like
@@ -234,7 +235,7 @@ services:
       - ts-train-mysql
 
   ts-train-mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     environment:
       MYSQL_DATABASE: 'ts-train-mysql'
       # So you don't have to use root, but you can if you like
@@ -250,7 +251,6 @@ services:
       - ./sql-scripts/train_type:/docker-entrypoint-initdb.d
     networks:
       - my-network
-    command: --init-file /docker-entrypoint-initdb.d/train_type.sql
 
   ts-price-service:
     build: ts-price-service
@@ -264,7 +264,7 @@ services:
       - ts-price-mysql
 
   ts-price-mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     environment:
       MYSQL_DATABASE: 'ts-price-mysql'
       # So you don't have to use root, but you can if you like
@@ -280,7 +280,6 @@ services:
       - ./sql-scripts/price_config:/docker-entrypoint-initdb.d
     networks:
       - my-network
-    command: --init-file /docker-entrypoint-initdb.d/price_config.sql
 
   ts-order-service:
     image: thesis/ts-order-service:0.2.0
@@ -293,7 +292,7 @@ services:
       - ts-order-mysql
 
   ts-order-mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     environment:
       MYSQL_DATABASE: 'ts-order-mysql'
       # So you don't have to use root, but you can if you like
@@ -307,6 +306,58 @@ services:
       - '3312:3306'
     networks:
       - my-network
+
+#  ts-consign-service:
+#    image: thesis/ts-consign-service:0.2.0
+#    restart: no
+#    ports:
+#      - 16111:16111
+#    networks:
+#      - my-network
+#    depends_on:
+#      - ts-consign-mysql
+#
+#  ts-consign-mysql:
+#    image: mysql:8.0
+#    environment:
+#      MYSQL_DATABASE: 'ts-consign-mysql'
+#      # So you don't have to use root, but you can if you like
+#      MYSQL_USER: 'user'
+#      # You can use whatever password you like
+#      MYSQL_PASSWORD: 'password'
+#      # Password for root access
+#      MYSQL_ROOT_PASSWORD: 'root'
+#    ports:
+#      # <Port exposed> : <MySQL Port running inside container>
+#      - '3320:3306'
+#    networks:
+#      - my-network
+#
+#  ts-consign-price-service:
+#    image: thesis/ts-consign-price-service:0.2.0
+#    restart: no
+#    ports:
+#      - 16110:16110
+#    networks:
+#      - my-network
+#    depends_on:
+#      - ts-consign-price-mysql
+#
+#  ts-consign-price-mysql:
+#    image: mysql:8.0
+#    environment:
+#      MYSQL_DATABASE: 'ts-consign-price-mysql'
+#      # So you don't have to use root, but you can if you like
+#      MYSQL_USER: 'user'
+#      # You can use whatever password you like
+#      MYSQL_PASSWORD: 'password'
+#      # Password for root access
+#      MYSQL_ROOT_PASSWORD: 'root'
+#    ports:
+#      # <Port exposed> : <MySQL Port running inside container>
+#      - '3321:3306'
+#    networks:
+#      - my-network
 
   prometheus:
     image: prom/prometheus

@@ -27,7 +27,7 @@ public class PriceApplication {
         SpringApplication.run(PriceApplication.class, args);
     }
 
-    @LoadBalanced
+//    @LoadBalanced
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();

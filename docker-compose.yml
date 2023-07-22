@@ -92,6 +92,15 @@ services:
     networks:
       - my-network
 
+  ts-route-plan-service:
+    build: ts-route-plan-service
+    image: thesis/ts-route-plan-service:0.2.0
+    restart: "no"
+    ports:
+      - 14578:14578
+    networks:
+      - my-network
+
 #  ts-route-mongo:
 #    image: mongo
 #    networks:

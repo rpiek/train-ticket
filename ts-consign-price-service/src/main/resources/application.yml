@@ -2,7 +2,7 @@ spring:
   application:
     name: ts-consign-price-service
   datasource:
-    url: jdbc:mysql://${CONSIGN_PRICE_MYSQL_HOST:ts-consign-price-mysql}:${CONSIGN_PRICE_MYSQL_PORT:3306}/${CONSIGN_PRICE_MYSQL_DATABASE:ts-consign-price-mysql}?useSSL=false
+    url: jdbc:mysql://${CONSIGN_PRICE_MYSQL_HOST:ts-consign-price-mysql}:${CONSIGN_PRICE_MYSQL_PORT:3306}/${CONSIGN_PRICE_MYSQL_DATABASE:ts-consign-price-mysql}
     username: ${CONSIGN_PRICE_MYSQL_USER:root}
     password: ${CONSIGN_PRICE_MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -11,7 +11,7 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
   zipkin:
     base-url: http://zipkin:9411
 

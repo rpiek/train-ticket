@@ -5,7 +5,7 @@ spring:
   application:
     name: ts-train-food-service
   datasource:
-    url: jdbc:mysql://${TRAIN_FOOD_MYSQL_HOST:ts-train-food-mysql}:${TRAIN_FOOD_MYSQL_PORT:3306}/${TRAIN_FOOD_MYSQL_DATABASE:ts-train-food-mysql}?useSSL=false
+    url: jdbc:mysql://${TRAIN_FOOD_MYSQL_HOST:ts-train-food-mysql}:${TRAIN_FOOD_MYSQL_PORT:3306}/${TRAIN_FOOD_MYSQL_DATABASE:ts-train-food-mysql}
     username: ${TRAIN_FOOD_MYSQL_USER:root}
     password: ${TRAIN_FOOD_MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -15,7 +15,7 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
 
 swagger:
   controllerPackage: trainFood.controller

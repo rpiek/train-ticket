@@ -5,7 +5,7 @@ create table price_config
     basic_price_rate       double       not null,
     first_class_price_rate double       not null,
     route_id               varchar(36)  null,
-    train_type             varchar(255) null,
+    train_type             varchar(165) null,
     constraint route_type_idx
         unique (train_type, route_id)
 )

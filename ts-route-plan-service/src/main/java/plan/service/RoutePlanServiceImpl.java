@@ -167,7 +167,7 @@ public class RoutePlanServiceImpl implements RoutePlanService {
         HttpEntity requestEntity = new HttpEntity(null);
         String route_service_url = getServiceUrl("ts-route-service");
         ResponseEntity<Response<ArrayList<Route>>> re = restTemplate.exchange(
-                route_service_url + "/api/v1/routeservice/routes/" + info.getStartStation() + "/" + info.getEndStation(),
+                route_service_url + ":11178/api/v1/routeservice/routes/" + info.getStartStation() + "/" + info.getEndStation(),
                 HttpMethod.GET,
                 requestEntity,
                 new ParameterizedTypeReference<Response<ArrayList<Route>>>() {
@@ -203,7 +203,7 @@ public class RoutePlanServiceImpl implements RoutePlanService {
         requestEntity = new HttpEntity(resultRoutes, null);
         String travel_service_url=getServiceUrl("ts-travel-service");
         ResponseEntity<Response<ArrayList<ArrayList<Trip>>>> re2 = restTemplate.exchange(
-                travel_service_url + "/api/v1/travelservice/trips/routes",
+                travel_service_url + ":12346/api/v1/travelservice/trips/routes",
                 HttpMethod.POST,
                 requestEntity,
                 new ParameterizedTypeReference<Response<ArrayList<ArrayList<Trip>>>>() {
@@ -211,22 +211,22 @@ public class RoutePlanServiceImpl implements RoutePlanService {
 
         ArrayList<ArrayList<Trip>> travelTrips = re2.getBody().getData();
 
-        String travel2_service_url=getServiceUrl("ts-travel2-service");
-        re2 = restTemplate.exchange(
-                travel2_service_url + "/api/v1/travel2service/trips/routes",
-                HttpMethod.POST,
-                requestEntity,
-                new ParameterizedTypeReference<Response<ArrayList<ArrayList<Trip>>>>() {
-                });
-        ArrayList<ArrayList<Trip>> travel2Trips = re2.getBody().getData();
+//        String travel2_service_url=getServiceUrl("ts-travel2-service");
+//        re2 = restTemplate.exchange(
+//                travel2_service_url + "/api/v1/travel2service/trips/routes",
+//                HttpMethod.POST,
+//                requestEntity,
+//                new ParameterizedTypeReference<Response<ArrayList<ArrayList<Trip>>>>() {
+//                });
+//        ArrayList<ArrayList<Trip>> travel2Trips = re2.getBody().getData();
 
         //Merge query results
-        ArrayList<ArrayList<Trip>> finalTripResult = new ArrayList<>();
-        for (int i = 0; i < travel2Trips.size(); i++) {
-            ArrayList<Trip> tempList = travel2Trips.get(i);
-            tempList.addAll(travelTrips.get(i));
-            finalTripResult.add(tempList);
-        }
+        ArrayList<ArrayList<Trip>> finalTripResult = travelTrips;
+//        for (int i = 0; i < travel2Trips.size(); i++) {
+//            ArrayList<Trip> tempList = travel2Trips.get(i);
+//            tempList.addAll(travelTrips.get(i));
+//            finalTripResult.add(tempList);
+//        }
         RoutePlanServiceImpl.LOGGER.info("[searchMinStopStations][Get train Information][Trips Num: {}]", finalTripResult.size());
         //5.Then, get the price and the station information according to the train information
         ArrayList<Trip> trips = new ArrayList<>();
@@ -246,10 +246,11 @@ public class RoutePlanServiceImpl implements RoutePlanService {
             requestEntity = new HttpEntity(allDetailInfo, null);
             String requestUrl = "";
             if (trip.getTripId().toString().charAt(0) == 'D' || trip.getTripId().toString().charAt(0) == 'G') {
-                requestUrl = travel_service_url + "/api/v1/travelservice/trip_detail";
-            } else {
-                requestUrl = travel2_service_url + "/api/v1/travel2service/trip_detail";
+                requestUrl = travel_service_url + ":12346/api/v1/travelservice/trip_detail";
             }
+//            } else {
+////                requestUrl = travel2_service_url + "/api/v1/travel2service/trip_detail";
+//            }
             re3 = restTemplate.exchange(
                     requestUrl,
                     HttpMethod.POST,
@@ -287,7 +288,7 @@ public class RoutePlanServiceImpl implements RoutePlanService {
         HttpEntity requestEntity = new HttpEntity(null);
         String route_service_url = getServiceUrl("ts-route-service");
         ResponseEntity<Response<Route>> re = restTemplate.exchange(
-                route_service_url + "/api/v1/routeservice/routes/" + routeId,
+                route_service_url + ":11178/api/v1/routeservice/routes/" + routeId,
                 HttpMethod.GET,
                 requestEntity,
                 new ParameterizedTypeReference<Response<Route>>() {
@@ -308,7 +309,7 @@ public class RoutePlanServiceImpl implements RoutePlanService {
         HttpEntity requestEntity = new HttpEntity(info, null);
         String travel_service_url=getServiceUrl("ts-travel-service");
         ResponseEntity<Response<ArrayList<TripResponse>>> re = restTemplate.exchange(
-                travel_service_url + "/api/v1/travelservice/trips/left",
+                travel_service_url + ":12346/api/v1/travelservice/trips/left",
                 HttpMethod.POST,
                 requestEntity,
                 new ParameterizedTypeReference<Response<ArrayList<TripResponse>>>() {

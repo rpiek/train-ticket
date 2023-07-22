@@ -10,7 +10,7 @@ spring:
   application:
     name: ts-order-service
   datasource:
-    url: jdbc:mysql://${ORDER_MYSQL_HOST:ts-order-mysql}:${ORDER_MYSQL_PORT:3306}/${ORDER_MYSQL_DATABASE:ts-order-mysql}?useSSL=false
+    url: jdbc:mysql://${ORDER_MYSQL_HOST:ts-order-mysql}:${ORDER_MYSQL_PORT:3306}/${ORDER_MYSQL_DATABASE:ts-order-mysql}
     username: ${ORDER_MYSQL_USER:root}
     password: ${ORDER_MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -19,7 +19,7 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
   zipkin:
     base-url: http://zipkin:9411
   sleuth:

@@ -10,7 +10,7 @@ spring:
   zipkin:
     base-url: http://zipkin:9411
   datasource:
-    url: jdbc:mysql://${TRAVEL_MYSQL_HOST:ts-travel-mysql}:${TRAVEL_MYSQL_PORT:3306}/${TRAVEL_MYSQL_DATABASE:ts-travel-mysql}?useSSL=false
+    url: jdbc:mysql://${TRAVEL_MYSQL_HOST:ts-travel-mysql}:${TRAVEL_MYSQL_PORT:3306}/${TRAVEL_MYSQL_DATABASE:ts-travel-mysql}
     username: ${TRAVEL_MYSQL_USER:root}
     password: ${TRAVEL_MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -19,13 +19,12 @@ spring:
   sleuth:
     sampler:
       probability: 1.0
-
   jpa:
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
 
 swagger:
   controllerPackage: travel.controller
