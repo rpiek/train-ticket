@@ -7,14 +7,25 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 
+//@SpringBootApplication
+//@EnableAspectJAutoProxy(proxyTargetClass = true)
+//@EnableAsync
+//@IntegrationComponentScan
+//@EnableDiscoveryClient
+//public class GatewayApplication {
+//    public static void main(String[] args) {
+//        SpringApplication.run(GatewayApplication.class, args);
+//    }
+//
+//}
+
 @SpringBootApplication
-@EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableAsync
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 @IntegrationComponentScan
-@EnableDiscoveryClient
 public class GatewayApplication {
     public static void main(String[] args) {
         SpringApplication.run(GatewayApplication.class, args);
     }
-
 }
+
