@@ -521,8 +521,6 @@ public class TravelServiceImpl implements TravelService {
                 Response.class);
         Response routeRes = re.getBody();
 
-        repository.findAll();
-
         Route route1 = new Route();
         TravelServiceImpl.LOGGER.info("[getRouteByRouteId][Get Route By Id][Routes Response is : {}]", routeRes.toString());
         if (routeRes.getStatus() == 1) {

@@ -261,7 +261,6 @@ public class RoutePlanServiceImpl implements RoutePlanService {
             TripAllDetail tripAllDetail = re3.getBody().getData();
             tripResponse = tripAllDetail.getTripResponse();
 
-
             RoutePlanResultUnit unit = new RoutePlanResultUnit();
             unit.setTripId(trip.getTripId().toString());
             unit.setTrainTypeName(tripResponse.getTrainTypeName());

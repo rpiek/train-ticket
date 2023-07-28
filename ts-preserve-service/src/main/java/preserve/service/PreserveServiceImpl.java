@@ -100,7 +100,7 @@ public class PreserveServiceImpl implements PreserveService {
         PreserveServiceImpl.LOGGER.info("[preserve][Step 3][Check tickets num][Tickets Enough]");
         //4.send the order request and set the order information
         //PreserveServiceImpl.LOGGER.info("[Step 4] Do Order");
-//        Contacts contacts = new Contacts();
+        Contacts contacts = new Contacts();
         Order order = new Order();
         UUID orderId = UUID.randomUUID();
         order.setId(orderId.toString());
@@ -215,30 +215,30 @@ public class PreserveServiceImpl implements PreserveService {
         }
 
         //7.add consign
-        if (null != oti.getConsigneeName() && !"".equals(oti.getConsigneeName())) {
+        // if (null != oti.getConsigneeName() && !"".equals(oti.getConsigneeName())) {
 
-            Consign consignRequest = new Consign();
-            consignRequest.setOrderId(cor.getData().getId());
-            consignRequest.setAccountId(cor.getData().getAccountId());
-            consignRequest.setHandleDate(oti.getHandleDate());
-            consignRequest.setTargetDate(cor.getData().getTravelDate().toString());
-            consignRequest.setFrom(cor.getData().getFrom());
-            consignRequest.setTo(cor.getData().getTo());
-            consignRequest.setConsignee(oti.getConsigneeName());
-            consignRequest.setPhone(oti.getConsigneePhone());
-            consignRequest.setWeight(oti.getConsigneeWeight());
-            consignRequest.setWithin(oti.isWithin());
-            LOGGER.info("CONSIGN INFO : " +consignRequest.toString());
-            Response icresult = createConsign(consignRequest, headers);
-            if (icresult.getStatus() == 1) {
-                PreserveServiceImpl.LOGGER.info("[preserve][Step 7][Add Consign][Consign Success]");
-            } else {
-                PreserveServiceImpl.LOGGER.error("[preserve][Step 7][Add Consign][Preserve Consign Fail][OrderId: {}]", cor.getData().getId());
-                returnResponse.setMsg("Consign Fail.");
-            }
-        } else {
-            PreserveServiceImpl.LOGGER.info("[preserve][Step 7][Add Consign][Do not need to consign]");
-        }
+        //     Consign consignRequest = new Consign();
+        //     consignRequest.setOrderId(cor.getData().getId());
+        //     consignRequest.setAccountId(cor.getData().getAccountId());
+        //     consignRequest.setHandleDate(oti.getHandleDate());
+        //     consignRequest.setTargetDate(cor.getData().getTravelDate().toString());
+        //     consignRequest.setFrom(cor.getData().getFrom());
+        //     consignRequest.setTo(cor.getData().getTo());
+        //     consignRequest.setConsignee(oti.getConsigneeName());
+        //     consignRequest.setPhone(oti.getConsigneePhone());
+        //     consignRequest.setWeight(oti.getConsigneeWeight());
+        //     consignRequest.setWithin(oti.isWithin());
+        //     LOGGER.info("CONSIGN INFO : " +consignRequest.toString());
+        //     Response icresult = createConsign(consignRequest, headers);
+        //     if (icresult.getStatus() == 1) {
+        //         PreserveServiceImpl.LOGGER.info("[preserve][Step 7][Add Consign][Consign Success]");
+        //     } else {
+        //         PreserveServiceImpl.LOGGER.error("[preserve][Step 7][Add Consign][Preserve Consign Fail][OrderId: {}]", cor.getData().getId());
+        //         returnResponse.setMsg("Consign Fail.");
+        //     }
+        // } else {
+        //     PreserveServiceImpl.LOGGER.info("[preserve][Step 7][Add Consign][Do not need to consign]");
+        // }
 
         //8.send notification
 
@@ -329,6 +329,7 @@ public class PreserveServiceImpl implements PreserveService {
     private String queryForStationId(String stationName, HttpHeaders httpHeaders) {
         PreserveServiceImpl.LOGGER.info("[queryForStationId][Preserve Other Service][Get Station By  Name]");
 
+
         HttpEntity requestQueryForStationId = new HttpEntity(httpHeaders);
         String station_service_url = getServiceUrl("ts-station-service");
         ResponseEntity<Response<String>> reQueryForStationId = restTemplate.exchange(
@@ -372,19 +373,19 @@ public class PreserveServiceImpl implements PreserveService {
     }
 
 
-    private void getContactsById(String contactsId, HttpHeaders httpHeaders) {
+    private Response<Contacts> getContactsById(String contactsId, HttpHeaders httpHeaders) {
         PreserveServiceImpl.LOGGER.info("[getContactsById][Preserve Other Service][Get Contacts By Id is]");
-//
-//        HttpEntity requestGetContactsResult = new HttpEntity(httpHeaders);
-//        String contacts_service_url = getServiceUrl("ts-contacts-service");
-//        ResponseEntity<Response<Contacts>> reGetContactsResult = restTemplate.exchange(
-//                contacts_service_url + ":12347/api/v1/contactservice/contacts/" + contactsId,
-//                HttpMethod.GET,
-//                requestGetContactsResult,
-//                new ParameterizedTypeReference<Response<Contacts>>() {
-//                });
 
-//        return reGetContactsResult.getBody();
+        HttpEntity requestGetContactsResult = new HttpEntity(httpHeaders);
+        String contacts_service_url = getServiceUrl("ts-contacts-service");
+        ResponseEntity<Response<Contacts>> reGetContactsResult = restTemplate.exchange(
+                contacts_service_url + "/api/v1/contactservice/contacts/" + contactsId,
+                HttpMethod.GET,
+                requestGetContactsResult,
+                new ParameterizedTypeReference<Response<Contacts>>() {
+                });
+
+        return reGetContactsResult.getBody();
     }
 
     private Response createOrder(Order coi, HttpHeaders httpHeaders) {

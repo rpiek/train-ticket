@@ -22,7 +22,7 @@ import static org.springframework.web.cors.CorsConfiguration.ALL;
  * @author fdse
  */
 @Configuration
-//@EnableWebsecurity
+@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
