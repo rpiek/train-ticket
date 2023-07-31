@@ -71,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // close session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-//                .authorizeRequests()
+                .authorizeRequests()
 //                .antMatchers(HttpMethod.POST, order).hasAnyRole(admin, "USER")
 //                .antMatchers(HttpMethod.PUT, order).hasAnyRole(admin, "USER")
 //                .antMatchers(HttpMethod.DELETE, order).hasAnyRole(admin, "USER")
@@ -80,8 +80,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/api/v1/orderservice/order/**").permitAll()
 //                .antMatchers("/swagger-ui.html", "/webjars/**", "/images/**",
 //                        "/configuration/**", "/swagger-resources/**", "/v2/**").permitAll()
-//                .anyRequest().authenticated()
-                .addFilterBefore(new JWTFilter(), UsernamePasswordAuthenticationFilter.class);
+                .anyRequest().permitAll();
+//                .addFilterBefore(new JWTFilter(), UsernamePasswordAuthenticationFilter.class);
 
         // close cache
         httpSecurity.headers().cacheControl();

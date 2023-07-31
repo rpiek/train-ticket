@@ -100,7 +100,7 @@ public class PreserveServiceImpl implements PreserveService {
         PreserveServiceImpl.LOGGER.info("[preserve][Step 3][Check tickets num][Tickets Enough]");
         //4.send the order request and set the order information
         //PreserveServiceImpl.LOGGER.info("[Step 4] Do Order");
-        Contacts contacts = new Contacts();
+//        Contacts contacts = new Contacts();
         Order order = new Order();
         UUID orderId = UUID.randomUUID();
         order.setId(orderId.toString());

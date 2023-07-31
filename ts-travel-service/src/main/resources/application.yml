@@ -14,8 +14,7 @@ spring:
     username: ${TRAVEL_MYSQL_USER:root}
     password: ${TRAVEL_MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    hikari:
-#      maximum-pool-size: 10
+
   sleuth:
     sampler:
       probability: 1.0

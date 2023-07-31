@@ -137,7 +137,7 @@ public class FoodServiceImpl implements FoodService {
             delivery.setStationName(addFoodOrder.getStationName());
             delivery.setStoreName(addFoodOrder.getStoreName());
 
-            String deliveryJson = JsonUtils.object2Json(delivery);
+//            String deliveryJson = JsonUtils.object2Json(delivery);
 //            LOGGER.info("[createFoodOrder][AddFoodOrder, delivery info send to mq][delivery info: {}]", deliveryJson);
 //            try {
 //                sender.send(deliveryJson);
