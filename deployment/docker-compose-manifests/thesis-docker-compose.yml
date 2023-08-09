@@ -8,6 +8,8 @@ services:
     ports:
       - "9411:9411"
     environment:
+      - STORAGE_TYPE=elasticsearch
+      - ES_HOSTS=http://elasticsearch:9200
       - JAVA_OPTS=-Xmx4g
     networks:
       - my-network
