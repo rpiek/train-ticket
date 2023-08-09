@@ -10,7 +10,7 @@ services:
     environment:
       - STORAGE_TYPE=cassandra3
       - CASSANDRA_CONTACT_POINTS=cassandra
-      - CASSANDRA_ENSURE_SCHEMa=true
+      - CASSANDRA_ENSURE_SCHEMA=true
       - JAVA_OPTS=-Xms512m -Xmx2g
     networks:
       - my-network
@@ -20,9 +20,9 @@ services:
   cassandra:
     image: cassandra:3.11.3 # Use the desired Cassandra version
     container_name: cassandra
-    cpus: "1"
+#    cpus: "1"
     environment:
-      - "MAX_HEAP_SIZE=1G" # Adjust memory settings as needed
+      - "MAX_HEAP_SIZE=2G" # Adjust memory settings as needed
       - "HEAP_NEWSIZE=200M" # Adjust memory settings as needed
     networks:
       - my-network
