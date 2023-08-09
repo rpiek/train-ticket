@@ -12,14 +12,14 @@ services:
     networks:
       - my-network
 
-#  elasticsearch:
-#    image: docker.elastic.co/elasticsearch/elasticsearch:6.7.0
-#    container_name: elasticsearch
-#    environment:
-#      - discovery.type=single-node
-#      - "ES_JAVA_OPTS=-Xms512m -Xmx2g" # Adjust memory settings as needed
-#    networks:
-#      - my-network
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.7.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+#      - "ES_JAVA_OPTS=-Xms512m -Xmx4g" # Adjust memory settings as needed
+    networks:
+      - my-network
 
   ts-route-service:
     image: thesis/ts-route-service:0.2.0
