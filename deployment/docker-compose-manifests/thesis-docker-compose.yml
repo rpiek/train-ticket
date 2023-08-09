@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 services:
 
   # Used version 2.24.2
@@ -19,6 +19,7 @@ services:
   cassandra:
     image: cassandra:3.11.3 # Use the desired Cassandra version
     container_name: cassandra
+    cpus: "0.5"
     environment:
       - "MAX_HEAP_SIZE=1G" # Adjust memory settings as needed
       - "HEAP_NEWSIZE=200M" # Adjust memory settings as needed
