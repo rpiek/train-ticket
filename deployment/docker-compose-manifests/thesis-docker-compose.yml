@@ -8,32 +8,32 @@ services:
     ports:
       - "9411:9411"
     environment:
-#      - STORAGE_TYPE=elasticsearch
-#      - ES_HOSTS=http://elasticsearch:9200
+      - STORAGE_TYPE=elasticsearch
+      - ES_HOSTS=http://elasticsearch:9200
       - JAVA_OPTS=-Xmx8g
 #    volumes:
 #      - ./logs:/var/log/zipkin
     networks:
       - my-network
 
-#  kibana:
-#    image: docker.elastic.co/kibana/kibana:6.7.0
-#    container_name: kibana
-#    environment:
-#      - ELASTICSEARCH_URL=http://elasticsearch:9200
-#    ports:
-#      - "5601:5601"
-#    networks:
-#      - my-network
-#
-#  elasticsearch:
-#    image: docker.elastic.co/elasticsearch/elasticsearch:6.7.0
-#    container_name: elasticsearch
-#    environment:
-#      - discovery.type=single-node
-##      - "ES_JAVA_OPTS=-Xms512m -Xmx4g" # Adjust memory settings as needed
-#    networks:
-#      - my-network
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.7.0
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    networks:
+      - my-network
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.7.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx8g
+    networks:
+      - my-network
 
   ts-route-service:
     image: thesis/ts-route-service:0.2.0
