@@ -16,6 +16,16 @@ services:
     networks:
       - my-network
 
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.7.0
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    networks:
+      - my-network
+
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.7.0
     container_name: elasticsearch
