@@ -47,24 +47,24 @@ public class PreserveServiceImpl implements PreserveService {
     @Override
     public Response preserve(OrderTicketsInfo oti, HttpHeaders headers) {
         //1.detect ticket scalper
-        //PreserveServiceImpl.LOGGER.info("[Step 1] Check Security");
+        PreserveServiceImpl.LOGGER.info("[Step 1] Check Security");
 
-//        Response result = checkSecurity(oti.getAccountId(), headers);
-//        if (result.getStatus() == 0) {
-//            PreserveServiceImpl.LOGGER.error("[preserve][Step 1][Check Security Fail][AccountId: {}]",oti.getAccountId());
-//            return new Response<>(0, result.getMsg(), null);
-//        }
+        Response result = checkSecurity(oti.getAccountId(), headers);
+        if (result.getStatus() == 0) {
+            PreserveServiceImpl.LOGGER.error("[preserve][Step 1][Check Security Fail][AccountId: {}]",oti.getAccountId());
+            return new Response<>(0, result.getMsg(), null);
+        }
         PreserveServiceImpl.LOGGER.info("[preserve][Step 1][Check Security Complete][AccountId: {}]",oti.getAccountId());
         //2.Querying contact information -- modification, mediated by the underlying information micro service
         //PreserveServiceImpl.LOGGER.info("[Step 2] Find contacts");
         //PreserveServiceImpl.LOGGER.info("[Step 2] Contacts Id: {}", oti.getContactsId());
 
-//        Response<Contacts> gcr = getContactsById(oti.getContactsId(), headers);
-//        if (gcr.getStatus() == 0) {
-//            PreserveServiceImpl.LOGGER.error("[preserve][Step 2][Find Contacts Fail][ContactsId: {},message: {}]",oti.getContactsId(),gcr.getMsg());
-//            return new Response<>(0, gcr.getMsg(), null);
-//        }
-//        PreserveServiceImpl.LOGGER.info("[preserve][Step 2][Find contacts Complete][ContactsId: {}]",oti.getContactsId());
+        Response<Contacts> gcr = getContactsById(oti.getContactsId(), headers);
+        if (gcr.getStatus() == 0) {
+            PreserveServiceImpl.LOGGER.error("[preserve][Step 2][Find Contacts Fail][ContactsId: {},message: {}]",oti.getContactsId(),gcr.getMsg());
+            return new Response<>(0, gcr.getMsg(), null);
+        }
+        PreserveServiceImpl.LOGGER.info("[preserve][Step 2][Find contacts Complete][ContactsId: {}]",oti.getContactsId());
         //3.Check the info of train and the number of remaining tickets
         //PreserveServiceImpl.LOGGER.info("[Step 3] Check tickets num");
         TripAllDetailInfo gtdi = new TripAllDetailInfo();
@@ -100,7 +100,7 @@ public class PreserveServiceImpl implements PreserveService {
         PreserveServiceImpl.LOGGER.info("[preserve][Step 3][Check tickets num][Tickets Enough]");
         //4.send the order request and set the order information
         //PreserveServiceImpl.LOGGER.info("[Step 4] Do Order");
-//        Contacts contacts = new Contacts();
+        Contacts contacts = gcr.getData();
         Order order = new Order();
         UUID orderId = UUID.randomUUID();
         order.setId(orderId.toString());
@@ -114,9 +114,9 @@ public class PreserveServiceImpl implements PreserveService {
         order.setTo(toStationName);
         order.setBoughtDate(StringUtils.Date2String(new Date()));
         order.setStatus(OrderStatus.NOTPAID.getCode());
-        order.setContactsDocumentNumber("123");
-        order.setContactsName("John Doe");
-        order.setDocumentType(DocumentType.ID_CARD.getCode());
+        order.setContactsDocumentNumber(contacts.getDocumentNumber());
+        order.setContactsName(contacts.getName());
+        order.setDocumentType(contacts.getDocumentType());
 
         Travel query = new Travel();
         query.setTrip(trip);
@@ -175,19 +175,19 @@ public class PreserveServiceImpl implements PreserveService {
         PreserveServiceImpl.LOGGER.info("[preserve][Step 4][Do Order][Do Order Complete]");
 
         Response returnResponse = new Response<>(1, "Success.", cor.getMsg());
-        //5.Check insurance options
-        if (oti.getAssurance() == 0) {
-            PreserveServiceImpl.LOGGER.info("[preserve][Step 5][Buy Assurance][Do not need to buy assurance]");
-        } else {
-            Response addAssuranceResult = addAssuranceForOrder(
-                    oti.getAssurance(), cor.getData().getId().toString(), headers);
-            if (addAssuranceResult.getStatus() == 1) {
-                PreserveServiceImpl.LOGGER.info("[preserve][Step 5][Buy Assurance][Preserve Buy Assurance Success]");
-            } else {
-                PreserveServiceImpl.LOGGER.warn("[preserve][Step 5][Buy Assurance][Buy Assurance Fail][assurance: {}, OrderId: {}]", oti.getAssurance(),cor.getData().getId());
-                returnResponse.setMsg("Success.But Buy Assurance Fail.");
-            }
-        }
+//        //5.Check insurance options
+//        if (oti.getAssurance() == 0) {
+//            PreserveServiceImpl.LOGGER.info("[preserve][Step 5][Buy Assurance][Do not need to buy assurance]");
+//        } else {
+//            Response addAssuranceResult = addAssuranceForOrder(
+//                    oti.getAssurance(), cor.getData().getId().toString(), headers);
+//            if (addAssuranceResult.getStatus() == 1) {
+//                PreserveServiceImpl.LOGGER.info("[preserve][Step 5][Buy Assurance][Preserve Buy Assurance Success]");
+//            } else {
+//                PreserveServiceImpl.LOGGER.warn("[preserve][Step 5][Buy Assurance][Buy Assurance Fail][assurance: {}, OrderId: {}]", oti.getAssurance(),cor.getData().getId());
+//                returnResponse.setMsg("Success.But Buy Assurance Fail.");
+//            }
+//        }
 
         //6.Increase the food order
         if (oti.getFoodType() != 0) {
@@ -215,47 +215,47 @@ public class PreserveServiceImpl implements PreserveService {
         }
 
         //7.add consign
-        // if (null != oti.getConsigneeName() && !"".equals(oti.getConsigneeName())) {
+        if (null != oti.getConsigneeName() && !"".equals(oti.getConsigneeName())) {
 
-        //     Consign consignRequest = new Consign();
-        //     consignRequest.setOrderId(cor.getData().getId());
-        //     consignRequest.setAccountId(cor.getData().getAccountId());
-        //     consignRequest.setHandleDate(oti.getHandleDate());
-        //     consignRequest.setTargetDate(cor.getData().getTravelDate().toString());
-        //     consignRequest.setFrom(cor.getData().getFrom());
-        //     consignRequest.setTo(cor.getData().getTo());
-        //     consignRequest.setConsignee(oti.getConsigneeName());
-        //     consignRequest.setPhone(oti.getConsigneePhone());
-        //     consignRequest.setWeight(oti.getConsigneeWeight());
-        //     consignRequest.setWithin(oti.isWithin());
-        //     LOGGER.info("CONSIGN INFO : " +consignRequest.toString());
-        //     Response icresult = createConsign(consignRequest, headers);
-        //     if (icresult.getStatus() == 1) {
-        //         PreserveServiceImpl.LOGGER.info("[preserve][Step 7][Add Consign][Consign Success]");
-        //     } else {
-        //         PreserveServiceImpl.LOGGER.error("[preserve][Step 7][Add Consign][Preserve Consign Fail][OrderId: {}]", cor.getData().getId());
-        //         returnResponse.setMsg("Consign Fail.");
-        //     }
-        // } else {
-        //     PreserveServiceImpl.LOGGER.info("[preserve][Step 7][Add Consign][Do not need to consign]");
-        // }
+            Consign consignRequest = new Consign();
+            consignRequest.setOrderId(cor.getData().getId());
+            consignRequest.setAccountId(cor.getData().getAccountId());
+            consignRequest.setHandleDate(oti.getHandleDate());
+            consignRequest.setTargetDate(cor.getData().getTravelDate().toString());
+            consignRequest.setFrom(cor.getData().getFrom());
+            consignRequest.setTo(cor.getData().getTo());
+            consignRequest.setConsignee(oti.getConsigneeName());
+            consignRequest.setPhone(oti.getConsigneePhone());
+            consignRequest.setWeight(oti.getConsigneeWeight());
+            consignRequest.setWithin(oti.isWithin());
+            LOGGER.info("CONSIGN INFO : " +consignRequest.toString());
+            Response icresult = createConsign(consignRequest, headers);
+            if (icresult.getStatus() == 1) {
+                PreserveServiceImpl.LOGGER.info("[preserve][Step 7][Add Consign][Consign Success]");
+            } else {
+                PreserveServiceImpl.LOGGER.error("[preserve][Step 7][Add Consign][Preserve Consign Fail][OrderId: {}]", cor.getData().getId());
+                returnResponse.setMsg("Consign Fail.");
+            }
+        } else {
+            PreserveServiceImpl.LOGGER.info("[preserve][Step 7][Add Consign][Do not need to consign]");
+        }
 
         //8.send notification
 
-//        User getUser = getAccount(order.getAccountId().toString(), headers);
-//
-//        NotifyInfo notifyInfo = new NotifyInfo();
-//        notifyInfo.setDate(new Date().toString());
-//
-//        notifyInfo.setEmail(getUser.getEmail());
-//        notifyInfo.setStartPlace(order.getFrom());
-//        notifyInfo.setEndPlace(order.getTo());
-//        notifyInfo.setUsername(getUser.getUserName());
-//        notifyInfo.setSeatNumber(order.getSeatNumber());
-//        notifyInfo.setOrderNumber(order.getId().toString());
-//        notifyInfo.setPrice(order.getPrice());
-//        notifyInfo.setSeatClass(SeatClass.getNameByCode(order.getSeatClass()));
-//        notifyInfo.setStartTime(order.getTravelTime().toString());
+        User getUser = getAccount(order.getAccountId().toString(), headers);
+
+        NotifyInfo notifyInfo = new NotifyInfo();
+        notifyInfo.setDate(new Date().toString());
+
+        notifyInfo.setEmail(getUser.getEmail());
+        notifyInfo.setStartPlace(order.getFrom());
+        notifyInfo.setEndPlace(order.getTo());
+        notifyInfo.setUsername(getUser.getUserName());
+        notifyInfo.setSeatNumber(order.getSeatNumber());
+        notifyInfo.setOrderNumber(order.getId().toString());
+        notifyInfo.setPrice(order.getPrice());
+        notifyInfo.setSeatClass(SeatClass.getNameByCode(order.getSeatClass()));
+        notifyInfo.setStartTime(order.getTravelTime().toString());
 
         // TODO: change to async message serivce
         // sendEmail(notifyInfo, headers);
@@ -379,7 +379,7 @@ public class PreserveServiceImpl implements PreserveService {
         HttpEntity requestGetContactsResult = new HttpEntity(httpHeaders);
         String contacts_service_url = getServiceUrl("ts-contacts-service");
         ResponseEntity<Response<Contacts>> reGetContactsResult = restTemplate.exchange(
-                contacts_service_url + "/api/v1/contactservice/contacts/" + contactsId,
+                contacts_service_url + ":12347/api/v1/contactservice/contacts/" + contactsId,
                 HttpMethod.GET,
                 requestGetContactsResult,
                 new ParameterizedTypeReference<Response<Contacts>>() {

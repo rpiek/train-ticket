@@ -17,6 +17,9 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
   zipkin:
     base-url: http://zipkin:9411
+  sleuth:
+    sampler:
+      probability: 1.0
 
 swagger:
   controllerPackage: contacts.controller

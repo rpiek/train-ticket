@@ -109,9 +109,9 @@ public class SecurityServiceImpl implements SecurityService {
         //1.Get the orders in the past one hour and the total effective votes
         SecurityServiceImpl.LOGGER.debug("[check][Get Order Num Info]");
         OrderSecurity orderResult = getSecurityOrderInfoFromOrder(new Date(), accountId, headers);
-        OrderSecurity orderOtherResult = getSecurityOrderOtherInfoFromOrder(new Date(), accountId, headers);
-        int orderInOneHour = orderOtherResult.getOrderNumInLastOneHour() + orderResult.getOrderNumInLastOneHour();
-        int totalValidOrder = orderOtherResult.getOrderNumOfValidOrder() + orderResult.getOrderNumOfValidOrder();
+//        OrderSecurity orderOtherResult = getSecurityOrderOtherInfoFromOrder(new Date(), accountId, headers);
+        int orderInOneHour = orderResult.getOrderNumInLastOneHour();
+        int totalValidOrder = orderResult.getOrderNumOfValidOrder();
         //2. get critical configuration information
         SecurityServiceImpl.LOGGER.debug("[check][Get Security Config Info]");
         SecurityConfig configMaxInHour = securityRepository.findByName("max_order_1_hour");

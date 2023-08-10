@@ -55,14 +55,14 @@ services:
 #    networks:
 #      - my-network
 #
-#  ts-user-service:
-#    build: ts-user-service
-#    image: thesis/ts-user-service:0.2.0
-#    restart: no
-#    ports:
-#      - 12342:12342
-#    networks:
-#      - my-network
+  ts-user-service:
+    build: ts-user-service
+    image: thesis/ts-user-service:0.2.0
+    restart: no
+    ports:
+      - 12342:12342
+    networks:
+      - my-network
 #
 #  ts-user-mongo:
 #    image: mongo
@@ -106,14 +106,14 @@ services:
 #    networks:
 #      - my-network
 #
-#  ts-contacts-service:
-#    build: ts-contacts-service
-#    image: thesis/ts-contacts-service:0.2.0
-#    restart: always
-#    ports:
-#      - 12347:12347
-#    networks:
-#      - my-network
+  ts-contacts-service:
+    build: ts-contacts-service
+    image: thesis/ts-contacts-service:0.2.0
+    restart: always
+    ports:
+      - 12347:12347
+    networks:
+      - my-network
 #
 #  ts-contacts-mongo:
 #    image: mongo
@@ -134,14 +134,14 @@ services:
 #    networks:
 #      - my-network
 #
-#  ts-order-other-service:
-#    build: ts-order-other-service
-#    image: thesis/ts-order-other-service:0.2.0
-#    restart: no
-#    ports:
-#      - 12032:12032
-#    networks:
-#      - my-network
+  ts-order-other-service:
+    build: ts-order-other-service
+    image: thesis/ts-order-other-service:0.2.0
+    restart: no
+    ports:
+      - 12032:12032
+    networks:
+      - my-network
 #
 #  ts-order-other-mongo:
 #    image: mongo
@@ -279,14 +279,14 @@ services:
 #        networks:
 #          - my-network
 #
-#  ts-security-service:
-#        build: ts-security-service
-#        image: thesis/ts-security-service:0.2.0
-#        restart: always
-#        ports:
-#          - 11188:11188
-#        networks:
-#          - my-network
+  ts-security-service:
+        build: ts-security-service
+        image: thesis/ts-security-service:0.2.0
+        restart: always
+        ports:
+          - 11188:11188
+        networks:
+          - my-network
 #
 #  ts-security-mongo:
 #    image: mongo
@@ -353,14 +353,14 @@ services:
 #        networks:
 #          - my-network
 #
-#  ts-assurance-service:
-#        build: ts-assurance-service
-#        image: thesis/ts-assurance-service:0.2.0
-#        restart: always
-#        ports:
-#          - 18888:18888
-#        networks:
-#          - my-network
+  ts-assurance-service:
+        build: ts-assurance-service
+        image: thesis/ts-assurance-service:0.2.0
+        restart: always
+        ports:
+          - 18888:18888
+        networks:
+          - my-network
 #
 #  ts-assurance-mongo:
 #    image: mongo
@@ -449,15 +449,7 @@ services:
 #    networks:
 #      - my-network
 #
-#  ts-route-plan-service:
-#          build: ts-route-plan-service
-#          image: ${IMG_REPO}/ts-route-plan-service:${IMG_TAG}
-#          restart: always
-#          ports:
-#            - 14578:14578
-#          networks:
-#            - my-network
-#
+
   ts-food-service:
       build: ts-food-service
       image: thesis/ts-food-service:0.2.0
