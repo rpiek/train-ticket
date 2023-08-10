@@ -134,14 +134,14 @@ services:
 #    networks:
 #      - my-network
 #
-  ts-order-other-service:
-    build: ts-order-other-service
-    image: thesis/ts-order-other-service:0.2.0
-    restart: no
-    ports:
-      - 12032:12032
-    networks:
-      - my-network
+#  ts-order-other-service:
+#    build: ts-order-other-service
+#    image: thesis/ts-order-other-service:0.2.0
+#    restart: no
+#    ports:
+#      - 12032:12032
+#    networks:
+#      - my-network
 #
 #  ts-order-other-mongo:
 #    image: mongo
