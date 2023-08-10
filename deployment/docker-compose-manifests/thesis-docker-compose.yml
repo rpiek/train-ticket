@@ -8,23 +8,22 @@ services:
     ports:
       - "9411:9411"
     environment:
-#      - STORAGE_TYPE=elasticsearch
-#      - ES_HOSTS=http://elasticsearch:9200
-      - JAVA_OPTS=-Dlogging.file=/var/log/zipkin/zipkin-traces.log -Dlogging.level.zipkin2=DEBUG
+      - STORAGE_TYPE=elasticsearch
+      - ES_HOSTS=http://elasticsearch:9200
       - JAVA_OPTS=-Xmx4g
     volumes:
       - ./logs:/var/log/zipkin
     networks:
       - my-network
 
-#  elasticsearch:
-#    image: docker.elastic.co/elasticsearch/elasticsearch:6.7.0
-#    container_name: elasticsearch
-#    environment:
-#      - discovery.type=single-node
-##      - "ES_JAVA_OPTS=-Xms512m -Xmx4g" # Adjust memory settings as needed
-#    networks:
-#      - my-network
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.7.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+#      - "ES_JAVA_OPTS=-Xms512m -Xmx4g" # Adjust memory settings as needed
+    networks:
+      - my-network
 
   ts-route-service:
     image: thesis/ts-route-service:0.2.0
