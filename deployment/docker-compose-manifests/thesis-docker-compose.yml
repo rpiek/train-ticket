@@ -10,7 +10,10 @@ services:
     environment:
 #      - STORAGE_TYPE=elasticsearch
 #      - ES_HOSTS=http://elasticsearch:9200
+      - JAVA_OPTS=-Dlogging.file=/var/log/zipkin/zipkin-traces.log -Dlogging.level.zipkin2=DEBUG
       - JAVA_OPTS=-Xmx4g
+    volumes:
+      - ./logs:/var/log/zipkin
     networks:
       - my-network
 
