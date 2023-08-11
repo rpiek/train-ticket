@@ -4,7 +4,6 @@ services:
   # Used version 2.24.2
   zipkin:
     image: openzipkin/zipkin:2.24.2
-    container_name: zipkin
     ports:
       - "9412:9411"
     environment:
