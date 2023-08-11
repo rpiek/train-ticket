@@ -213,3 +213,4 @@ INSERT INTO contacts (id, account_id, name, document_type, document_number, phon
                                                                                               ('073ff01e-1960-4dd6-b017-cd07cc8c5ba0', 'f9a692c1-5057-4105-a8e5-2f7a398bb625', 'Anabelle', 1, '22568857', '11-605357-266513-1');
 
 
+
