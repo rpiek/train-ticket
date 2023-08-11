@@ -20,7 +20,6 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 14282,
   "graphTooltip": 0,
-  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -102,9 +101,9 @@
             "uid": "a82ebd36-c63d-4b86-ba89-c639a6a4628a"
           },
           "editorMode": "code",
-          "expr": "sum(rate(container_cpu_usage_seconds_total{instance=~\"$host\",name=~\"$container\",name=~\".+\"}[10s])) by (name) *100",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{instance=~\"$host\",name=~\"$container\",name=~\".+\"}[5s])) by (name) *100",
           "hide": false,
-          "interval": "",
+          "interval": "1s",
           "legendFormat": "{{name}}",
           "range": true,
           "refId": "A"
@@ -715,7 +714,7 @@
       "type": "table"
     }
   ],
-  "refresh": "",
+  "refresh": false,
   "schemaVersion": 38,
   "style": "dark",
   "tags": [
@@ -789,13 +788,13 @@
     ]
   },
   "time": {
-    "from": "now-6h",
-    "to": "now"
+    "from": "2023-08-11T20:30:54.662Z",
+    "to": "2023-08-11T20:37:37.312Z"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Cadvisor exporter",
   "uid": "pMEd7m0Mz",
-  "version": 4,
+  "version": 1,
   "weekStart": ""
 }
