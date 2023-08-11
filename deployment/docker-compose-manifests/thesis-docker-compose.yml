@@ -2,28 +2,15 @@ version: '3'
 services:
 
   # Used version 2.24.2
-#  zipkin:
-#    image: openzipkin/zipkin:2.24.2
-#    container_name: zipkin
-#    ports:
-#      - "9411:9411"
-#    environment:
-#      - STORAGE_TYPE=cassandra3
-##      - CASSANDRA_CONTACT_POINTS=cassandra
-##      - CASSANDRA_ENSURE_SCHEMa=true
-#    networks:
-#      - my-network
-#    depends_on:
-#      - cassandra
+  zipkin:
+    image: openzipkin/zipkin:2.24.2
+    ports:
+      - "9411:9411"
+    environment:
+        - JAVA_OPTS=-Xmx8g
+    networks:
+      - my-network
 
-#  cassandra:
-#    image: cassandra:3.11.3 # Use the desired Cassandra version
-#    container_name: cassandra
-#    environment:
-#      - "MAX_HEAP_SIZE=1G" # Adjust memory settings as needed
-#      - "HEAP_NEWSIZE=200M" # Adjust memory settings as needed
-#    networks:
-#      - my-network
 
   ts-route-service:
     image: thesis/ts-route-service:0.2.0
