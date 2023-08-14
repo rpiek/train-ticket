@@ -242,20 +242,20 @@ public class PreserveServiceImpl implements PreserveService {
 
         //8.send notification
 
-        User getUser = getAccount(order.getAccountId().toString(), headers);
-
-        NotifyInfo notifyInfo = new NotifyInfo();
-        notifyInfo.setDate(new Date().toString());
-
-        notifyInfo.setEmail(getUser.getEmail());
-        notifyInfo.setStartPlace(order.getFrom());
-        notifyInfo.setEndPlace(order.getTo());
-        notifyInfo.setUsername(getUser.getUserName());
-        notifyInfo.setSeatNumber(order.getSeatNumber());
-        notifyInfo.setOrderNumber(order.getId().toString());
-        notifyInfo.setPrice(order.getPrice());
-        notifyInfo.setSeatClass(SeatClass.getNameByCode(order.getSeatClass()));
-        notifyInfo.setStartTime(order.getTravelTime().toString());
+//        User getUser = getAccount(order.getAccountId().toString(), headers);
+//
+//        NotifyInfo notifyInfo = new NotifyInfo();
+//        notifyInfo.setDate(new Date().toString());
+//
+//        notifyInfo.setEmail(getUser.getEmail());
+//        notifyInfo.setStartPlace(order.getFrom());
+//        notifyInfo.setEndPlace(order.getTo());
+//        notifyInfo.setUsername(getUser.getUserName());
+//        notifyInfo.setSeatNumber(order.getSeatNumber());
+//        notifyInfo.setOrderNumber(order.getId().toString());
+//        notifyInfo.setPrice(order.getPrice());
+//        notifyInfo.setSeatClass(SeatClass.getNameByCode(order.getSeatClass()));
+//        notifyInfo.setStartTime(order.getTravelTime().toString());
 
         // TODO: change to async message serivce
         // sendEmail(notifyInfo, headers);
