@@ -49,12 +49,12 @@ public class PreserveServiceImpl implements PreserveService {
         //1.detect ticket scalper
         PreserveServiceImpl.LOGGER.info("[Step 1] Check Security");
 
-        Response result = checkSecurity(oti.getAccountId(), headers);
-        if (result.getStatus() == 0) {
-            PreserveServiceImpl.LOGGER.error("[preserve][Step 1][Check Security Fail][AccountId: {}]",oti.getAccountId());
-            return new Response<>(0, result.getMsg(), null);
-        }
-        PreserveServiceImpl.LOGGER.info("[preserve][Step 1][Check Security Complete][AccountId: {}]",oti.getAccountId());
+//        Response result = checkSecurity(oti.getAccountId(), headers);
+//        if (result.getStatus() == 0) {
+//            PreserveServiceImpl.LOGGER.error("[preserve][Step 1][Check Security Fail][AccountId: {}]",oti.getAccountId());
+//            return new Response<>(0, result.getMsg(), null);
+//        }
+//        PreserveServiceImpl.LOGGER.info("[preserve][Step 1][Check Security Complete][AccountId: {}]",oti.getAccountId());
         //2.Querying contact information -- modification, mediated by the underlying information micro service
         //PreserveServiceImpl.LOGGER.info("[Step 2] Find contacts");
         //PreserveServiceImpl.LOGGER.info("[Step 2] Contacts Id: {}", oti.getContactsId());
@@ -100,7 +100,7 @@ public class PreserveServiceImpl implements PreserveService {
         PreserveServiceImpl.LOGGER.info("[preserve][Step 3][Check tickets num][Tickets Enough]");
         //4.send the order request and set the order information
         //PreserveServiceImpl.LOGGER.info("[Step 4] Do Order");
-        Contacts contacts = gcr.getData();
+//        Contacts contacts = gcr.getData();
         Order order = new Order();
         UUID orderId = UUID.randomUUID();
         order.setId(orderId.toString());
@@ -114,9 +114,9 @@ public class PreserveServiceImpl implements PreserveService {
         order.setTo(toStationName);
         order.setBoughtDate(StringUtils.Date2String(new Date()));
         order.setStatus(OrderStatus.NOTPAID.getCode());
-        order.setContactsDocumentNumber(contacts.getDocumentNumber());
-        order.setContactsName(contacts.getName());
-        order.setDocumentType(contacts.getDocumentType());
+        order.setContactsDocumentNumber("123");
+        order.setContactsName("John Doe");
+        order.setDocumentType(0);
 
         Travel query = new Travel();
         query.setTrip(trip);
