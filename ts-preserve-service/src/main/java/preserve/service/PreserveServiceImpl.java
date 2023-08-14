@@ -49,12 +49,12 @@ public class PreserveServiceImpl implements PreserveService {
         //1.detect ticket scalper
         PreserveServiceImpl.LOGGER.info("[Step 1] Check Security");
 
-//        Response result = checkSecurity(oti.getAccountId(), headers);
-//        if (result.getStatus() == 0) {
-//            PreserveServiceImpl.LOGGER.error("[preserve][Step 1][Check Security Fail][AccountId: {}]",oti.getAccountId());
-//            return new Response<>(0, result.getMsg(), null);
-//        }
-//        PreserveServiceImpl.LOGGER.info("[preserve][Step 1][Check Security Complete][AccountId: {}]",oti.getAccountId());
+        Response result = checkSecurity(oti.getAccountId(), headers);
+        if (result.getStatus() == 0) {
+            PreserveServiceImpl.LOGGER.error("[preserve][Step 1][Check Security Fail][AccountId: {}]",oti.getAccountId());
+            return new Response<>(0, result.getMsg(), null);
+        }
+        PreserveServiceImpl.LOGGER.info("[preserve][Step 1][Check Security Complete][AccountId: {}]",oti.getAccountId());
         //2.Querying contact information -- modification, mediated by the underlying information micro service
         //PreserveServiceImpl.LOGGER.info("[Step 2] Find contacts");
         //PreserveServiceImpl.LOGGER.info("[Step 2] Contacts Id: {}", oti.getContactsId());
@@ -215,30 +215,30 @@ public class PreserveServiceImpl implements PreserveService {
         }
 
         //7.add consign
-        if (null != oti.getConsigneeName() && !"".equals(oti.getConsigneeName())) {
-
-            Consign consignRequest = new Consign();
-            consignRequest.setOrderId(cor.getData().getId());
-            consignRequest.setAccountId(cor.getData().getAccountId());
-            consignRequest.setHandleDate(oti.getHandleDate());
-            consignRequest.setTargetDate(cor.getData().getTravelDate().toString());
-            consignRequest.setFrom(cor.getData().getFrom());
-            consignRequest.setTo(cor.getData().getTo());
-            consignRequest.setConsignee(oti.getConsigneeName());
-            consignRequest.setPhone(oti.getConsigneePhone());
-            consignRequest.setWeight(oti.getConsigneeWeight());
-            consignRequest.setWithin(oti.isWithin());
-            LOGGER.info("CONSIGN INFO : " +consignRequest.toString());
-            Response icresult = createConsign(consignRequest, headers);
-            if (icresult.getStatus() == 1) {
-                PreserveServiceImpl.LOGGER.info("[preserve][Step 7][Add Consign][Consign Success]");
-            } else {
-                PreserveServiceImpl.LOGGER.error("[preserve][Step 7][Add Consign][Preserve Consign Fail][OrderId: {}]", cor.getData().getId());
-                returnResponse.setMsg("Consign Fail.");
-            }
-        } else {
-            PreserveServiceImpl.LOGGER.info("[preserve][Step 7][Add Consign][Do not need to consign]");
-        }
+//        if (null != oti.getConsigneeName() && !"".equals(oti.getConsigneeName())) {
+//
+//            Consign consignRequest = new Consign();
+//            consignRequest.setOrderId(cor.getData().getId());
+//            consignRequest.setAccountId(cor.getData().getAccountId());
+//            consignRequest.setHandleDate(oti.getHandleDate());
+//            consignRequest.setTargetDate(cor.getData().getTravelDate().toString());
+//            consignRequest.setFrom(cor.getData().getFrom());
+//            consignRequest.setTo(cor.getData().getTo());
+//            consignRequest.setConsignee(oti.getConsigneeName());
+//            consignRequest.setPhone(oti.getConsigneePhone());
+//            consignRequest.setWeight(oti.getConsigneeWeight());
+//            consignRequest.setWithin(oti.isWithin());
+//            LOGGER.info("CONSIGN INFO : " +consignRequest.toString());
+//            Response icresult = createConsign(consignRequest, headers);
+//            if (icresult.getStatus() == 1) {
+//                PreserveServiceImpl.LOGGER.info("[preserve][Step 7][Add Consign][Consign Success]");
+//            } else {
+//                PreserveServiceImpl.LOGGER.error("[preserve][Step 7][Add Consign][Preserve Consign Fail][OrderId: {}]", cor.getData().getId());
+//                returnResponse.setMsg("Consign Fail.");
+//            }
+//        } else {
+//            PreserveServiceImpl.LOGGER.info("[preserve][Step 7][Add Consign][Do not need to consign]");
+//        }
 
         //8.send notification
 
