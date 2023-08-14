@@ -103,7 +103,7 @@
           "editorMode": "code",
           "expr": "sum(rate(container_cpu_usage_seconds_total{instance=~\"$host\",name=~\"$container\",name=~\".+\"}[5s])) by (name) *100",
           "hide": false,
-          "interval": "1s",
+          "interval": "5s",
           "legendFormat": "{{name}}",
           "range": true,
           "refId": "A"
