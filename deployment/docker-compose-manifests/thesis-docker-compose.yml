@@ -455,7 +455,7 @@ services:
       - ./grafana/provisioning:/etc/grafana/provisioning/
     networks:
       - my-network
-      -
+
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.47.0
