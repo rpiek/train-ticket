@@ -183,9 +183,6 @@ services:
       - my-network
     depends_on:
       - ts-food-mysql
-    environment:
-      - JAVA_OPTS=-XX:+PrintGCDetails -Xjit:verbose -XX:+PrintGCDateStamps -Xloggc:/test/gc.log -XX:+PrintCompilation
-
 
   ts-food-mysql:
     image: mysql:8.0
