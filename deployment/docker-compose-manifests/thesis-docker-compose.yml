@@ -46,7 +46,7 @@ services:
     depends_on:
       - ts-route-mysql
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=1000
 
   ts-route-plan-service:
     image: thesis/ts-route-plan-service:0.2.0
@@ -57,7 +57,7 @@ services:
     networks:
       - my-network
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=1000
 
   ts-route-mysql:
     image: mysql:8.0
@@ -86,7 +86,7 @@ services:
     networks:
       - my-network
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=1000
 
   ts-security-mysql:
     image: mysql:8.0
@@ -112,7 +112,7 @@ services:
     networks:
       - my-network
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=1000
 
   ts-user-mysql:
     image: mysql:8.0
@@ -140,7 +140,7 @@ services:
     networks:
       - my-network
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=1000
 
   ts-contacts-mysql:
     image: mysql:8.0
@@ -170,7 +170,7 @@ services:
     networks:
       - my-network
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=1000
 
   ts-food-service:
     build: ts-food-service
@@ -212,7 +212,7 @@ services:
     depends_on:
       - ts-station-mysql
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=1000
 
   ts-station-mysql:
     image: mysql:8.0
@@ -244,7 +244,7 @@ services:
     depends_on:
       - ts-travel-mysql
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=1000
 
   ts-travel-mysql:
     image: mysql:8.0
@@ -270,7 +270,7 @@ services:
     networks:
       - my-network
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=1000
 
   ts-seat-service:
     image: thesis/ts-seat-service:0.2.0
@@ -281,7 +281,7 @@ services:
     networks:
       - my-network
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=1000
 
   ts-config-service:
     image: thesis/ts-config-service:0.2.0
@@ -294,7 +294,7 @@ services:
     depends_on:
       - ts-config-mysql
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=1000
 
   ts-config-mysql:
     image: mysql:8.0
@@ -324,7 +324,7 @@ services:
     depends_on:
       - ts-train-mysql
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=1000
 
   ts-train-mysql:
     image: mysql:8.0
@@ -357,7 +357,7 @@ services:
     depends_on:
       - ts-price-mysql
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=1000
 
   ts-price-mysql:
     image: mysql:8.0
@@ -389,7 +389,7 @@ services:
     depends_on:
       - ts-order-mysql
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=1000
 
   ts-order-mysql:
     image: mysql:8.0
@@ -418,7 +418,7 @@ services:
    depends_on:
      - ts-consign-mysql
    environment:
-     - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
+     - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=1000
 
   ts-consign-mysql:
    image: mysql:8.0
@@ -446,7 +446,7 @@ services:
    depends_on:
      - ts-consign-price-mysql
    environment:
-     - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
+     - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=1000
 
   ts-consign-price-mysql:
    image: mysql:8.0
