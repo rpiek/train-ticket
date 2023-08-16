@@ -184,11 +184,8 @@ services:
     depends_on:
       - ts-food-mysql
     environment:
-      - JAVA_OPTS=-XX:+PrintGCDetails
-      - JAVA_OPTS=-Xjit:verbose
-      - JAVA_OPTS=-XX:+PrintGCDateStamps
-      - JAVA_OPTS=-Xloggc:/test/gc.log
-      - JAVA_OPTS=-XX:+PrintCompilation
+      - JAVA_OPTS=-XX:+PrintGCDetails -Xjit:verbose -XX:+PrintGCDateStamps -Xloggc:/test/gc.log -XX:+PrintCompilation
+
 
   ts-food-mysql:
     image: mysql:8.0
