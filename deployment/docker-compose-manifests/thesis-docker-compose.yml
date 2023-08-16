@@ -45,8 +45,6 @@ services:
       - my-network
     depends_on:
       - ts-route-mysql
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-route-plan-service:
     image: thesis/ts-route-plan-service:0.2.0
@@ -56,8 +54,6 @@ services:
       - 14578:14578
     networks:
       - my-network
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-route-mysql:
     image: mysql:8.0
@@ -73,8 +69,8 @@ services:
     ports:
       # <Port exposed> : <MySQL Port running inside container>
       - '3307:3306'
-    volumes:
-      - ./sql-scripts/route:/docker-entrypoint-initdb.d
+#    volumes:
+#      - ./sql-scripts/route:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
@@ -85,8 +81,6 @@ services:
       - 11188:11188
     networks:
       - my-network
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-security-mysql:
     image: mysql:8.0
@@ -111,8 +105,6 @@ services:
       - 12342:12342
     networks:
       - my-network
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-user-mysql:
     image: mysql:8.0
@@ -127,8 +119,8 @@ services:
     ports:
       # <Port exposed> : <MySQL Port running inside container>
       - '3314:3306'
-    volumes:
-      - ./sql-scripts/user:/docker-entrypoint-initdb.d
+#    volumes:
+#      - ./sql-scripts/user:/docker-entrypoint-initdb.d
     networks:
       - my-network
  
@@ -139,8 +131,6 @@ services:
       - 12347:12347
     networks:
       - my-network
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-contacts-mysql:
     image: mysql:8.0
@@ -155,8 +145,8 @@ services:
     ports:
       # <Port exposed> : <MySQL Port running inside container>
       - '3301:3306'
-    volumes:
-      - ./sql-scripts/contacts:/docker-entrypoint-initdb.d
+#    volumes:
+#      - ./sql-scripts/contacts:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
@@ -169,8 +159,6 @@ services:
       - 14568:14568
     networks:
       - my-network
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-food-service:
     build: ts-food-service
@@ -183,8 +171,6 @@ services:
       - my-network
     depends_on:
       - ts-food-mysql
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-food-mysql:
     image: mysql:8.0
@@ -213,8 +199,6 @@ services:
       - my-network
     depends_on:
       - ts-station-mysql
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-station-mysql:
     image: mysql:8.0
@@ -230,8 +214,8 @@ services:
     ports:
       # <Port exposed> : <MySQL Port running inside container>
       - '3308:3306'
-    volumes:
-      - ./sql-scripts/station:/docker-entrypoint-initdb.d
+#    volumes:
+#      - ./sql-scripts/station:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
@@ -245,8 +229,6 @@ services:
       - my-network
     depends_on:
       - ts-travel-mysql
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-travel-mysql:
     image: mysql:8.0
@@ -258,8 +240,8 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       - '3306:3306'
-    volumes:
-      - ./sql-scripts/trip:/docker-entrypoint-initdb.d
+#    volumes:
+#      - ./sql-scripts/trip:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
@@ -271,8 +253,6 @@ services:
       - 15680:15680
     networks:
       - my-network
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-seat-service:
     image: thesis/ts-seat-service:0.2.0
@@ -282,8 +262,6 @@ services:
       - 18898:18898
     networks:
       - my-network
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-config-service:
     image: thesis/ts-config-service:0.2.0
@@ -295,8 +273,6 @@ services:
       - my-network
     depends_on:
       - ts-config-mysql
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-config-mysql:
     image: mysql:8.0
@@ -325,8 +301,6 @@ services:
       - my-network
     depends_on:
       - ts-train-mysql
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-train-mysql:
     image: mysql:8.0
@@ -342,8 +316,8 @@ services:
     ports:
       # <Port exposed> : <MySQL Port running inside container>
       - '3310:3306'
-    volumes:
-      - ./sql-scripts/train_type:/docker-entrypoint-initdb.d
+#    volumes:
+#      - ./sql-scripts/train_type:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
@@ -358,8 +332,6 @@ services:
       - my-network
     depends_on:
       - ts-price-mysql
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-price-mysql:
     image: mysql:8.0
@@ -375,8 +347,8 @@ services:
     ports:
       # <Port exposed> : <MySQL Port running inside container>
       - '3311:3306'
-    volumes:
-      - ./sql-scripts/price_config:/docker-entrypoint-initdb.d
+#    volumes:
+#      - ./sql-scripts/price_config:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
@@ -390,8 +362,6 @@ services:
       - my-network
     depends_on:
       - ts-order-mysql
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-order-mysql:
     image: mysql:8.0
@@ -419,8 +389,6 @@ services:
      - my-network
    depends_on:
      - ts-consign-mysql
-   environment:
-     - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-consign-mysql:
    image: mysql:8.0
@@ -447,8 +415,6 @@ services:
      - my-network
    depends_on:
      - ts-consign-price-mysql
-   environment:
-     - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-consign-price-mysql:
    image: mysql:8.0
