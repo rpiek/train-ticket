@@ -57,7 +57,7 @@ services:
     networks:
       - my-network
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=10
+      - JAVA_OPTS=-XX:+UseConcMarkSweepGC
 
   ts-route-mysql:
     image: mysql:8.0
@@ -86,7 +86,7 @@ services:
     networks:
       - my-network
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=10
+      - JAVA_OPTS=-XX:+UseConcMarkSweepGC
 
   ts-security-mysql:
     image: mysql:8.0
@@ -112,7 +112,7 @@ services:
     networks:
       - my-network
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=10
+      - JAVA_OPTS=-XX:+UseConcMarkSweepGC
 
   ts-user-mysql:
     image: mysql:8.0
@@ -140,7 +140,7 @@ services:
     networks:
       - my-network
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=10
+      - JAVA_OPTS=-XX:+UseConcMarkSweepGC
 
   ts-contacts-mysql:
     image: mysql:8.0
@@ -170,7 +170,7 @@ services:
     networks:
       - my-network
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=10
+      - JAVA_OPTS=-XX:+UseConcMarkSweepGC
 
   ts-food-service:
     build: ts-food-service
@@ -183,6 +183,8 @@ services:
       - my-network
     depends_on:
       - ts-food-mysql
+    environment:
+      - JAVA_OPTS=-XX:+UseConcMarkSweepGC
 
   ts-food-mysql:
     image: mysql:8.0
@@ -212,7 +214,7 @@ services:
     depends_on:
       - ts-station-mysql
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=10
+      - JAVA_OPTS=-XX:+UseConcMarkSweepGC
 
   ts-station-mysql:
     image: mysql:8.0
@@ -244,7 +246,7 @@ services:
     depends_on:
       - ts-travel-mysql
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=10
+      - JAVA_OPTS=-XX:+UseConcMarkSweepGC
 
   ts-travel-mysql:
     image: mysql:8.0
@@ -270,7 +272,7 @@ services:
     networks:
       - my-network
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=10
+      - JAVA_OPTS=-XX:+UseConcMarkSweepGC
 
   ts-seat-service:
     image: thesis/ts-seat-service:0.2.0
@@ -281,7 +283,7 @@ services:
     networks:
       - my-network
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=10
+      - JAVA_OPTS=-XX:+UseConcMarkSweepGC
 
   ts-config-service:
     image: thesis/ts-config-service:0.2.0
@@ -294,7 +296,7 @@ services:
     depends_on:
       - ts-config-mysql
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=10
+      - JAVA_OPTS=-XX:+UseConcMarkSweepGC
 
   ts-config-mysql:
     image: mysql:8.0
@@ -324,7 +326,7 @@ services:
     depends_on:
       - ts-train-mysql
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=10
+      - JAVA_OPTS=-XX:+UseConcMarkSweepGC
 
   ts-train-mysql:
     image: mysql:8.0
@@ -357,7 +359,7 @@ services:
     depends_on:
       - ts-price-mysql
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=10
+      - JAVA_OPTS=-XX:+UseConcMarkSweepGC
 
   ts-price-mysql:
     image: mysql:8.0
@@ -389,7 +391,7 @@ services:
     depends_on:
       - ts-order-mysql
     environment:
-      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=10
+      - JAVA_OPTS=-XX:+UseConcMarkSweepGC
 
   ts-order-mysql:
     image: mysql:8.0
@@ -418,7 +420,7 @@ services:
    depends_on:
      - ts-consign-mysql
    environment:
-     - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=10
+     - JAVA_OPTS=-XX:+UseConcMarkSweepGC
 
   ts-consign-mysql:
    image: mysql:8.0
@@ -446,7 +448,7 @@ services:
    depends_on:
      - ts-consign-price-mysql
    environment:
-     - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=10
+     - JAVA_OPTS=-XX:+UseConcMarkSweepGC
 
   ts-consign-price-mysql:
    image: mysql:8.0
