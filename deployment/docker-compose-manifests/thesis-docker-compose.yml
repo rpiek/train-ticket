@@ -183,11 +183,13 @@ services:
       - my-network
     depends_on:
       - ts-food-mysql
+    command:
+      sh -c "mkdir -p /test"
     environment:
       - JAVA_OPTS=-XX:+PrintGCDetails
       - JAVA_OPTS=-Xjit:verbose
       - JAVA_OPTS=-XX:+PrintGCDateStamps
-      - JAVA_OPTS=-Xloggc:/gc.log
+      - JAVA_OPTS=-Xloggc:/test/gc.log
       - JAVA_OPTS=-XX:+PrintCompilation
 
   ts-food-mysql:
