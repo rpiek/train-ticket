@@ -185,6 +185,7 @@ services:
       - ts-food-mysql
     environment:
       - JAVA_OPTS=-XX:+PrintGCDetails
+      - JAVA_OPTS=-Xjit:verbose
       - JAVA_OPTS=-XX:+PrintGCDateStamps
       - JAVA_OPTS=-Xloggc:/gc.log
       - JAVA_OPTS=-XX:+PrintCompilation
