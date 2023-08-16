@@ -101,9 +101,9 @@
             "uid": "a82ebd36-c63d-4b86-ba89-c639a6a4628a"
           },
           "editorMode": "code",
-          "expr": "sum(rate(container_cpu_usage_seconds_total{instance=~\"$host\",name=~\"$container\",name=~\".+\"}[20s])) by (name) *100",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{instance=~\"$host\",name=~\"$container\",name=~\".+\"}[5s])) by (name) *100",
           "hide": false,
-          "interval": "10s",
+          "interval": "1s",
           "legendFormat": "{{name}}",
           "range": true,
           "refId": "A"
