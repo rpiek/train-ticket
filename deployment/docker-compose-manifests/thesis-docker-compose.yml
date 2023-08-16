@@ -46,9 +46,7 @@ services:
     depends_on:
       - ts-route-mysql
     environment:
-      - JVM_OPTS=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/path/to/container_gc.log
-    volumes:
-      - ./path/on/host:/path/to/container_gc.log
+      - JVM_OPTS=-Xmx2g
 
   ts-route-plan-service:
     image: thesis/ts-route-plan-service:0.2.0
@@ -59,9 +57,7 @@ services:
     networks:
       - my-network
     environment:
-      - JVM_OPTS=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/path/to/container_gc.log
-    volumes:
-      - ./path/on/host:/path/to/container_gc.log
+      - JVM_OPTS=-Xmx2g
 
   ts-route-mysql:
     image: mysql:8.0
@@ -90,9 +86,7 @@ services:
     networks:
       - my-network
     environment:
-      - JVM_OPTS=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/path/to/container_gc.log
-    volumes:
-      - ./path/on/host:/path/to/container_gc.log
+      - JVM_OPTS=-Xmx2g
 
   ts-security-mysql:
     image: mysql:8.0
@@ -110,7 +104,6 @@ services:
     networks:
       - my-network
 
-
   ts-user-service:
     image: thesis/ts-user-service:0.2.0
     restart: always
@@ -119,9 +112,7 @@ services:
     networks:
       - my-network
     environment:
-      - JVM_OPTS=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/path/to/container_gc.log
-    volumes:
-      - ./path/on/host:/path/to/container_gc.log
+      - JVM_OPTS=-Xmx2g
 
   ts-user-mysql:
     image: mysql:8.0
@@ -149,9 +140,7 @@ services:
     networks:
       - my-network
     environment:
-      - JVM_OPTS=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/path/to/container_gc.log
-    volumes:
-      - ./path/on/host:/path/to/container_gc.log
+      - JVM_OPTS=-Xmx2g
 
   ts-contacts-mysql:
     image: mysql:8.0
@@ -181,9 +170,7 @@ services:
     networks:
       - my-network
     environment:
-      - JVM_OPTS=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/path/to/container_gc.log
-    volumes:
-      - ./path/on/host:/path/to/container_gc.log
+      - JVM_OPTS=-Xmx2g
 
   ts-food-service:
     build: ts-food-service
@@ -197,9 +184,7 @@ services:
     depends_on:
       - ts-food-mysql
     environment:
-      - JVM_OPTS=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/path/to/container_gc.log
-    volumes:
-      - ./path/on/host:/path/to/container_gc.log
+      - JVM_OPTS=-Xmx2g
 
   ts-food-mysql:
     image: mysql:8.0
@@ -229,9 +214,7 @@ services:
     depends_on:
       - ts-station-mysql
     environment:
-      - JVM_OPTS=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/path/to/container_gc.log
-    volumes:
-      - ./path/on/host:/path/to/container_gc.log
+      - JVM_OPTS=-Xmx2g
 
   ts-station-mysql:
     image: mysql:8.0
@@ -263,9 +246,7 @@ services:
     depends_on:
       - ts-travel-mysql
     environment:
-      - JVM_OPTS=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/path/to/container_gc.log
-    volumes:
-      - ./path/on/host:/path/to/container_gc.log
+      - JVM_OPTS=-Xmx2g
 
   ts-travel-mysql:
     image: mysql:8.0
@@ -291,9 +272,7 @@ services:
     networks:
       - my-network
     environment:
-      - JVM_OPTS=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/path/to/container_gc.log
-    volumes:
-      - ./path/on/host:/path/to/container_gc.log
+      - JVM_OPTS=-Xmx2g
 
   ts-seat-service:
     image: thesis/ts-seat-service:0.2.0
@@ -304,9 +283,7 @@ services:
     networks:
       - my-network
     environment:
-      - JVM_OPTS=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/path/to/container_gc.log
-    volumes:
-      - ./path/on/host:/path/to/container_gc.log
+      - JVM_OPTS=-Xmx2g
 
   ts-config-service:
     image: thesis/ts-config-service:0.2.0
@@ -319,9 +296,7 @@ services:
     depends_on:
       - ts-config-mysql
     environment:
-      - JVM_OPTS=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/path/to/container_gc.log
-    volumes:
-      - ./path/on/host:/path/to/container_gc.log
+      - JVM_OPTS=-Xmx2g
 
   ts-config-mysql:
     image: mysql:8.0
@@ -351,9 +326,7 @@ services:
     depends_on:
       - ts-train-mysql
     environment:
-      - JVM_OPTS=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/path/to/container_gc.log
-    volumes:
-      - ./path/on/host:/path/to/container_gc.log
+      - JVM_OPTS=-Xmx2g
 
   ts-train-mysql:
     image: mysql:8.0
@@ -386,9 +359,7 @@ services:
     depends_on:
       - ts-price-mysql
     environment:
-      - JVM_OPTS=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/path/to/container_gc.log
-    volumes:
-      - ./path/on/host:/path/to/container_gc.log
+      - JVM_OPTS=-Xmx2g
 
   ts-price-mysql:
     image: mysql:8.0
@@ -420,9 +391,7 @@ services:
     depends_on:
       - ts-order-mysql
     environment:
-      - JVM_OPTS=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/path/to/container_gc.log
-    volumes:
-      - ./path/on/host:/path/to/container_gc.log
+      - JVM_OPTS=-Xmx2g
 
   ts-order-mysql:
     image: mysql:8.0
@@ -451,9 +420,7 @@ services:
    depends_on:
      - ts-consign-mysql
    environment:
-     - JVM_OPTS=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/path/to/container_gc.log
-   volumes:
-     - ./path/on/host:/path/to/container_gc.log
+     - JVM_OPTS=-Xmx2g
 
   ts-consign-mysql:
    image: mysql:8.0
@@ -481,9 +448,7 @@ services:
    depends_on:
      - ts-consign-price-mysql
    environment:
-     - JVM_OPTS=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/path/to/container_gc.log
-   volumes:
-     - ./path/on/host:/path/to/container_gc.log
+     - JVM_OPTS=-Xmx2g
 
   ts-consign-price-mysql:
    image: mysql:8.0
