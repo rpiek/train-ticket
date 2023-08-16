@@ -8,32 +8,32 @@ services:
     ports:
       - "9411:9411"
     environment:
-      #      - STORAGE_TYPE=elasticsearch
-      #      - ES_HOSTS=http://elasticsearch:9200
+#      - STORAGE_TYPE=elasticsearch
+#      - ES_HOSTS=http://elasticsearch:9200
       - JAVA_OPTS=-Xmx8g
-    #    volumes:
-    #      - ./logs:/var/log/zipkin
+#    volumes:
+#      - ./logs:/var/log/zipkin
     networks:
       - my-network
 
-  #  kibana:
-  #    image: docker.elastic.co/kibana/kibana:6.7.0
-  #    container_name: kibana
-  #    environment:
-  #      - ELASTICSEARCH_URL=http://elasticsearch:9200
-  #    ports:
-  #      - "5601:5601"
-  #    networks:
-  #      - my-network
-  #
-  #  elasticsearch:
-  #    image: docker.elastic.co/elasticsearch/elasticsearch:6.7.0
-  #    container_name: elasticsearch
-  #    environment:
-  #      - discovery.type=single-node
-  #      - ES_JAVA_OPTS=-Xms512m -Xmx8g
-  #    networks:
-  #      - my-network
+#  kibana:
+#    image: docker.elastic.co/kibana/kibana:6.7.0
+#    container_name: kibana
+#    environment:
+#      - ELASTICSEARCH_URL=http://elasticsearch:9200
+#    ports:
+#      - "5601:5601"
+#    networks:
+#      - my-network
+#
+#  elasticsearch:
+#    image: docker.elastic.co/elasticsearch/elasticsearch:6.7.0
+#    container_name: elasticsearch
+#    environment:
+#      - discovery.type=single-node
+#      - ES_JAVA_OPTS=-Xms512m -Xmx8g
+#    networks:
+#      - my-network
 
   ts-route-service:
     image: thesis/ts-route-service:0.2.0
@@ -46,7 +46,7 @@ services:
     depends_on:
       - ts-route-mysql
     environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
 
   ts-route-plan-service:
     image: thesis/ts-route-plan-service:0.2.0
@@ -57,7 +57,7 @@ services:
     networks:
       - my-network
     environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
 
   ts-route-mysql:
     image: mysql:8.0
@@ -86,7 +86,7 @@ services:
     networks:
       - my-network
     environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
 
   ts-security-mysql:
     image: mysql:8.0
@@ -112,7 +112,7 @@ services:
     networks:
       - my-network
     environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
 
   ts-user-mysql:
     image: mysql:8.0
@@ -140,7 +140,7 @@ services:
     networks:
       - my-network
     environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
 
   ts-contacts-mysql:
     image: mysql:8.0
@@ -170,7 +170,7 @@ services:
     networks:
       - my-network
     environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
 
   ts-food-service:
     build: ts-food-service
@@ -183,8 +183,6 @@ services:
       - my-network
     depends_on:
       - ts-food-mysql
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
 
   ts-food-mysql:
     image: mysql:8.0
@@ -214,7 +212,7 @@ services:
     depends_on:
       - ts-station-mysql
     environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
 
   ts-station-mysql:
     image: mysql:8.0
@@ -246,7 +244,7 @@ services:
     depends_on:
       - ts-travel-mysql
     environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
 
   ts-travel-mysql:
     image: mysql:8.0
@@ -272,7 +270,7 @@ services:
     networks:
       - my-network
     environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
 
   ts-seat-service:
     image: thesis/ts-seat-service:0.2.0
@@ -283,7 +281,7 @@ services:
     networks:
       - my-network
     environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
 
   ts-config-service:
     image: thesis/ts-config-service:0.2.0
@@ -296,7 +294,7 @@ services:
     depends_on:
       - ts-config-mysql
     environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
 
   ts-config-mysql:
     image: mysql:8.0
@@ -326,7 +324,7 @@ services:
     depends_on:
       - ts-train-mysql
     environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
 
   ts-train-mysql:
     image: mysql:8.0
@@ -359,7 +357,7 @@ services:
     depends_on:
       - ts-price-mysql
     environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
 
   ts-price-mysql:
     image: mysql:8.0
@@ -391,7 +389,7 @@ services:
     depends_on:
       - ts-order-mysql
     environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
+      - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
 
   ts-order-mysql:
     image: mysql:8.0
@@ -411,60 +409,60 @@ services:
       - my-network
 
   ts-consign-service:
-    image: thesis/ts-consign-service:0.2.0
-    restart: no
-    ports:
-      - 16111:16111
-    networks:
-      - my-network
-    depends_on:
-      - ts-consign-mysql
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
+   image: thesis/ts-consign-service:0.2.0
+   restart: no
+   ports:
+     - 16111:16111
+   networks:
+     - my-network
+   depends_on:
+     - ts-consign-mysql
+   environment:
+     - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
 
   ts-consign-mysql:
-    image: mysql:8.0
-    environment:
-      MYSQL_DATABASE: 'ts-consign-mysql'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'user'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'password'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'root'
-    ports:
-      # <Port exposed> : <MySQL Port running inside container>
-      - '3320:3306'
-    networks:
-      - my-network
+   image: mysql:8.0
+   environment:
+     MYSQL_DATABASE: 'ts-consign-mysql'
+     # So you don't have to use root, but you can if you like
+     MYSQL_USER: 'user'
+     # You can use whatever password you like
+     MYSQL_PASSWORD: 'password'
+     # Password for root access
+     MYSQL_ROOT_PASSWORD: 'root'
+   ports:
+     # <Port exposed> : <MySQL Port running inside container>
+     - '3320:3306'
+   networks:
+     - my-network
 
   ts-consign-price-service:
-    image: thesis/ts-consign-price-service:0.2.0
-    restart: no
-    ports:
-      - 16110:16110
-    networks:
-      - my-network
-    depends_on:
-      - ts-consign-price-mysql
-    environment:
-      - JVM_OPTS=-XX:+UseParallelGC -Xmx2g
+   image: thesis/ts-consign-price-service:0.2.0
+   restart: no
+   ports:
+     - 16110:16110
+   networks:
+     - my-network
+   depends_on:
+     - ts-consign-price-mysql
+   environment:
+     - JAVA_OPTS=-XX:+UseG1GC -XX:MaxGCPauseMillis=100
 
   ts-consign-price-mysql:
-    image: mysql:8.0
-    environment:
-      MYSQL_DATABASE: 'ts-consign-price-mysql'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'user'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'password'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'root'
-    ports:
-      # <Port exposed> : <MySQL Port running inside container>
-      - '3321:3306'
-    networks:
-      - my-network
+   image: mysql:8.0
+   environment:
+     MYSQL_DATABASE: 'ts-consign-price-mysql'
+     # So you don't have to use root, but you can if you like
+     MYSQL_USER: 'user'
+     # You can use whatever password you like
+     MYSQL_PASSWORD: 'password'
+     # Password for root access
+     MYSQL_ROOT_PASSWORD: 'root'
+   ports:
+     # <Port exposed> : <MySQL Port running inside container>
+     - '3321:3306'
+   networks:
+     - my-network
 
   # Used version 2.46
   prometheus:
