@@ -184,7 +184,7 @@ services:
     depends_on:
       - ts-food-mysql
     command:
-      sh -c "mkdir -p /test"
+      sh -c "mkdir -p test"
     environment:
       - JAVA_OPTS=-XX:+PrintGCDetails
       - JAVA_OPTS=-Xjit:verbose
