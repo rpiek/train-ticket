@@ -119,8 +119,8 @@ services:
     ports:
       # <Port exposed> : <MySQL Port running inside container>
       - '3314:3306'
-#    volumes:
-#      - ./sql-scripts/user:/docker-entrypoint-initdb.d
+    volumes:
+      - ./sql-scripts/user:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
