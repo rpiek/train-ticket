@@ -45,8 +45,6 @@ services:
       - my-network
     depends_on:
       - ts-route-mysql
-    environment:
-      - JAVA_OPTS= -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/gc.log -XX:+PrintCompilation
 
   ts-route-plan-service:
     image: thesis/ts-route-plan-service:0.2.0
@@ -56,8 +54,6 @@ services:
       - 14578:14578
     networks:
       - my-network
-    environment:
-      - JAVA_OPTS= -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/gc.log -XX:+PrintCompilation
 
   ts-route-mysql:
     image: mysql:8.0
@@ -85,8 +81,6 @@ services:
       - 11188:11188
     networks:
       - my-network
-    environment:
-      - JAVA_OPTS= -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/gc.log -XX:+PrintCompilation
 
   ts-security-mysql:
     image: mysql:8.0
@@ -111,8 +105,6 @@ services:
       - 12342:12342
     networks:
       - my-network
-    environment:
-      - JAVA_OPTS= -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/gc.log -XX:+PrintCompilation
 
   ts-user-mysql:
     image: mysql:8.0
@@ -139,8 +131,6 @@ services:
       - 12347:12347
     networks:
       - my-network
-    environment:
-      - JAVA_OPTS= -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/gc.log -XX:+PrintCompilation
 
   ts-contacts-mysql:
     image: mysql:8.0
@@ -169,8 +159,6 @@ services:
       - 14568:14568
     networks:
       - my-network
-    environment:
-      - JAVA_OPTS= -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/gc.log -XX:+PrintCompilation
 
   ts-food-service:
     build: ts-food-service
@@ -211,8 +199,6 @@ services:
       - my-network
     depends_on:
       - ts-station-mysql
-    environment:
-      - JAVA_OPTS= -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/gc.log -XX:+PrintCompilation
 
   ts-station-mysql:
     image: mysql:8.0
@@ -243,8 +229,6 @@ services:
       - my-network
     depends_on:
       - ts-travel-mysql
-    environment:
-      - JAVA_OPTS= -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/gc.log -XX:+PrintCompilation
 
   ts-travel-mysql:
     image: mysql:8.0
@@ -269,8 +253,6 @@ services:
       - 15680:15680
     networks:
       - my-network
-    environment:
-      - JAVA_OPTS= -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/gc.log -XX:+PrintCompilation
 
   ts-seat-service:
     image: thesis/ts-seat-service:0.2.0
@@ -280,8 +262,6 @@ services:
       - 18898:18898
     networks:
       - my-network
-    environment:
-      - JAVA_OPTS= -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/gc.log -XX:+PrintCompilation
 
   ts-config-service:
     image: thesis/ts-config-service:0.2.0
@@ -293,8 +273,6 @@ services:
       - my-network
     depends_on:
       - ts-config-mysql
-    environment:
-      - JAVA_OPTS= -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/gc.log -XX:+PrintCompilation
 
   ts-config-mysql:
     image: mysql:8.0
@@ -323,8 +301,6 @@ services:
       - my-network
     depends_on:
       - ts-train-mysql
-    environment:
-      - JAVA_OPTS= -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/gc.log -XX:+PrintCompilation
 
   ts-train-mysql:
     image: mysql:8.0
@@ -356,8 +332,6 @@ services:
       - my-network
     depends_on:
       - ts-price-mysql
-    environment:
-      - JAVA_OPTS= -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/gc.log -XX:+PrintCompilation
 
   ts-price-mysql:
     image: mysql:8.0
@@ -388,8 +362,6 @@ services:
       - my-network
     depends_on:
       - ts-order-mysql
-    environment:
-      - JAVA_OPTS= -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/gc.log -XX:+PrintCompilation
 
   ts-order-mysql:
     image: mysql:8.0
@@ -417,8 +389,6 @@ services:
      - my-network
    depends_on:
      - ts-consign-mysql
-   environment:
-    - JAVA_OPTS= -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/gc.log -XX:+PrintCompilation
 
   ts-consign-mysql:
    image: mysql:8.0
@@ -445,8 +415,6 @@ services:
      - my-network
    depends_on:
      - ts-consign-price-mysql
-   environment:
-     - JAVA_OPTS= -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/gc.log -XX:+PrintCompilation
 
   ts-consign-price-mysql:
    image: mysql:8.0
