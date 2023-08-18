@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class Queues {
 
     public final static String queueName = "food_delivery";
+
     @Bean
     public Queue emailQueue() {
         return new Queue(queueName);
