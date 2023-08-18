@@ -347,7 +347,7 @@ services:
       # <Port exposed> : <MySQL Port running inside container>
       - '3311:3306'
     volumes:
-      - ./sql-scripts/price_config/price_config_100.sql:/docker-entrypoint-initdb.d
+      - ./sql-scripts/price_config_100:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
