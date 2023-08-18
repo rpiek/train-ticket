@@ -4,7 +4,6 @@ services:
   # Used version 2.24.2
   zipkin:
     image: openzipkin/zipkin:2.24.2
-    container_name: zipkin
     ports:
       - "9411:9411"
     environment:
@@ -70,7 +69,7 @@ services:
       # <Port exposed> : <MySQL Port running inside container>
       - '3307:3306'
     volumes:
-      - ./sql-scripts/route:/docker-entrypoint-initdb.d
+      - ./sql-scripts/route/route_100.sql:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
@@ -120,7 +119,7 @@ services:
       # <Port exposed> : <MySQL Port running inside container>
       - '3314:3306'
     volumes:
-      - ./sql-scripts/user:/docker-entrypoint-initdb.d
+      - ./sql-scripts/user/user_100.sql:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
@@ -215,7 +214,7 @@ services:
       # <Port exposed> : <MySQL Port running inside container>
       - '3308:3306'
     volumes:
-      - ./sql-scripts/station:/docker-entrypoint-initdb.d
+      - ./sql-scripts/station/station_100.sql:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
@@ -241,7 +240,7 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - ./sql-scripts/trip:/docker-entrypoint-initdb.d
+      - ./sql-scripts/trip/trip_100.sql:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
@@ -317,7 +316,7 @@ services:
       # <Port exposed> : <MySQL Port running inside container>
       - '3310:3306'
     volumes:
-      - ./sql-scripts/train_type:/docker-entrypoint-initdb.d
+      - ./sql-scripts/train_type/train_type_100.sql:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
@@ -348,7 +347,7 @@ services:
       # <Port exposed> : <MySQL Port running inside container>
       - '3311:3306'
     volumes:
-      - ./sql-scripts/price_config:/docker-entrypoint-initdb.d
+      - ./sql-scripts/price_config/price_config_100.sql:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
