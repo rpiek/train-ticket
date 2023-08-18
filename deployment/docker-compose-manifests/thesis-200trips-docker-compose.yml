@@ -240,7 +240,7 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - ./sql-scripts/trip/trip_200:/docker-entrypoint-initdb.d
+      - ./sql-scripts/trip_200:/docker-entrypoint-initdb.d
     networks:
       - my-network
 

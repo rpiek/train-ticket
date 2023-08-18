@@ -69,7 +69,7 @@ services:
       # <Port exposed> : <MySQL Port running inside container>
       - '3307:3306'
     volumes:
-      - ./sql-scripts/route/route_100.sql:/docker-entrypoint-initdb.d
+      - ./sql-scripts/route:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
@@ -119,7 +119,7 @@ services:
       # <Port exposed> : <MySQL Port running inside container>
       - '3314:3306'
     volumes:
-      - ./sql-scripts/user/user_100.sql:/docker-entrypoint-initdb.d
+      - ./sql-scripts/user:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
@@ -214,7 +214,7 @@ services:
       # <Port exposed> : <MySQL Port running inside container>
       - '3308:3306'
     volumes:
-      - ./sql-scripts/station/station_100.sql:/docker-entrypoint-initdb.d
+      - ./sql-scripts/station:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
@@ -240,7 +240,7 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - ./sql-scripts/trip/trip_100.sql:/docker-entrypoint-initdb.d
+      - ./sql-scripts/trip:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
@@ -316,7 +316,7 @@ services:
       # <Port exposed> : <MySQL Port running inside container>
       - '3310:3306'
     volumes:
-      - ./sql-scripts/train_type/train_type_100.sql:/docker-entrypoint-initdb.d
+      - ./sql-scripts/train_type:/docker-entrypoint-initdb.d
     networks:
       - my-network
 
