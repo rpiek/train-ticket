@@ -188,16 +188,16 @@ services:
     networks:
       - my-network
 
-  ts-station-service:
-    image: thesis/ts-station-service:0.2.0
-    #cpus: 0.25
-    restart: "no"
-    ports:
-      - 12345:12345
-    networks:
-      - my-network
-    depends_on:
-      - ts-station-mysql
+#  ts-station-service:
+#    image: thesis/ts-station-service:0.2.0
+#    #cpus: 0.25
+#    restart: "no"
+#    ports:
+#      - 12345:12345
+#    networks:
+#      - my-network
+#    depends_on:
+#      - ts-station-mysql
 
   ts-station-mysql:
     image: mysql:8.0
@@ -252,6 +252,8 @@ services:
       - 15680:15680
     networks:
       - my-network
+    depends_on:
+      - ts-station-mysql
 
   ts-seat-service:
     image: thesis/ts-seat-service:0.2.0

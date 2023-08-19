@@ -31,6 +31,9 @@ public class BasicServiceImpl implements BasicService {
     @Autowired
     private DiscoveryClient discoveryClient;
 
+    @Autowired
+    private StationService stationService;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(BasicServiceImpl.class);
 
     private String getServiceUrl(String serviceName) {
@@ -182,7 +185,7 @@ public class BasicServiceImpl implements BasicService {
         //List<String> invalidTrips = new ArrayList<>();
 
         // check if station exist to exclude invalid travel info
-        Map<String, String> stationMap = checkStationsExists(new ArrayList<>(stationNames), headers);
+        Map<String, String> stationMap = checkStationsExists(new ArrayList<>(stationNames));
         if(stationMap == null) {
             response.setStatus(0);
             response.setMsg("all stations don't exist");
@@ -339,21 +342,10 @@ public class BasicServiceImpl implements BasicService {
         return  re.getBody();
     }
 
-    public Map<String,String> checkStationsExists(List<String> stationNames, HttpHeaders headers) {
+    public Map<String,String> checkStationsExists(List<String> stationNames) {
         BasicServiceImpl.LOGGER.info("[checkStationsExists][Check Stations Exists][stationNames: {}]", stationNames);
-        HttpEntity requestEntity = new HttpEntity(stationNames, null);
-        String station_service_url=getServiceUrl("ts-station-service");
-        ResponseEntity<Response> re = restTemplate.exchange(
-                station_service_url + ":12345/api/v1/stationservice/stations/idlist",
-                HttpMethod.POST,
-                requestEntity,
-                Response.class);
-        Response<Map<String, String>> r = re.getBody();
-        if(r.getStatus() == 0) {
-            return null;
-        }
-        Map<String, String> stationMap = r.getData();
-        return stationMap;
+
+        return stationService.queryForIdBatchIntra(stationNames);
     }
 
     public boolean checkStationExists(String stationName, HttpHeaders headers) {

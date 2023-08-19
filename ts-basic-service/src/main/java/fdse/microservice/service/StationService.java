@@ -3,6 +3,7 @@ package fdse.microservice.service;
 import edu.fudan.common.util.Response;
 import fdse.microservice.entity.Station;
 import java.util.List;
+import java.util.Map;
 import org.springframework.http.HttpHeaders;
 
 public interface StationService {
@@ -20,6 +21,8 @@ public interface StationService {
     Response queryForId(String stationName, HttpHeaders headers);
 
     Response queryForIdBatch(List<String> nameList, HttpHeaders headers);
+
+    Map<String, String> queryForIdBatchIntra(List <String> nameList);
 
     Response queryById(String stationId, HttpHeaders headers);
 

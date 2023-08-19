@@ -124,6 +124,27 @@ public class StationServiceImpl implements StationService {
 
     }
 
+    public Map<String, String> queryForIdBatchIntra(List <String> nameList) {
+        Map<String, String> result = new HashMap<>();
+        List<Station> stations = repository.findByNames(nameList);
+        Map<String, String> stationMap = new HashMap<>();
+        for(Station s: stations) {
+            stationMap.put(s.getName(), s.getId());
+        }
+
+        for(String name: nameList){
+            result.put(name, stationMap.get(name));
+        }
+
+        if (!result.isEmpty()) {
+            return result;
+        } else {
+            StationServiceImpl.LOGGER.warn("[queryForIdBatch][Find station ids warn][Stations not found][StationNameNumber: {}]",nameList.size());
+            return null;
+        }
+
+    }
+
     @Override
     public Response queryById(String stationId, HttpHeaders headers) {
         Optional<Station> station = repository.findById(stationId);
