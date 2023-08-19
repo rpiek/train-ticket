@@ -17,7 +17,7 @@ spring:
     base-url: http://zipkin:9411
   sleuth:
     sampler:
-      probability: 0
+      probability: 1.0
 
 # HTTP Server
 server:
