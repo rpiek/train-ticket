@@ -50,8 +50,8 @@ public class BasicServiceImpl implements BasicService {
         response.setMsg("Success");
         String start = info.getStartPlace();
         String end = info.getEndPlace();
-        boolean startingPlaceExist = checkStationExists(start, headers);
-        boolean endPlaceExist = checkStationExists(end, headers);
+        boolean startingPlaceExist = checkStationExists(start);
+        boolean endPlaceExist = checkStationExists(end);
         if (!startingPlaceExist || !endPlaceExist) {
             result.setStatus(false);
             response.setStatus(0);
@@ -327,19 +327,14 @@ public class BasicServiceImpl implements BasicService {
     @Override
     public Response queryForStationId(String stationName, HttpHeaders headers) {
         BasicServiceImpl.LOGGER.info("[queryForStationId][Query For Station Id][stationName: {}]", stationName);
-        HttpEntity requestEntity = new HttpEntity(null);
-        String station_service_url=getServiceUrl("ts-station-service");
-        ResponseEntity<Response> re = restTemplate.exchange(
-                station_service_url + ":12345/api/v1/stationservice/stations/id/" + stationName,
-                HttpMethod.GET,
-                requestEntity,
-                Response.class);
-        if (re.getBody().getStatus() != 1) {
-            String msg = re.getBody().getMsg();
-            BasicServiceImpl.LOGGER.warn("[queryForStationId][Query for stationId error][stationName: {}, message: {}]", stationName, msg);
-            return new Response<>(0, msg, null);
+        String stationId = stationService.queryForIdIntra(stationName);
+
+        if (stationId == null) {
+            BasicServiceImpl.LOGGER.warn("[queryForStationId][Query for stationId error][stationName: {}, message: {}]", stationName, "Not exists");
+            return new Response<>(0, "Not exists", null);
         }
-        return  re.getBody();
+
+        return new Response<>(1, "Success", stationId);
     }
 
     public Map<String,String> checkStationsExists(List<String> stationNames) {
@@ -348,18 +343,11 @@ public class BasicServiceImpl implements BasicService {
         return stationService.queryForIdBatchIntra(stationNames);
     }
 
-    public boolean checkStationExists(String stationName, HttpHeaders headers) {
+    public boolean checkStationExists(String stationName) {
         BasicServiceImpl.LOGGER.info("[checkStationExists][Check Station Exists][stationName: {}]", stationName);
-        HttpEntity requestEntity = new HttpEntity(null);
-        String station_service_url=getServiceUrl("ts-station-service");
-        ResponseEntity<Response> re = restTemplate.exchange(
-                station_service_url + ":12345/api/v1/stationservice/stations/id/" + stationName,
-                HttpMethod.GET,
-                requestEntity,
-                Response.class);
-        Response exist = re.getBody();
+        String stationId = stationService.queryForIdIntra(stationName);
 
-        return exist.getStatus() == 1;
+        return stationId != null;
     }
 
     public List<TrainType> queryTrainTypeByNames(List<String> trainTypeNames, HttpHeaders headers) {

@@ -20,6 +20,8 @@ public interface StationService {
 
     Response queryForId(String stationName, HttpHeaders headers);
 
+    String queryForIdIntra(String stationName);
+
     Response queryForIdBatch(List<String> nameList, HttpHeaders headers);
 
     Map<String, String> queryForIdBatchIntra(List <String> nameList);

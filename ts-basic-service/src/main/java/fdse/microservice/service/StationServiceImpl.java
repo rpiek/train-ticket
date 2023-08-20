@@ -101,6 +101,16 @@ public class StationServiceImpl implements StationService {
         }
     }
 
+    public String queryForIdIntra(String stationName) {
+        Station station = repository.findByName(stationName);
+
+        if (station  != null) {
+            return station.getId();
+        } else {
+            return null;
+        }
+    }
+
 
     @Override
     public Response queryForIdBatch(List<String> nameList, HttpHeaders headers) {
