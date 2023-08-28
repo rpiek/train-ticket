@@ -267,7 +267,7 @@ services:
     #cpus: 0.25
     restart: no
     ports:
-      - 15680:15679
+      - 15682:15679
     networks:
       - my-network
     depends_on:
@@ -295,7 +295,7 @@ services:
     #cpus: 0.25
     restart: no
     ports:
-      - 14568:14567
+      - 14570:14567
     networks:
       - my-network
     depends_on:
@@ -409,7 +409,7 @@ services:
    image: thesis/ts-consign-price-service:0.2.0
    restart: no
    ports:
-     - 16111:16110
+     - 16113:16110
    networks:
      - my-network
    depends_on:
