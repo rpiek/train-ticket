@@ -127,7 +127,7 @@ services:
     image: thesis/ts-contacts-service:0.2.0
     restart: always
     ports:
-      - 12347:12347
+      - 12348:12347
     networks:
       - my-network
 
