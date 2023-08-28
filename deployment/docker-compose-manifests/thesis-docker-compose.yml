@@ -314,7 +314,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       # <Port exposed> : <MySQL Port running inside container>
-      - '3311:3306'
+      - '3321:3306'
     volumes:
       - ./sql-scripts/train_type:/docker-entrypoint-initdb.d
     networks:
