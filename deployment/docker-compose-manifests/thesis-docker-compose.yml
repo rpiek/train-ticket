@@ -193,7 +193,7 @@ services:
     #cpus: 0.25
     restart: "no"
     ports:
-      - 12346:12345
+      - 12316:12345
     networks:
       - my-network
     depends_on:
