@@ -143,7 +143,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       # <Port exposed> : <MySQL Port running inside container>
-      - '3332:3306'
+      - '3352:3306'
     volumes:
       - ./sql-scripts/contacts:/docker-entrypoint-initdb.d
     networks:
@@ -345,7 +345,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       # <Port exposed> : <MySQL Port running inside container>
-      - '3332:3306'
+      - '3392:3306'
     volumes:
       - ./sql-scripts/price_config_100:/docker-entrypoint-initdb.d
     networks:
@@ -427,7 +427,7 @@ services:
      MYSQL_ROOT_PASSWORD: 'root'
    ports:
      # <Port exposed> : <MySQL Port running inside container>
-     - '3332:3306'
+     - '3342:3306'
    networks:
      - my-network
 
