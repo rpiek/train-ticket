@@ -39,7 +39,7 @@ services:
     #cpus: 0.25
     restart: "no"
     ports:
-      - 11178:11178
+      - 11179:11178
     networks:
       - my-network
     depends_on:
@@ -50,7 +50,7 @@ services:
     #cpus: 0.25
     restart: "no"
     ports:
-      - 14578:14578
+      - 14579:14578
     networks:
       - my-network
 
@@ -67,7 +67,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       # <Port exposed> : <MySQL Port running inside container>
-      - '3307:3306'
+      - '3308:3306'
     volumes:
       - ./sql-scripts/route:/docker-entrypoint-initdb.d
     networks:
@@ -77,7 +77,7 @@ services:
     image: thesis/ts-security-service:0.2.0
     restart: always
     ports:
-      - 11188:11188
+      - 11189:11188
     networks:
       - my-network
 
@@ -101,7 +101,7 @@ services:
     image: thesis/ts-user-service:0.2.0
     restart: always
     ports:
-      - 12342:12342
+      - 12343:12342
     networks:
       - my-network
 
@@ -117,7 +117,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       # <Port exposed> : <MySQL Port running inside container>
-      - '3314:3306'
+      - '3315:3306'
     volumes:
       - ./sql-scripts/user:/docker-entrypoint-initdb.d
     networks:
@@ -143,7 +143,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       # <Port exposed> : <MySQL Port running inside container>
-      - '3301:3306'
+      - '3302:3306'
     volumes:
       - ./sql-scripts/contacts:/docker-entrypoint-initdb.d
     networks:
@@ -155,7 +155,7 @@ services:
     image: thesis/ts-preserve-service:0.2.0
     restart: no
     ports:
-      - 14568:14568
+      - 14569:14568
     networks:
       - my-network
 
@@ -165,7 +165,7 @@ services:
     image: thesis/ts-food-service:0.2.0
     restart: no
     ports:
-      - 18856:18856
+      - 18857:18856
     networks:
       - my-network
     depends_on:
@@ -184,7 +184,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       # <Port exposed> : <MySQL Port running inside container>
-      - '3298:3306'
+      - '3299:3306'
     networks:
       - my-network
 
@@ -193,7 +193,7 @@ services:
     #cpus: 0.25
     restart: "no"
     ports:
-      - 12345:12345
+      - 12346:12345
     networks:
       - my-network
     depends_on:
@@ -212,7 +212,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       # <Port exposed> : <MySQL Port running inside container>
-      - '3308:3306'
+      - '3309:3306'
     volumes:
       - ./sql-scripts/station:/docker-entrypoint-initdb.d
     networks:
@@ -223,7 +223,7 @@ services:
     #cpus: 0.25
     restart: "no"
     ports:
-      - 12346:12346
+      - 12347:12346
     networks:
       - my-network
     depends_on:
@@ -238,7 +238,7 @@ services:
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
-      - '3306:3306'
+      - '3307:3306'
     volumes:
       - ./sql-scripts/trip:/docker-entrypoint-initdb.d
     networks:
@@ -249,7 +249,7 @@ services:
     #cpus: 0.25
     restart: "no"
     ports:
-      - 15680:15680
+      - 15681:15680
     networks:
       - my-network
 
@@ -258,7 +258,7 @@ services:
     #cpus: 0.25
     restart: no
     ports:
-      - 18898:18898
+      - 18899:18898
     networks:
       - my-network
 
@@ -267,7 +267,7 @@ services:
     #cpus: 0.25
     restart: no
     ports:
-      - 15679:15679
+      - 15680:15679
     networks:
       - my-network
     depends_on:
@@ -286,7 +286,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       # <Port exposed> : <MySQL Port running inside container>
-      - '3309:3306'
+      - '3310:3306'
     networks:
       - my-network
 
@@ -295,7 +295,7 @@ services:
     #cpus: 0.25
     restart: no
     ports:
-      - 14567:14567
+      - 14568:14567
     networks:
       - my-network
     depends_on:
@@ -314,7 +314,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       # <Port exposed> : <MySQL Port running inside container>
-      - '3310:3306'
+      - '3311:3306'
     volumes:
       - ./sql-scripts/train_type:/docker-entrypoint-initdb.d
     networks:
@@ -326,7 +326,7 @@ services:
     image: thesis/ts-price-service:0.2.0
     restart: no
     ports:
-      - 16579:16579
+      - 16580:16579
     networks:
       - my-network
     depends_on:
@@ -345,7 +345,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       # <Port exposed> : <MySQL Port running inside container>
-      - '3311:3306'
+      - '3312:3306'
     volumes:
       - ./sql-scripts/price_config_100:/docker-entrypoint-initdb.d
     networks:
@@ -356,7 +356,7 @@ services:
     #cpus: 0.25
     restart: no
     ports:
-      - 12031:12031
+      - 12032:12031
     networks:
       - my-network
     depends_on:
@@ -375,7 +375,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       # <Port exposed> : <MySQL Port running inside container>
-      - '3312:3306'
+      - '3313:3306'
     networks:
       - my-network
 
@@ -383,7 +383,7 @@ services:
    image: thesis/ts-consign-service:0.2.0
    restart: no
    ports:
-     - 16111:16111
+     - 16112:16111
    networks:
      - my-network
    depends_on:
@@ -401,7 +401,7 @@ services:
      MYSQL_ROOT_PASSWORD: 'root'
    ports:
      # <Port exposed> : <MySQL Port running inside container>
-     - '3320:3306'
+     - '3321:3306'
    networks:
      - my-network
 
@@ -409,7 +409,7 @@ services:
    image: thesis/ts-consign-price-service:0.2.0
    restart: no
    ports:
-     - 16110:16110
+     - 16111:16110
    networks:
      - my-network
    depends_on:
@@ -427,7 +427,7 @@ services:
      MYSQL_ROOT_PASSWORD: 'root'
    ports:
      # <Port exposed> : <MySQL Port running inside container>
-     - '3321:3306'
+     - '3322:3306'
    networks:
      - my-network
 
@@ -437,7 +437,7 @@ services:
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
-      - 9090:9090
+      - 9091:9090
     networks:
       - my-network
 
@@ -449,7 +449,7 @@ services:
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Editor
       - GF_AUTH_BASIC_ENABLED=false
     ports:
-      - 3000:3000
+      - 3001:3000
     volumes:
       - ./grafana/provisioning:/etc/grafana/provisioning/
     networks:
@@ -458,7 +458,7 @@ services:
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.47.0
     ports:
-      - 8080:8080
+      - 8081:8080
     volumes:
       - /:/rootfs:ro
       - /var/run/docker.sock:/var/run/docker.sock:rw
