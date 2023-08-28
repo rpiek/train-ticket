@@ -93,7 +93,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       # <Port exposed> : <MySQL Port running inside container>
-      - '3333:3306'
+      - '3334:3306'
     networks:
       - my-network
 
