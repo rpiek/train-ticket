@@ -5,7 +5,7 @@ services:
   zipkin:
     image: openzipkin/zipkin:2.24.2
     ports:
-      - "9411:9411"
+      - "9412:9411"
     environment:
 #      - STORAGE_TYPE=elasticsearch
 #      - ES_HOSTS=http://elasticsearch:9200
