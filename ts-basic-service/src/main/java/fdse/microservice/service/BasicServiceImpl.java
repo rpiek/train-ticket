@@ -85,6 +85,7 @@ public class BasicServiceImpl implements BasicService {
         //Trains that meet the above criteria are added to the return list
         int indexStart = 0;
         int indexEnd = 0;
+        LOGGER.info("Dit is start en end: " + start + " , " + end);
         LOGGER.info("Dit is de route: " + route);
         if (route.getStations().contains(start) &&
                 route.getStations().contains(end) &&
