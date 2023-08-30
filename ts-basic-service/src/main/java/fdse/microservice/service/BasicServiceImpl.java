@@ -85,19 +85,12 @@ public class BasicServiceImpl implements BasicService {
         //Trains that meet the above criteria are added to the return list
         int indexStart = 0;
         int indexEnd = 0;
-        LOGGER.info("Dit is start en end: " + start + " , " + end);
-        LOGGER.info("Dit is de route: " + route);
         if (route.getStations().contains(start) &&
                 route.getStations().contains(end) &&
                 route.getStations().indexOf(start) < route.getStations().indexOf(end)){
             indexStart = route.getStations().indexOf(start);
             indexEnd = route.getStations().indexOf(end);
-            LOGGER.info("[queryForTravel][query start index and end index][indexStart: {} indexEnd: {}]", indexStart, indexEnd);
-            LOGGER.info("[queryForTravel][query stations and distances][stations: {} distances: {}]", route.getStations(), route.getDistances());
         }else {
-            LOGGER.info("Start contains: " + route.getStations().contains(start));
-            LOGGER.info("End contains: " + route.getStations().contains(end));
-            LOGGER.info(route.getStations().indexOf(start) + " en " + route.getStations().indexOf(end));
             result.setStatus(false);
             response.setStatus(0);
             response.setMsg("Station not correct in Route");

@@ -263,7 +263,6 @@ public class RoutePlanServiceImpl implements RoutePlanService {
                     });
 
             TripAllDetail tripAllDetail = re3.getBody().getData();
-            RoutePlanServiceImpl.LOGGER.info("Result is: " + re3);
             tripResponse = tripAllDetail.getTripResponse();
 
             RoutePlanResultUnit unit = new RoutePlanResultUnit();
