@@ -136,6 +136,7 @@ public class RouteServiceImpl implements RouteService {
         ArrayList<Route> routes = routeRepository.findAll();
         RouteServiceImpl.LOGGER.info("[getRouteByStartAndEnd][Find All][size:{}]", routes.size());
         List<Route> resultList = new ArrayList<>();
+        RouteServiceImpl.LOGGER.info(startId + " , " + terminalId);
         for (Route route : routes) {
             if (route.getStations().contains(startId) &&
                     route.getStations().contains(terminalId) &&
@@ -144,7 +145,7 @@ public class RouteServiceImpl implements RouteService {
             }
         }
         if (!resultList.isEmpty()) {
-            return routes;
+            return resultList;
         } else {
             RouteServiceImpl.LOGGER.warn("[getRouteByStartAndEnd][Find by start and terminal warn][Routes not found][startId: {},terminalId: {}]",startId,terminalId);
             return null;
