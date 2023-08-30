@@ -92,12 +92,10 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public Response getRouteByIds(List<String> routeIds, HttpHeaders headers) {
         List<Route> routes = routeRepository.findByIds(routeIds);
-        RouteServiceImpl.LOGGER.info("DB call done");
         if (routes == null || routes.isEmpty()) {
             RouteServiceImpl.LOGGER.error("[getRouteById][Find route error][Route not found][RouteIds: {}]",routeIds);
             return new Response<>(0, "No content with the routeIds", null);
         } else {
-            RouteServiceImpl.LOGGER.info("Were in the method now");
             return new Response<>(1, success, routes);
         }
     }
