@@ -95,6 +95,9 @@ public class BasicServiceImpl implements BasicService {
             LOGGER.info("[queryForTravel][query start index and end index][indexStart: {} indexEnd: {}]", indexStart, indexEnd);
             LOGGER.info("[queryForTravel][query stations and distances][stations: {} distances: {}]", route.getStations(), route.getDistances());
         }else {
+            LOGGER.info("Start contains: " + String.valueOf(route.getStations().contains(start)));
+            LOGGER.info("End contains: " + String.valueOf(route.getStations().contains(end)));
+            LOGGER.info(route.getStations().indexOf(start) + " en " + route.getStations().indexOf(end));
             result.setStatus(false);
             response.setStatus(0);
             response.setMsg("Station not correct in Route");
