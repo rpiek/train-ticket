@@ -30,6 +30,9 @@ public class BasicServiceImpl implements BasicService {
     @Autowired
     private DiscoveryClient discoveryClient;
 
+    @Autowired
+    private RouteService routeService;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(BasicServiceImpl.class);
 
     private String getServiceUrl(String serviceName) {
@@ -402,40 +405,42 @@ public class BasicServiceImpl implements BasicService {
 
     private List<Route> getRoutesByRouteIds(List<String> routeIds, HttpHeaders headers) {
         BasicServiceImpl.LOGGER.info("[getRoutesByRouteIds][Get Route By Ids][Route IDs：{}]", routeIds);
-        HttpEntity requestEntity = new HttpEntity(routeIds, null);
-        String route_service_url=getServiceUrl("ts-route-service");
-        ResponseEntity<Response> re = restTemplate.exchange(
-                route_service_url + ":11178/api/v1/routeservice/routes/byIds/",
-                HttpMethod.POST,
-                requestEntity,
-                Response.class);
-        Response<List<Route>> result = re.getBody();
-        if ( result.getStatus() == 0) {
-            BasicServiceImpl.LOGGER.warn("[getRoutesByRouteIds][Get Route By Ids Failed][Fail msg: {}]", result.getMsg());
+//        HttpEntity requestEntity = new HttpEntity(routeIds, null);
+//        String route_service_url=getServiceUrl("ts-route-service");
+//        ResponseEntity<Response> re = restTemplate.exchange(
+//                route_service_url + ":11178/api/v1/routeservice/routes/byIds/",
+//                HttpMethod.POST,
+//                requestEntity,
+//                Response.class);
+//        Response<List<Route>> result = re.getBody();
+        List<Route> result = routeService.getRouteByIdsIntra(routeIds);
+        if (result == null) {
+            BasicServiceImpl.LOGGER.warn("[getRoutesByRouteIds][Get Route By Ids Failed][Fail msg: {}]", "No content with the routeIds");
             return null;
         } else {
             BasicServiceImpl.LOGGER.info("[getRoutesByRouteIds][Get Route By Ids][Success]");
-            List<Route> routes = Arrays.asList(JsonUtils.conveterObject(result.getData(), Route[].class));;
-            return routes;
+//            List<Route> routes = Arrays.asList(JsonUtils.conveterObject(result.getData(), Route[].class));;
+            return result;
         }
     }
 
-    private Route getRouteByRouteId(String routeId, HttpHeaders headers) {
+    private edu.fudan.common.entity.Route getRouteByRouteId(String routeId, HttpHeaders headers) {
         BasicServiceImpl.LOGGER.info("[getRouteByRouteId][Get Route By Id][Route ID：{}]", routeId);
-        HttpEntity requestEntity = new HttpEntity(null);
-        String route_service_url=getServiceUrl("ts-route-service");
-        ResponseEntity<Response> re = restTemplate.exchange(
-                route_service_url + ":11178/api/v1/routeservice/routes/" + routeId,
-                HttpMethod.GET,
-                requestEntity,
-                Response.class);
-        Response result = re.getBody();
-        if ( result.getStatus() == 0) {
-            BasicServiceImpl.LOGGER.warn("[getRouteByRouteId][Get Route By Id Failed][Fail msg: {}]", result.getMsg());
+//        HttpEntity requestEntity = new HttpEntity(null);
+//        String route_service_url=getServiceUrl("ts-route-service");
+//        ResponseEntity<Response> re = restTemplate.exchange(
+//                route_service_url + ":11178/api/v1/routeservice/routes/" + routeId,
+//                HttpMethod.GET,
+//                requestEntity,
+//                Response.class);
+//        Response result = re.getBody();
+        Route result = routeService.getRouteByIdIntra(routeId);
+        if (result == null) {
+            BasicServiceImpl.LOGGER.warn("[getRouteByRouteId][Get Route By Id Failed][Fail msg: {}]", "No content with the routeId");
             return null;
         } else {
             BasicServiceImpl.LOGGER.info("[getRouteByRouteId][Get Route By Id][Success]");
-            return JsonUtils.conveterObject(result.getData(), Route.class);
+            return result;
         }
     }
 

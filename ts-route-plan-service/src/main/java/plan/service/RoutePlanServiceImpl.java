@@ -3,6 +3,7 @@ package plan.service;
 import edu.fudan.common.entity.*;
 import edu.fudan.common.util.Response;
 import edu.fudan.common.util.StringUtils;
+import plan.service.RouteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ public class RoutePlanServiceImpl implements RoutePlanService {
     private RestTemplate restTemplate;
     @Autowired
     private DiscoveryClient discoveryClient;
+    @Autowired
+    private RouteService routeService;
     private static final Logger LOGGER = LoggerFactory.getLogger(RoutePlanServiceImpl.class);
 
     private String getServiceUrl(String serviceName) {
@@ -165,16 +168,17 @@ public class RoutePlanServiceImpl implements RoutePlanService {
         //1.Get the route through the two stations
 
         HttpEntity requestEntity = new HttpEntity(null);
-        String route_service_url = getServiceUrl("ts-route-service");
-        ResponseEntity<Response<ArrayList<Route>>> re = restTemplate.exchange(
-                route_service_url + ":11178/api/v1/routeservice/routes/" + info.getStartStation() + "/" + info.getEndStation(),
-                HttpMethod.GET,
-                requestEntity,
-                new ParameterizedTypeReference<Response<ArrayList<Route>>>() {
-                });
+//        String route_service_url = getServiceUrl("ts-route-service");
+//        ResponseEntity<Response<ArrayList<Route>>> re = restTemplate.exchange(
+//                route_service_url + ":11178/api/v1/routeservice/routes/" + info.getStartStation() + "/" + info.getEndStation(),
+//                HttpMethod.GET,
+//                requestEntity,
+//                new ParameterizedTypeReference<Response<ArrayList<Route>>>() {
+//                });
+        List<plan.entity.Route> routeList = routeService.getRouteByStartAndEndIntra(fromStationId, toStationId);
 
 
-        ArrayList<Route> routeList = re.getBody().getData();
+//        ArrayList<Route> routeList = re.getBody().getData();
         RoutePlanServiceImpl.LOGGER.info("[searchMinStopStations][Get the route][Candidate Route Number: {}]", routeList.size());
         //2.Calculate how many stops there are between the two stations
         ArrayList<Integer> gapList = new ArrayList<>();

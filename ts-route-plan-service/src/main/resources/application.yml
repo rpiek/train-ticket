@@ -5,6 +5,17 @@ spring:
 #        server-addr: ${NACOS_ADDRS:nacos-0.nacos-headless.default.svc.cluster.local,nacos-1.nacos-headless.default.svc.cluster.local,nacos-2.nacos-headless.default.svc.cluster.local}
   application:
     name: ts-route-plan-service
+  datasource:
+    url: jdbc:mysql://${ROUTE_MYSQL_HOST:ts-route-mysql}:${ROUTE_MYSQL_PORT:3306}/${ROUTE_MYSQL_DATABASE:ts-route-mysql}
+    username: ${ROUTE_MYSQL_USER:root}
+    password: ${ROUTE_MYSQL_PASSWORD:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
   zipkin:
     base-url: http://zipkin:9411
   sleuth:
