@@ -42,6 +42,8 @@ public interface RouteService {
      */
     Response getRouteById(String routeId, HttpHeaders headers);
 
+    Route getRouteByIdIntra(String routeId);
+
     /**
      * get route by ids
      *

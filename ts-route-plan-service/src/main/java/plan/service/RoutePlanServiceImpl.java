@@ -276,7 +276,7 @@ public class RoutePlanServiceImpl implements RoutePlanService {
             unit.setPriceForSecondClassSeat(tripResponse.getPriceForEconomyClass());
             //Go get the roadmap according to routeid
             String routeId = trip.getRouteId();
-            Route tripRoute = getRouteByRouteId(routeId, headers);
+            plan.entity.Route tripRoute = getRouteByRouteId(routeId, headers);
             if (tripRoute != null) {
                 unit.setStopStations(tripRoute.getStations());
             }
@@ -287,23 +287,25 @@ public class RoutePlanServiceImpl implements RoutePlanService {
         return new Response<>(1, "Success.", tripResponses);
     }
 
-    private Route getRouteByRouteId(String routeId, HttpHeaders headers) {
-        HttpEntity requestEntity = new HttpEntity(null);
-        String route_service_url = getServiceUrl("ts-route-service");
-        ResponseEntity<Response<Route>> re = restTemplate.exchange(
-                route_service_url + ":11178/api/v1/routeservice/routes/" + routeId,
-                HttpMethod.GET,
-                requestEntity,
-                new ParameterizedTypeReference<Response<Route>>() {
-                });
-        Response<Route> result = re.getBody();
+    private plan.entity.Route getRouteByRouteId(String routeId, HttpHeaders headers) {
+//        HttpEntity requestEntity = new HttpEntity(null);
+//        String route_service_url = getServiceUrl("ts-route-service");
+//        ResponseEntity<Response<Route>> re = restTemplate.exchange(
+//                route_service_url + ":11178/api/v1/routeservice/routes/" + routeId,
+//                HttpMethod.GET,
+//                requestEntity,
+//                new ParameterizedTypeReference<Response<Route>>() {
+//                });
+//        Response<Route> result = re.getBody();
 
-        if (result.getStatus() == 0) {
+        plan.entity.Route result = routeService.getRouteByIdIntra(routeId);
+
+        if (result == null) {
             RoutePlanServiceImpl.LOGGER.error("[getRouteByRouteId][Get Route By Id Fail][RouteId: {}]", routeId);
             return null;
         } else {
             RoutePlanServiceImpl.LOGGER.info("[getRouteByRouteId][Get Route By Id Success]");
-            return result.getData();
+            return result;
         }
     }
 

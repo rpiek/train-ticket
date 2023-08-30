@@ -89,6 +89,18 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
+    public Route getRouteByIdIntra(String routeId) {
+        Optional<Route> route = routeRepository.findById(routeId);
+        if (!route.isPresent()) {
+            RouteServiceImpl.LOGGER.error("[getRouteById][Find route error][Route not found][RouteId: {}]",routeId);
+            return null;
+        } else {
+            return route.get();
+        }
+
+    }
+
+    @Override
     public Response getRouteByIds(List<String> routeIds, HttpHeaders headers) {
         List<Route> routes = routeRepository.findByIds(routeIds);
         if (routes == null || routes.isEmpty()) {
