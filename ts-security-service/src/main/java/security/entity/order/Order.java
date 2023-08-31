@@ -42,7 +42,7 @@ public class Order {
     /**
      * Which Account Bought it
      */
-    @Column(length = 36)
+    @Column(name = "account_id", length = 36)
     private String accountId;
 
     /**
