@@ -21,7 +21,7 @@ public class TransactionManagerConfig {
     private EntityManagerFactory entityManagerFactory2;
 
     @Primary
-    @Bean(name = "transactionManager1")
+    @Bean(name = "transactionManager")
     public PlatformTransactionManager transactionManager1() {
         return new JpaTransactionManager(entityManagerFactory1);
     }
