@@ -1,10 +1,10 @@
-package security.repository;
+package security.repository.security;
 
 
 import org.springframework.cloud.sleuth.annotation.NewSpan;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import security.entity.SecurityConfig;
+import security.entity.security.SecurityConfig;
 import java.util.ArrayList;
 import java.util.Optional;
 

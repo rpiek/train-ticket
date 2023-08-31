@@ -1,4 +1,4 @@
-package security.entity;
+package seat.entity;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;

@@ -2,7 +2,7 @@ package security.service;
 
 import edu.fudan.common.util.Response;
 import org.springframework.http.HttpHeaders;
-import security.entity.*;
+import security.entity.security.SecurityConfig;
 
 /**
  * @author fdse

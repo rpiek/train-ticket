@@ -1,8 +1,7 @@
-package security.service;
+package seat.service;
 
 import edu.fudan.common.entity.LeftTicketInfo;
-import security.entity.order.Order;
-import security.entity.order.OrderAlterInfo;
+import seat.entity.OrderAlterInfo;
 import edu.fudan.common.entity.OrderSecurity;
 import edu.fudan.common.entity.OrderStatus;
 import edu.fudan.common.entity.Seat;
@@ -19,8 +18,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-import security.entity.order.OrderInfo;
-import security.repository.order.OrderRepository;
+import seat.entity.Order;
+import seat.entity.OrderInfo;
+import seat.repository.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +77,26 @@ public class OrderServiceImpl implements OrderService {
         } else {
             OrderServiceImpl.LOGGER.warn("[getSoldTickets][Seat][Left ticket info is empty][seat from date: {}, train number: {}]",seatRequest.getTravelDate(),seatRequest.getTrainNumber()); //warn级别，获取资源但资源为空
             return new Response<>(0, "Order is Null.", null);
+        }
+    }
+
+    @Override
+    public LeftTicketInfo getSoldTicketsIntra(Seat seatRequest) {
+        ArrayList<Order> list = orderRepository.findByTravelDateAndTrainNumber(seatRequest.getTravelDate(),
+                seatRequest.getTrainNumber());
+        if (list != null && !list.isEmpty()) {
+            Set ticketSet = new HashSet();
+            for (Order tempOrder : list) {
+                ticketSet.add(new Ticket(Integer.parseInt(tempOrder.getSeatNumber()),
+                        tempOrder.getFrom(), tempOrder.getTo()));
+            }
+            LeftTicketInfo leftTicketInfo = new LeftTicketInfo();
+            leftTicketInfo.setSoldTickets(ticketSet);
+            OrderServiceImpl.LOGGER.info("[getSoldTickets][Left ticket info][info is: {}]", leftTicketInfo.toString());
+            return leftTicketInfo;
+        } else {
+            OrderServiceImpl.LOGGER.warn("[getSoldTickets][Seat][Left ticket info is empty][seat from date: {}, train number: {}]",seatRequest.getTravelDate(),seatRequest.getTrainNumber()); //warn级别，获取资源但资源为空
+            return null;
         }
     }
 
@@ -413,32 +433,6 @@ public class OrderServiceImpl implements OrderService {
         result.setOrderNumInLastOneHour(countOrderInOneHour);
         result.setOrderNumOfValidOrder(countTotalValidOrder);
         return new Response<>(1, "Check Security Success . ", result);
-    }
-
-    @Override
-    public OrderSecurity checkSecurityAboutOrderIntra(Date dateFrom, String accountId) {
-        OrderSecurity result = new OrderSecurity();
-        ArrayList<Order> orders = orderRepository.findByAccountId(accountId);
-        int countOrderInOneHour = 0;
-        int countTotalValidOrder = 0;
-        Calendar ca = Calendar.getInstance();
-        ca.setTime(dateFrom);
-        ca.add(Calendar.HOUR_OF_DAY, -1);
-        dateFrom = ca.getTime();
-        for (Order order : orders) {
-            if (order.getStatus() == OrderStatus.NOTPAID.getCode() ||
-                    order.getStatus() == OrderStatus.PAID.getCode() ||
-                    order.getStatus() == OrderStatus.COLLECTED.getCode()) {
-                countTotalValidOrder += 1;
-            }
-            Date boughtDate = StringUtils.String2Date(order.getBoughtDate());
-            if (boughtDate.after(dateFrom)) {
-                countOrderInOneHour += 1;
-            }
-        }
-        result.setOrderNumInLastOneHour(countOrderInOneHour);
-        result.setOrderNumOfValidOrder(countTotalValidOrder);
-        return result;
     }
 
     @Override

@@ -1,12 +1,12 @@
-package security.controller;
+package seat.controller;
 
 import static org.springframework.http.ResponseEntity.ok;
 
 import edu.fudan.common.entity.Seat;
 import edu.fudan.common.util.StringUtils;
-import security.entity.order.Order;
-import security.entity.order.OrderInfo;
-import security.service.OrderService;
+import seat.entity.Order;
+import seat.entity.OrderInfo;
+import seat.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

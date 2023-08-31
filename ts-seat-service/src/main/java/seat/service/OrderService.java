@@ -1,13 +1,14 @@
-package preserve.service;
+package seat.service;
 
+import edu.fudan.common.entity.LeftTicketInfo;
 import edu.fudan.common.entity.Seat;
 import edu.fudan.common.util.Response;
 import java.util.Date;
-import org.aspectj.weaver.ast.Or;
+import java.util.List;
 import org.springframework.http.HttpHeaders;
-import preserve.entity.Order;
-import preserve.entity.OrderAlterInfo;
-import preserve.entity.OrderInfo;
+import seat.entity.Order;
+import seat.entity.OrderAlterInfo;
+import seat.entity.OrderInfo;
 
 /**
  * @author fdse
@@ -17,8 +18,6 @@ public interface OrderService {
     Response findOrderById(String id, HttpHeaders headers);
 
     Response create(Order newOrder, HttpHeaders headers);
-
-    Order createIntra(Order newOrder);
 
     Response saveChanges(Order order, HttpHeaders headers);
 
@@ -49,6 +48,8 @@ public interface OrderService {
     Response deleteOrder(String orderId, HttpHeaders headers);
 
     Response getSoldTickets(Seat seatRequest, HttpHeaders headers);
+
+    LeftTicketInfo getSoldTicketsIntra(Seat seatRequest);
 
     Response addNewOrder(Order order, HttpHeaders headers);
 

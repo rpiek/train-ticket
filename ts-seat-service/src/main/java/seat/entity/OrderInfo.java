@@ -1,4 +1,4 @@
-package security.entity;
+package seat.entity;
 
 import lombok.Data;
 

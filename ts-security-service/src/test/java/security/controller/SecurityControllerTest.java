@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import security.entity.SecurityConfig;
+import security.entity.security.SecurityConfig;
 import security.service.SecurityService;
 
 @RunWith(JUnit4.class)

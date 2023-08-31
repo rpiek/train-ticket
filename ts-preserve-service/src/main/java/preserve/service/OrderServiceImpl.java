@@ -109,17 +109,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Response<Order> createIntra(Order order) {
+    public Order createIntra(Order order) {
         OrderServiceImpl.LOGGER.info("[create][Create Order][Ready to Create Order]");
         ArrayList<Order> accountOrders = orderRepository.findByAccountId(order.getAccountId());
         if (accountOrders.contains(order)) {
             OrderServiceImpl.LOGGER.error("[create][Order Create Fail][Order already exists][OrderId: {}]", order.getId());
-            return new Response<>(0, "Order already exist", null);
+            return null;
         } else {
             order.setId(UUID.randomUUID().toString());
             order=orderRepository.save(order);
             OrderServiceImpl.LOGGER.info("[create][Order Create Success][Order Price][OrderId:{} , Price: {}]",order.getId(),order.getPrice());
-            return new Response<>(1, success, order);
+            return order;
         }
     }
 

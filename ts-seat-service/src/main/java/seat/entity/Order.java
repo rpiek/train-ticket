@@ -1,4 +1,4 @@
-package security.entity;
+package seat.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import edu.fudan.common.entity.OrderStatus;

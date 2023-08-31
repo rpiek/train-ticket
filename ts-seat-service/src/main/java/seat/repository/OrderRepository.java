@@ -1,8 +1,8 @@
-package security.repository;
+package seat.repository;
 
 import java.util.ArrayList;
 import java.util.Optional;
-import security.entity.Order;
+import seat.entity.Order;
 import org.springframework.cloud.sleuth.annotation.NewSpan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

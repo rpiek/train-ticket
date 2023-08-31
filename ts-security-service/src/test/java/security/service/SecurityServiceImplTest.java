@@ -14,8 +14,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
-import security.entity.SecurityConfig;
-import security.repository.SecurityRepository;
+import security.entity.security.SecurityConfig;
+import security.repository.security.SecurityRepository;
 
 import java.util.ArrayList;
 import java.util.Optional;

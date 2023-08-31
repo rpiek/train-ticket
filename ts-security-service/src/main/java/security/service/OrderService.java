@@ -5,9 +5,9 @@ import edu.fudan.common.entity.Seat;
 import edu.fudan.common.util.Response;
 import java.util.Date;
 import org.springframework.http.HttpHeaders;
-import security.entity.Order;
-import security.entity.OrderAlterInfo;
-import security.entity.OrderInfo;
+import security.entity.order.Order;
+import security.entity.order.OrderAlterInfo;
+import security.entity.order.OrderInfo;
 
 /**
  * @author fdse
@@ -42,7 +42,7 @@ public interface OrderService {
 
     Response checkSecurityAboutOrder(Date checkDate, String accountId, HttpHeaders headers);
 
-    Response<OrderSecurity> checkSecurityAboutOrderIntra(Date checkDate, String accountId);
+    OrderSecurity checkSecurityAboutOrderIntra(Date checkDate, String accountId);
 
     void initOrder(Order order, HttpHeaders headers);
 

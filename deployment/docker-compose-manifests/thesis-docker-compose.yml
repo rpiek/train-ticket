@@ -80,6 +80,8 @@ services:
       - 11188:11188
     networks:
       - my-network
+    depends_on:
+      - ts-order-mysql
 
   ts-security-mysql:
     image: mysql:8.0
@@ -158,6 +160,8 @@ services:
       - 14568:14568
     networks:
       - my-network
+    depends_on:
+      - ts-order-mysql
 
   ts-food-service:
     build: ts-food-service
@@ -261,6 +265,8 @@ services:
       - 18898:18898
     networks:
       - my-network
+    depends_on:
+      - ts-order-mysql
 
   ts-config-service:
     image: thesis/ts-config-service:0.2.0
@@ -350,17 +356,17 @@ services:
       - ./sql-scripts/price_config_100:/docker-entrypoint-initdb.d
     networks:
       - my-network
-
-  ts-order-service:
-    image: thesis/ts-order-service:0.2.0
-    #cpus: 0.25
-    restart: no
-    ports:
-      - 12031:12031
-    networks:
-      - my-network
-    depends_on:
-      - ts-order-mysql
+#
+#  ts-order-service:
+#    image: thesis/ts-order-service:0.2.0
+#    #cpus: 0.25
+#    restart: no
+#    ports:
+#      - 12031:12031
+#    networks:
+#      - my-network
+#    depends_on:
+#      - ts-order-mysql
 
   ts-order-mysql:
     image: mysql:8.0

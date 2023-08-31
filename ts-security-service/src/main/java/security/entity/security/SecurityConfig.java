@@ -1,4 +1,4 @@
-package security.entity;
+package security.entity.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;

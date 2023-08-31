@@ -168,14 +168,14 @@ public class PreserveServiceImpl implements PreserveService {
 
         PreserveServiceImpl.LOGGER.info("[preserve][Step 4][Do Order][Order Price][Price is: {}]", order.getPrice());
 
-        Response<Order> cor = createOrder(order, headers);
-        if (cor.getStatus() == 0) {
-            PreserveServiceImpl.LOGGER.error("[preserve][Step 4][Do Order][Create Order Fail][OrderId: {},  Reason: {}]", order.getId(), cor.getMsg());
-            return new Response<>(0, cor.getMsg(), null);
+        Order cor = createOrder(order, headers);
+        if (cor == null) {
+            PreserveServiceImpl.LOGGER.error("[preserve][Step 4][Do Order][Create Order Fail][OrderId: {},  Reason: {}]", order.getId(), "Order Not Found");
+            return new Response<>(0, "Order Not Found", null);
         }
         PreserveServiceImpl.LOGGER.info("[preserve][Step 4][Do Order][Do Order Complete]");
 
-        Response returnResponse = new Response<>(1, "Success.", cor.getMsg());
+        Response returnResponse = new Response<>(1, "Success.", "Success");
 //        //5.Check insurance options
 //        if (oti.getAssurance() == 0) {
 //            PreserveServiceImpl.LOGGER.info("[preserve][Step 5][Buy Assurance][Do not need to buy assurance]");
@@ -194,7 +194,7 @@ public class PreserveServiceImpl implements PreserveService {
         if (oti.getFoodType() != 0) {
 
             FoodOrder foodOrder = new FoodOrder();
-            foodOrder.setOrderId(cor.getData().getId());
+            foodOrder.setOrderId(cor.getId());
             foodOrder.setFoodType(oti.getFoodType());
             foodOrder.setFoodName(oti.getFoodName());
             foodOrder.setPrice(oti.getFoodPrice());
@@ -208,7 +208,7 @@ public class PreserveServiceImpl implements PreserveService {
             if (afor.getStatus() == 1) {
                 PreserveServiceImpl.LOGGER.info("[preserve][Step 6][Buy Food][Buy Food Success]");
             } else {
-                PreserveServiceImpl.LOGGER.error("[preserve][Step 6][Buy Food][Buy Food Fail][OrderId: {}]",cor.getData().getId());
+                PreserveServiceImpl.LOGGER.error("[preserve][Step 6][Buy Food][Buy Food Fail][OrderId: {}]",cor.getId());
                 returnResponse.setMsg("Success.But Buy Food Fail.");
             }
         } else {
@@ -219,12 +219,12 @@ public class PreserveServiceImpl implements PreserveService {
         if (null != oti.getConsigneeName() && !"".equals(oti.getConsigneeName())) {
 
             Consign consignRequest = new Consign();
-            consignRequest.setOrderId(cor.getData().getId());
-            consignRequest.setAccountId(cor.getData().getAccountId());
+            consignRequest.setOrderId(cor.getId());
+            consignRequest.setAccountId(cor.getAccountId());
             consignRequest.setHandleDate(oti.getHandleDate());
-            consignRequest.setTargetDate(cor.getData().getTravelDate().toString());
-            consignRequest.setFrom(cor.getData().getFrom());
-            consignRequest.setTo(cor.getData().getTo());
+            consignRequest.setTargetDate(cor.getTravelDate().toString());
+            consignRequest.setFrom(cor.getFrom());
+            consignRequest.setTo(cor.getTo());
             consignRequest.setConsignee(oti.getConsigneeName());
             consignRequest.setPhone(oti.getConsigneePhone());
             consignRequest.setWeight(oti.getConsigneeWeight());
@@ -234,7 +234,7 @@ public class PreserveServiceImpl implements PreserveService {
             if (icresult.getStatus() == 1) {
                 PreserveServiceImpl.LOGGER.info("[preserve][Step 7][Add Consign][Consign Success]");
             } else {
-                PreserveServiceImpl.LOGGER.error("[preserve][Step 7][Add Consign][Preserve Consign Fail][OrderId: {}]", cor.getData().getId());
+                PreserveServiceImpl.LOGGER.error("[preserve][Step 7][Add Consign][Preserve Consign Fail][OrderId: {}]", cor.getId());
                 returnResponse.setMsg("Consign Fail.");
             }
         } else {
@@ -389,7 +389,7 @@ public class PreserveServiceImpl implements PreserveService {
         return reGetContactsResult.getBody();
     }
 
-    private Response<Order> createOrder(Order coi, HttpHeaders httpHeaders) {
+    private Order createOrder(Order coi, HttpHeaders httpHeaders) {
         PreserveServiceImpl.LOGGER.info("[createOrder][Preserve Service][create order]");
 
         return orderService.createIntra(coi);

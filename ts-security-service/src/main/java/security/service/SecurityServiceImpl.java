@@ -5,10 +5,7 @@ import edu.fudan.common.util.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,13 +14,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
-import security.entity.SecurityConfig;
-import security.repository.SecurityRepository;
+import security.entity.security.SecurityConfig;
+import security.repository.security.SecurityRepository;
 
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -140,8 +136,8 @@ public class SecurityServiceImpl implements SecurityService {
 //                new ParameterizedTypeReference<Response<OrderSecurity>>() {
 //                });
 //        Response<OrderSecurity> response = re.getBody();
-        Response<OrderSecurity> response = orderService.checkSecurityAboutOrderIntra(checkDate, accountId);
-        OrderSecurity result =  response.getData();
+        OrderSecurity result = orderService.checkSecurityAboutOrderIntra(checkDate, accountId);
+//        OrderSecurity result =  response.getData();
         SecurityServiceImpl.LOGGER.info("[getSecurityOrderInfoFromOrder][Get Order Info For Security][Last One Hour: {}  Total Valid Order: {}]", result.getOrderNumInLastOneHour(), result.getOrderNumOfValidOrder());
         return result;
     }
