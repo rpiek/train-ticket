@@ -5,12 +5,12 @@ spring:
     url: jdbc:mysql://ts-security-mysql:3306/ts-security-mysql
     username: root
     password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver
   datasource2:
     url: jdbc:mysql://ts-order-mysql:3306/ts-order-mysql
     username: root
     password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
