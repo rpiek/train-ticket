@@ -24,7 +24,7 @@ public class JpaConfig1 {
     @Bean(name = "entityManagerFactory1")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory1(EntityManagerFactoryBuilder builder) {
         Map<String, Object> properties = new HashMap<String, Object>();
-        properties.put("hibernate.hbm2ddl.auto", "update");
+        properties.put("hibernate.ddl.auto", "update");
         return builder
                 .dataSource(dataSource1)
                 .packages("security.entity.security")
