@@ -27,6 +27,7 @@ public class JpaConfig2 {
 //                "update");
         properties.put("hibernate.dialect",
                 "org.hibernate.dialect.MySQL8Dialect");
+        properties.put("hibernate.physical_naming_strategy", "org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy");
         return builder
                 .dataSource(dataSource2)
                 .packages("security.entity.order")
