@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
  * @author fdse
  */
 @Repository
-@Qualifier("entityManagerFactory1")
+//@Qualifier("entityManagerFactory1")
 public interface SecurityRepository extends CrudRepository<SecurityConfig,String> {
 
     SecurityConfig findByName(String name);

@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
  * @author fdse
  */
 @Repository
-@Qualifier("entityManagerFactory2")
+//@Qualifier("entityManagerFactory2")
 public interface OrderRepository extends JpaRepository<Order, String> {
 
     @NewSpan("databaseRead")
