@@ -1,5 +1,7 @@
 package security.config;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.sql.DataSource;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,16 @@ public class JpaConfig2 {
 
     @Bean(name = "entityManagerFactory2")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory2(EntityManagerFactoryBuilder builder) {
+        Map<String, Object> properties = new HashMap<String, Object>();
+        properties.put("hibernate.hbm2ddl.auto",
+                "update");
+        properties.put("hibernate.dialect",
+                "org.hibernate.dialect.MySQL8Dialect");
         return builder
                 .dataSource(dataSource2)
                 .packages("security.entity.order")
                 .persistenceUnit("datasource2")
+                .properties(properties)
                 .build();
     }
 }

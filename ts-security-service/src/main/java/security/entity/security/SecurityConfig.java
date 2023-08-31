@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
  * @author fdse
  */
 @Data
-@Qualifier("entityManagerFactory1")
 @Entity
 @GenericGenerator(name = "jpa-uuid", strategy = "org.hibernate.id.UUIDGenerator")
 @JsonIgnoreProperties(ignoreUnknown = true)
