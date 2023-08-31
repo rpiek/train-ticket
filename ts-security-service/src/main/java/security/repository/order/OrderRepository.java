@@ -6,11 +6,13 @@ import security.entity.order.Order;
 import org.springframework.cloud.sleuth.annotation.NewSpan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  * @author fdse
  */
 @Repository
+@Qualifier("entityManagerFactory2")
 public interface OrderRepository extends JpaRepository<Order, String> {
 
     @NewSpan("databaseRead")

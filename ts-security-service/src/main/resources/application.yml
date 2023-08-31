@@ -1,7 +1,6 @@
 spring:
   application:
     name: ts-security-service
-
   datasource1:
     url: jdbc:mysql://${SECURITY_MYSQL_HOST:ts-security-mysql}:${SECURITY_MYSQL_PORT:3306}/${SECURITY_MYSQL_DATABASE:ts-security-mysql}
     username: ${SECURITY_MYSQL_USER:root}

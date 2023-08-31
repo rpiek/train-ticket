@@ -7,13 +7,15 @@ import org.springframework.stereotype.Repository;
 import security.entity.security.SecurityConfig;
 import java.util.ArrayList;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 
 /**
  * @author fdse
  */
 @Repository
+@Qualifier("entityManagerFactory1")
 public interface SecurityRepository extends CrudRepository<SecurityConfig,String> {
-
 
     SecurityConfig findByName(String name);
 
