@@ -23,8 +23,8 @@ public class JpaConfig2 {
     @Bean(name = "entityManagerFactory2")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory2(EntityManagerFactoryBuilder builder) {
         Map<String, Object> properties = new HashMap<String, Object>();
-        properties.put("hibernate.hbm2ddl.auto",
-                "update");
+//        properties.put("hibernate.hbm2ddl.auto",
+//                "update");
         properties.put("hibernate.dialect",
                 "org.hibernate.dialect.MySQL8Dialect");
         return builder
