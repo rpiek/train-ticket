@@ -11,12 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.Entity;
 
 import java.util.UUID;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  * @author fdse
  */
 @Data
-@Table(name = "Security")
+@Qualifier("entityManagerFactory1")
 @Entity
 @GenericGenerator(name = "jpa-uuid", strategy = "org.hibernate.id.UUIDGenerator")
 @JsonIgnoreProperties(ignoreUnknown = true)

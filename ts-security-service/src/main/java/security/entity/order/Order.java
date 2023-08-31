@@ -13,12 +13,14 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  * @author fdse
  */
 @Data
 @Table(name = "orders")
+@Qualifier("entityManagerFactory2")
 @Entity
 @GenericGenerator(name = "jpa-uuid", strategy = "org.hibernate.id.UUIDGenerator")
 @ToString
