@@ -7,9 +7,9 @@ spring:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   datasource2:
-    url: jdbc:mysql://${ORDER_MYSQL_HOST:ts-order-mysql}:${ORDER_MYSQL_PORT:3306}/${ORDER_MYSQL_DATABASE:ts-order-mysql}
-    username: ${ORDER_MYSQL_USER:root}
-    password: ${ORDER_MYSQL_PASSWORD:root}
+    url: jdbc:mysql://ts-order-mysql:3306/ts-order-mysql
+    username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
