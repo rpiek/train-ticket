@@ -20,11 +20,11 @@ public class JpaConfig2 {
 
     @Primary
     @Bean(name = "entityManagerFactory2")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory1(EntityManagerFactoryBuilder builder) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory2(EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(dataSource2)
                 .packages("security.entity.order")
-                .persistenceUnit("datasource1")
+                .persistenceUnit("datasource2")
                 .build();
     }
 }
