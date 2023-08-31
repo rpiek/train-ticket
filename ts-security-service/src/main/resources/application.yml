@@ -3,10 +3,16 @@ spring:
     name: ts-security-service
 
   datasource:
-    url: jdbc:mysql://${SECURITY_MYSQL_HOST:ts-security-mysql}:${SECURITY_MYSQL_PORT:3306}/${SECURITY_MYSQL_DATABASE:ts-security-mysql}
-    username: ${SECURITY_MYSQL_USER:root}
-    password: ${SECURITY_MYSQL_PASSWORD:root}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    security:
+      url: jdbc:mysql://${SECURITY_MYSQL_HOST:ts-security-mysql}:${SECURITY_MYSQL_PORT:3306}/${SECURITY_MYSQL_DATABASE:ts-security-mysql}
+      username: ${SECURITY_MYSQL_USER:root}
+      password: ${SECURITY_MYSQL_PASSWORD:root}
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    order:
+      url: jdbc:mysql://${ORDER_MYSQL_HOST:ts-order-mysql}:${ORDER_MYSQL_PORT:3306}/${ORDER_MYSQL_DATABASE:ts-order-mysql}
+      username: ${ORDER_MYSQL_USER:root}
+      password: ${ORDER_MYSQL_PASSWORD:root}
+      driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update

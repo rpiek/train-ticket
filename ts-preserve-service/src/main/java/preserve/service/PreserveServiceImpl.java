@@ -6,8 +6,6 @@ import edu.fudan.common.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -16,6 +14,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import preserve.entity.Order;
 import edu.fudan.common.entity.*;
 import preserve.mq.RabbitSend;
 
@@ -33,11 +32,13 @@ public class PreserveServiceImpl implements PreserveService {
     private RestTemplate restTemplate;
 
     @Autowired
+    private OrderService orderService;
+
+    @Autowired
     private RabbitSend sendService;
 
     @Autowired
     private DiscoveryClient discoveryClient;
-
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PreserveServiceImpl.class);
 
@@ -388,19 +389,17 @@ public class PreserveServiceImpl implements PreserveService {
         return reGetContactsResult.getBody();
     }
 
-    private Response createOrder(Order coi, HttpHeaders httpHeaders) {
+    private Response<Order> createOrder(Order coi, HttpHeaders httpHeaders) {
         PreserveServiceImpl.LOGGER.info("[createOrder][Preserve Service][create order]");
 
-        HttpEntity requestEntityCreateOrderResult = new HttpEntity(coi, httpHeaders);
-        String order_service_url = getServiceUrl("ts-order-service");
-        ResponseEntity<Response<Order>> reCreateOrderResult = restTemplate.exchange(
-                order_service_url + ":12031/api/v1/orderservice/order",
-                HttpMethod.POST,
-                requestEntityCreateOrderResult,
-                new ParameterizedTypeReference<Response<Order>>() {
-                });
-
-        return reCreateOrderResult.getBody();
+        return orderService.createIntra(coi);
+//        String order_service_url = getServiceUrl("ts-order-service");
+//        ResponseEntity<Response<Order>> reCreateOrderResult = restTemplate.exchange(
+//                order_service_url + ":12031/api/v1/orderservice/order",
+//                HttpMethod.POST,
+//                requestEntityCreateOrderResult,
+//                new ParameterizedTypeReference<Response<Order>>() {
+//                });
     }
 
     private Response createFoodOrder(FoodOrder afi, HttpHeaders httpHeaders) {

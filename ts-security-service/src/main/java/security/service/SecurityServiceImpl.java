@@ -39,6 +39,9 @@ public class SecurityServiceImpl implements SecurityService {
     RestTemplate restTemplate;
 
     @Autowired
+    OrderService orderService;
+
+    @Autowired
     private DiscoveryClient discoveryClient;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SecurityServiceImpl.class);
@@ -128,15 +131,16 @@ public class SecurityServiceImpl implements SecurityService {
     }
 
     private OrderSecurity getSecurityOrderInfoFromOrder(Date checkDate, String accountId, HttpHeaders headers) {
-        HttpEntity requestEntity = new HttpEntity(null);
-        String order_service_url = getServiceUrl("ts-order-service");
-        ResponseEntity<Response<OrderSecurity>> re = restTemplate.exchange(
-                order_service_url + ":12031/api/v1/orderservice/order/security/" + checkDate + "/" + accountId,
-                HttpMethod.GET,
-                requestEntity,
-                new ParameterizedTypeReference<Response<OrderSecurity>>() {
-                });
-        Response<OrderSecurity> response = re.getBody();
+//        HttpEntity requestEntity = new HttpEntity(null);
+//        String order_service_url = getServiceUrl("ts-order-service");
+//        ResponseEntity<Response<OrderSecurity>> re = restTemplate.exchange(
+//                order_service_url + ":12031/api/v1/orderservice/order/security/" + checkDate + "/" + accountId,
+//                HttpMethod.GET,
+//                requestEntity,
+//                new ParameterizedTypeReference<Response<OrderSecurity>>() {
+//                });
+//        Response<OrderSecurity> response = re.getBody();
+        Response<OrderSecurity> response = orderService.checkSecurityAboutOrderIntra(checkDate, accountId);
         OrderSecurity result =  response.getData();
         SecurityServiceImpl.LOGGER.info("[getSecurityOrderInfoFromOrder][Get Order Info For Security][Last One Hour: {}  Total Valid Order: {}]", result.getOrderNumInLastOneHour(), result.getOrderNumOfValidOrder());
         return result;
