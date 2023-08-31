@@ -82,6 +82,7 @@ services:
       - my-network
     depends_on:
       - ts-order-mysql
+      - ts-preserve-service
 
   ts-security-mysql:
     image: mysql:8.0
@@ -267,6 +268,7 @@ services:
       - my-network
     depends_on:
       - ts-order-mysql
+      - ts-preserve-service
 
   ts-config-service:
     image: thesis/ts-config-service:0.2.0
