@@ -143,17 +143,19 @@ public class SeatServiceImpl implements SeatService {
             SeatServiceImpl.LOGGER.info("[getLeftTicketOfInterval][TrainNumber start with G|D][trainNumber:{}]", trainNumber);
 
             //Call the micro service to query all the station information for the trains
-            HttpEntity requestEntity = new HttpEntity(seatRequest, null);
-            String order_service_url=getServiceUrl("ts-order-service");
-            re3 = restTemplate.exchange(
-                    order_service_url + ":12031/api/v1/orderservice/order/tickets",
-                    HttpMethod.POST,
-                    requestEntity,
-                    new ParameterizedTypeReference<Response<LeftTicketInfo>>() {
-                    });
+//            HttpEntity requestEntity = new HttpEntity(seatRequest, null);
+//            String order_service_url=getServiceUrl("ts-order-service");
+//            re3 = restTemplate.exchange(
+//                    order_service_url + ":12031/api/v1/orderservice/order/tickets",
+//                    HttpMethod.POST,
+//                    requestEntity,
+//                    new ParameterizedTypeReference<Response<LeftTicketInfo>>() {
+//                    });
+            leftTicketInfo = orderService.getSoldTicketsIntra(seatRequest);
 
-            SeatServiceImpl.LOGGER.info("[getLeftTicketOfInterval][Get Order tickets result][result is {}]", re3);
-            leftTicketInfo = re3.getBody().getData();
+
+            SeatServiceImpl.LOGGER.info("[getLeftTicketOfInterval][Get Order tickets result][result is {}]", leftTicketInfo.toString());
+//            leftTicketInfo = re3.getBody().getData();
         } else {
             SeatServiceImpl.LOGGER.info("[getLeftTicketOfInterval][TrainNumber start with other capital][trainNumber:{}]", trainNumber);
             //Call the micro service to query all the station information for the trains
