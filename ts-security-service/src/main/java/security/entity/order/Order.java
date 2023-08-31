@@ -31,6 +31,7 @@ public class Order {
     @GeneratedValue(generator = "jpa-uuid")
     private String id;
 
+    @Column(name = "bought_date")
     private String boughtDate;
 
 
