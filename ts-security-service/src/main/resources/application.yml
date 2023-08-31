@@ -2,9 +2,9 @@ spring:
   application:
     name: ts-security-service
   datasource1:
-    url: jdbc:mysql://${SECURITY_MYSQL_HOST:ts-security-mysql}:${SECURITY_MYSQL_PORT:3306}/${SECURITY_MYSQL_DATABASE:ts-security-mysql}
-    username: ${SECURITY_MYSQL_USER:root}
-    password: ${SECURITY_MYSQL_PASSWORD:root}
+    url: jdbc:mysql://ts-security-mysql:3306/ts-security-mysql
+    username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   datasource2:
     url: jdbc:mysql://${ORDER_MYSQL_HOST:ts-order-mysql}:${ORDER_MYSQL_PORT:3306}/${ORDER_MYSQL_DATABASE:ts-order-mysql}
