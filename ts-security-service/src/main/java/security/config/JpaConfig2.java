@@ -18,7 +18,6 @@ public class JpaConfig2 {
     @Qualifier("dataSource2")
     private DataSource dataSource2;
 
-    @Primary
     @Bean(name = "entityManagerFactory2")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory2(EntityManagerFactoryBuilder builder) {
         return builder
