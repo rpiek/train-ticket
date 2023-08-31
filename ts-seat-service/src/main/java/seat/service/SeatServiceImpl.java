@@ -67,7 +67,7 @@ public class SeatServiceImpl implements SeatService {
 //                    new ParameterizedTypeReference<Response<LeftTicketInfo>>() {
 //                    });
             leftTicketInfo = orderService.getSoldTicketsIntra(seatRequest);
-            SeatServiceImpl.LOGGER.info("[distributeSeat][Left ticket info][info is : {}]", leftTicketInfo.toString());
+            SeatServiceImpl.LOGGER.info("[distributeSeat][Left ticket info][info is : {}]", leftTicketInfo);
 //            leftTicketInfo = re3.getBody().getData();
         } else {
             SeatServiceImpl.LOGGER.info("[distributeSeat][TrainNumber start][Other Capital Except D and G]");
