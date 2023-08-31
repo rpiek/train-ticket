@@ -154,7 +154,7 @@ public class SeatServiceImpl implements SeatService {
             leftTicketInfo = orderService.getSoldTicketsIntra(seatRequest);
 
 
-            SeatServiceImpl.LOGGER.info("[getLeftTicketOfInterval][Get Order tickets result][result is {}]", leftTicketInfo.toString());
+            SeatServiceImpl.LOGGER.info("[getLeftTicketOfInterval][Get Order tickets result][result is {}]", leftTicketInfo);
 //            leftTicketInfo = re3.getBody().getData();
         } else {
             SeatServiceImpl.LOGGER.info("[getLeftTicketOfInterval][TrainNumber start with other capital][trainNumber:{}]", trainNumber);
