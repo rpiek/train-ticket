@@ -1,5 +1,7 @@
 package security.config;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.sql.DataSource;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,13 @@ public class JpaConfig1 {
     @Primary
     @Bean(name = "entityManagerFactory1")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory1(EntityManagerFactoryBuilder builder) {
+        Map<String, Object> properties = new HashMap<String, Object>();
+        properties.put("hibernate.hbm2ddl.auto", "update");
         return builder
                 .dataSource(dataSource1)
                 .packages("security.entity.security")
                 .persistenceUnit("datasource1")
+                .properties(properties)
                 .build();
     }
 }
