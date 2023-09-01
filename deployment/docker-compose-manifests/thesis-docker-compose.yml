@@ -36,7 +36,7 @@ services:
 
   ts-route-service:
     image: thesis/ts-route-service:0.2.0
-    cpus: 1
+    #cpus: 1
     restart: "no"
     ports:
       - 11178:11178
@@ -47,7 +47,7 @@ services:
 
   ts-route-plan-service:
     image: thesis/ts-route-plan-service:0.2.0
-    cpus: 1
+    #cpus: 1
     restart: "no"
     ports:
       - 14578:14578
@@ -56,7 +56,7 @@ services:
 
   ts-route-mysql:
     image: mysql:8.0
-    cpus: 1
+    #cpus: 1
     environment:
       MYSQL_DATABASE: 'ts-route-mysql'
       # So you don't have to use root, but you can if you like
@@ -154,7 +154,7 @@ services:
 
   ts-preserve-service:
     build: ts-preserve-service
-    cpus: 1
+    #cpus: 1
     image: thesis/ts-preserve-service:0.2.0
     restart: no
     ports:
@@ -166,7 +166,7 @@ services:
 
   ts-food-service:
     build: ts-food-service
-    cpus: 1
+    #cpus: 1
     image: thesis/ts-food-service:0.2.0
     restart: no
     ports:
@@ -178,7 +178,7 @@ services:
 
   ts-food-mysql:
     image: mysql:8.0
-    cpus: 1
+    #cpus: 1
     environment:
       MYSQL_DATABASE: 'ts-food-mysql'
       # So you don't have to use root, but you can if you like
@@ -195,7 +195,7 @@ services:
 
   ts-station-service:
     image: thesis/ts-station-service:0.2.0
-    cpus: 1
+    #cpus: 1
     restart: "no"
     ports:
       - 12345:12345
@@ -206,7 +206,7 @@ services:
 
   ts-station-mysql:
     image: mysql:8.0
-    cpus: 1
+    #cpus: 1
     environment:
       MYSQL_DATABASE: 'ts-station-mysql'
       # So you don't have to use root, but you can if you like
@@ -225,7 +225,7 @@ services:
 
   ts-travel-service:
     image: thesis/ts-travel-service:0.2.0
-    cpus: 1
+    #cpus: 1
     restart: "no"
     ports:
       - 12346:12346
@@ -236,7 +236,7 @@ services:
 
   ts-travel-mysql:
     image: mysql:8.0
-    cpus: 1
+    #cpus: 1
     environment:
       MYSQL_DATABASE: 'ts-travel-mysql'
       MYSQL_USER: 'user'
@@ -251,7 +251,7 @@ services:
 
   ts-basic-service:
     image: thesis/ts-basic-service:0.2.0
-    cpus: 1
+    #cpus: 1
     restart: "no"
     ports:
       - 15680:15680
@@ -260,7 +260,7 @@ services:
 
   ts-seat-service:
     image: thesis/ts-seat-service:0.2.0
-    cpus: 1
+    #cpus: 1
     restart: no
     ports:
       - 18898:18898
@@ -272,7 +272,7 @@ services:
 
   ts-config-service:
     image: thesis/ts-config-service:0.2.0
-    cpus: 1
+    #cpus: 1
     restart: no
     ports:
       - 15679:15679
@@ -283,7 +283,7 @@ services:
 
   ts-config-mysql:
     image: mysql:8.0
-    cpus: 1
+    #cpus: 1
     environment:
       MYSQL_DATABASE: 'ts-config-mysql'
       # So you don't have to use root, but you can if you like
@@ -300,7 +300,7 @@ services:
 
   ts-train-service:
     image: thesis/ts-train-service:0.2.0
-    cpus: 1
+    #cpus: 1
     restart: no
     ports:
       - 14567:14567
@@ -311,7 +311,7 @@ services:
 
   ts-train-mysql:
     image: mysql:8.0
-    cpus: 1
+    #cpus: 1
     environment:
       MYSQL_DATABASE: 'ts-train-mysql'
       # So you don't have to use root, but you can if you like
@@ -330,7 +330,7 @@ services:
 
   ts-price-service:
     build: ts-price-service
-    cpus: 1
+    #cpus: 1
     image: thesis/ts-price-service:0.2.0
     restart: no
     ports:
@@ -342,7 +342,7 @@ services:
 
   ts-price-mysql:
     image: mysql:8.0
-    cpus: 1
+    #cpus: 1
     environment:
       MYSQL_DATABASE: 'ts-price-mysql'
       # So you don't have to use root, but you can if you like
@@ -361,7 +361,7 @@ services:
 #
 #  ts-order-service:
 #    image: thesis/ts-order-service:0.2.0
-#    cpus: 1
+#    #cpus: 1
 #    restart: no
 #    ports:
 #      - 12031:12031
@@ -372,7 +372,7 @@ services:
 
   ts-order-mysql:
     image: mysql:8.0
-    cpus: 1
+    #cpus: 1
     environment:
       MYSQL_DATABASE: 'ts-order-mysql'
       # So you don't have to use root, but you can if you like
