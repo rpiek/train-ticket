@@ -1,6 +1,9 @@
 # HTTP Server
 server:
   port: 12346  # HTTP (Tomcat) port
+  tomcat:
+    threads:
+      max: 100
 
 spring:
   main:
@@ -14,8 +17,6 @@ spring:
     username: ${TRAVEL_MYSQL_USER:root}
     password: ${TRAVEL_MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
-    hikari:
-      maximum-pool-size: 5
   sleuth:
     sampler:
       probability: 1.0

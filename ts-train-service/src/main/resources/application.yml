@@ -10,8 +10,6 @@ spring:
     username: ${TRAIN_MYSQL_USER:root}
     password: ${TRAIN_MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
-    hikari:
-      maximum-pool-size: 5
   jpa:
     hibernate:
       ddl-auto: update
@@ -28,6 +26,9 @@ spring:
 # HTTP Server
 server:
   port: 14567  # HTTP (Tomcat) port
+  tomcat:
+    threads:
+      max: 100
 
 swagger:
   controllerPackage: train.controller
