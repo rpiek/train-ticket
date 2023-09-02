@@ -405,7 +405,7 @@ public class BasicServiceImpl implements BasicService {
     private List<Route> getRoutesByRouteIds(List<String> routeIds, HttpHeaders headers) {
         BasicServiceImpl.LOGGER.info("[getRoutesByRouteIds][Get Route By Ids][Route IDs：{}]", routeIds);
         HttpHeaders headers2 = new HttpHeaders();
-        headers.setAccept(Collections.singletonList(MediaType.valueOf("application/x-protobuf"))); // Set Protocol Buffers as the accepted content type
+        headers2.setAccept(Collections.singletonList(MediaType.valueOf("application/x-protobuf"))); // Set Protocol Buffers as the accepted content type
 
         HttpEntity requestEntity = new HttpEntity(routeIds, headers2);
         String route_service_url=getServiceUrl("ts-route-service");
