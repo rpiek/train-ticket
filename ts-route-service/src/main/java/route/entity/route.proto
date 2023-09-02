@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package route.entity;
+
+message Route {
+  string id = 1;
+  repeated string stations = 2;
+  repeated int32 distances = 3;
+  string start_station = 4;
+  string end_station = 5;
+}
