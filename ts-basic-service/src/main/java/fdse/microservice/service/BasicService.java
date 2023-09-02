@@ -1,5 +1,6 @@
 package fdse.microservice.service;
 
+import com.google.protobuf.InvalidProtocolBufferException;
 import edu.fudan.common.entity.Travel;
 import edu.fudan.common.util.Response;
 import edu.fudan.common.entity.*;
@@ -22,7 +23,7 @@ public interface BasicService {
      */
     Response queryForTravel(Travel info, HttpHeaders headers);
 
-    Response queryForTravels(List<Travel> infos, HttpHeaders headers);
+    Response queryForTravels(List<Travel> infos, HttpHeaders headers) throws InvalidProtocolBufferException;
 
     /**
      * query for station id with station name

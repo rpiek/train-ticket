@@ -2,13 +2,14 @@ package fdse.microservice.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.protobuf.InvalidProtocolBufferException;
 import edu.fudan.common.entity.*;
 import edu.fudan.common.util.JsonUtils;
 import edu.fudan.common.util.Response;
+import fdse.microservice.entity.RouteProto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -123,7 +124,7 @@ public class BasicServiceImpl implements BasicService {
     }
 
     @Override
-    public Response queryForTravels(List<Travel> infos, HttpHeaders headers) {
+    public Response queryForTravels(List<Travel> infos, HttpHeaders headers) throws InvalidProtocolBufferException {
         Response response = new Response<>();
         response.setStatus(1);
         response.setMsg("Success");
@@ -402,26 +403,38 @@ public class BasicServiceImpl implements BasicService {
         return JsonUtils.conveterObject(response.getData(), TrainType.class);
     }
 
-    private List<Route> getRoutesByRouteIds(List<String> routeIds, HttpHeaders headers) {
+    private List<Route> getRoutesByRouteIds(List<String> routeIds, HttpHeaders headers) throws InvalidProtocolBufferException {
         BasicServiceImpl.LOGGER.info("[getRoutesByRouteIds][Get Route By Ids][Route IDs：{}]", routeIds);
         HttpHeaders headers2 = new HttpHeaders();
         headers2.setAccept(Collections.singletonList(MediaType.valueOf("application/x-protobuf"))); // Set Protocol Buffers as the accepted content type
 
         HttpEntity requestEntity = new HttpEntity(routeIds, headers2);
         String route_service_url=getServiceUrl("ts-route-service");
-        ResponseEntity<Response> re = restTemplate.exchange(
+        ResponseEntity<byte[]> re = restTemplate.exchange(
                 route_service_url + ":11178/api/v1/routeservice/routes/byIds",
                 HttpMethod.POST,
                 requestEntity,
-                Response.class);
-        Response<List<Route>> result = re.getBody();
+                byte[].class  // Use byte[] to represent protobuf response
+        );
+        byte[] responseBody = re.getBody();
+        RouteProto.ResponseMessage protobufResponse = RouteProto.ResponseMessage.parseFrom(responseBody);
+
+        // Now, you can create your custom Response object based on the parsed protobuf data
+        edu.fudan.common.util.Response result = new edu.fudan.common.util.Response();
+        result.setStatus(protobufResponse.getStatus());
+        result.setMsg(protobufResponse.getMsg());
+        result.setData(protobufResponse.getRoutesList());
+        // Set any other fields or data you need
+
         if ( result.getStatus() == 0) {
             BasicServiceImpl.LOGGER.warn("[getRoutesByRouteIds][Get Route By Ids Failed][Fail msg: {}]", result.getMsg());
             return null;
         } else {
             BasicServiceImpl.LOGGER.info("[getRoutesByRouteIds][Get Route By Ids][Success]");
-            List<Route> routes = Arrays.asList(JsonUtils.conveterObject(result.getData(), Route[].class));;
-            return routes;
+//            List<Route> routes = Arrays.asList(JsonUtils.conveterObject(result.getData(), Route[].class));;
+            ArrayList<Route> commonRoutes = new ArrayList<>();
+            protobufResponse.getRoutesList().forEach(route -> commonRoutes.add(new Route(route.getId(), route.getStationsList(), route.getDistancesList(), route.getStartStation(), route.getEndStation())));
+            return commonRoutes;
         }
     }
 

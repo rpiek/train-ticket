@@ -1,5 +1,6 @@
 package fdse.microservice.controller;
 
+import com.google.protobuf.InvalidProtocolBufferException;
 import edu.fudan.common.entity.Travel;
 import fdse.microservice.service.BasicService;
 import org.slf4j.Logger;
@@ -40,7 +41,7 @@ public class BasicController {
     }
 
     @PostMapping(value = "/basic/travels")
-    public HttpEntity queryForTravels(@RequestBody List<Travel> infos, @RequestHeader HttpHeaders headers) {
+    public HttpEntity queryForTravels(@RequestBody List<Travel> infos, @RequestHeader HttpHeaders headers) throws InvalidProtocolBufferException {
         // TravelResult
         logger.info("[queryForTravels][Query for travels][Travels: {}]", infos);
         return ok(service.queryForTravels(infos, headers));
