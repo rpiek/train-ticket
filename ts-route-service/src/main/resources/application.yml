@@ -25,9 +25,6 @@ spring:
 # HTTP Server
 server:
   port: 11178  # HTTP (Tomcat) port
-  tomcat:
-    threads:
-      max: 5
 
 swagger:
   controllerPackage: route.controller

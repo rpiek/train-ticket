@@ -22,9 +22,6 @@ spring:
 # HTTP Server
 server:
   port: 12345  # HTTP (Tomcat) port
-  tomcat:
-    threads:
-      max: 5
 
 swagger:
   controllerPackage: fdse.microservice

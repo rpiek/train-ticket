@@ -1,8 +1,5 @@
 server:
   port: 12347
-  tomcat:
-    threads:
-      max: 5
 
 spring:
   application:
