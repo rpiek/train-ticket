@@ -28,8 +28,8 @@ public class BasicApplication {
 	}
 
 //	@LoadBalanced
-	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-		return builder.build();
-	}
+//	@Bean
+//	public RestTemplate restTemplate(RestTemplateBuilder builder) {
+//		return builder.build();
+//	}
 }
