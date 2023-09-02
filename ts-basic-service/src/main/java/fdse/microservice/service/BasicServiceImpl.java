@@ -407,12 +407,10 @@ public class BasicServiceImpl implements BasicService {
         HttpHeaders headers2 = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.valueOf("application/x-protobuf"))); // Set Protocol Buffers as the accepted content type
 
-        routeIds.clear();
-        routeIds.add("16354aaf-45b2-4d48-bbe7-04536ff5e0ab");
         HttpEntity requestEntity = new HttpEntity(routeIds, headers2);
         String route_service_url=getServiceUrl("ts-route-service");
         ResponseEntity<Response> re = restTemplate.exchange(
-                route_service_url + ":11178/api/v1/routeservice/routes/byIds/",
+                route_service_url + ":11178/api/v1/routeservice/routes/byIds",
                 HttpMethod.POST,
                 requestEntity,
                 Response.class);
