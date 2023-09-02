@@ -12,11 +12,10 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * @author fdse
- */
-@Data
+import route.entity.RouteProto; // Replace with the actual package of your generated code
+
 @Entity
+@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @GenericGenerator(name = "jpa-uuid", strategy = "org.hibernate.id.UUIDGenerator")
 public class Route {
@@ -41,19 +40,24 @@ public class Route {
         this.id = UUID.randomUUID().toString();
     }
 
-    public Route(String id, List<String> stations, List<Integer> distances, String startStation, String endStation) {
-        this.id = id;
-        this.stations = stations;
-        this.distances = distances;
-        this.startStation = startStation;
-        this.endStation = endStation;
+    public Route(RouteProto.Route routeProto) {
+        this.id = routeProto.getId();
+        this.stations = routeProto.getStationsList();
+        this.distances = routeProto.getDistancesList();
+        this.startStation = routeProto.getStartStation();
+        this.endStation = routeProto.getEndStation();
     }
 
-    public Route(List<String> stations, List<Integer> distances, String startStation, String endStation) {
-        this.id = UUID.randomUUID().toString();
-        this.stations = stations;
-        this.distances = distances;
-        this.startStation = startStation;
-        this.endStation = endStation;
+    public RouteProto.Route toProto() {
+        return RouteProto.Route.newBuilder()
+                .setId(id)
+                .addAllStations(stations)
+                .addAllDistances(distances)
+                .setStartStation(startStation)
+                .setEndStation(endStation)
+                .build();
     }
+
+    // Other methods as needed
 }
+

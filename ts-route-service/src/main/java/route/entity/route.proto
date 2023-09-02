@@ -9,3 +9,9 @@ message Route {
   string start_station = 4;
   string end_station = 5;
 }
+
+message ResponseMessage {
+  int32 status = 1;
+  string msg = 2;
+  repeated Route routes = 3;
+}

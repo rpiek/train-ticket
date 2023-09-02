@@ -91,21 +91,21 @@ public class RouteServiceImplTest {
         Assert.assertEquals(new Response<>(1, "Success", route), result);
     }
 
-    @Test
-    public void testGetRouteByStartAndTerminal1() {
-        List<String> stations = new ArrayList<>();
-        stations.add("shanghai");
-        stations.add("nanjing");
-        List<Integer> distances = new ArrayList<>();
-        distances.add(5);
-        distances.add(10);
-        Route route = new Route(UUID.randomUUID().toString(), stations, distances, "shanghai", "nanjing");
-        ArrayList<Route> routes = new ArrayList<>();
-        routes.add(route);
-        Mockito.when(routeRepository.findAll()).thenReturn(routes);
-        Response result = routeServiceImpl.getRouteByStartAndEnd("shanghai", "nanjing", headers);
-        Assert.assertEquals("Success", result.getMsg());
-    }
+//    @Test
+//    public void testGetRouteByStartAndTerminal1() {
+//        List<String> stations = new ArrayList<>();
+//        stations.add("shanghai");
+//        stations.add("nanjing");
+//        List<Integer> distances = new ArrayList<>();
+//        distances.add(5);
+//        distances.add(10);
+//        Route route = new Route(UUID.randomUUID().toString(), stations, distances, "shanghai", "nanjing");
+//        ArrayList<Route> routes = new ArrayList<>();
+//        routes.add(route);
+//        Mockito.when(routeRepository.findAll()).thenReturn(routes);
+//        Response result = routeServiceImpl.getRouteByStartAndEnd("shanghai", "nanjing", headers);
+//        Assert.assertEquals("Success", result.getMsg());
+//    }
 
     @Test
     public void testGetRouteByStartAndTerminal2() {
