@@ -53,7 +53,7 @@ public class RouteController {
         return ok(routeService.getRouteById(routeId, headers));
     }
 
-    @PostMapping(path = "/routes/byIds", produces = "application/x-protobuf")
+    @PostMapping(path = "/routes/byIds",  produces = "application/x-protobuf")
     public HttpEntity<byte[]> queryByIds(@RequestBody List<String> routeIds, @RequestHeader HttpHeaders headers) {
         LOGGER.info("[getRouteByIds][Query routes by ids][RouteIds: {}]", routeIds);
 
