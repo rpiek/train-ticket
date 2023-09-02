@@ -60,30 +60,30 @@ public class RouteController {
     }
 
     @GetMapping(path = "/routes", produces = "application/x-protobuf")
-    public ResponseEntity<byte[]> queryAll(@RequestHeader HttpHeaders headers) {
+    public HttpEntity<Response> queryAll(@RequestHeader HttpHeaders headers) {
         RouteController.LOGGER.info("[getAllRoutes][Query all routes]");
 
-        Response<List<Route>> response = routeService.getAllRoutes(headers);
+//        Response<List<Route>> response = routeService.getAllRoutes(headers);
+//
+//        // Convert the data part (list of routes) to Protocol Buffers format
+//        List<RouteProto.Route> routeProtos = response.getData().stream()
+//                .map(Route::toProto)
+//                .collect(Collectors.toList());
+//
+//        // Build a Protocol Buffers message containing the status, message, and data
+//        RouteProto.ResponseMessage.Builder responseMessageBuilder = RouteProto.ResponseMessage.newBuilder()
+//                .setStatus(response.getStatus())
+//                .setMsg(response.getMsg())
+//                .addAllRoutes(routeProtos);
+//
+//        // Serialize the response message to bytes
+//        byte[] responseBytes = responseMessageBuilder.build().toByteArray();
+//
+//        HttpHeaders responseHeaders = new HttpHeaders();
+//        responseHeaders.setContentType(MediaType.parseMediaType("application/x-protobuf"));
+//        responseHeaders.setContentLength(responseBytes.length);
 
-        // Convert the data part (list of routes) to Protocol Buffers format
-        List<RouteProto.Route> routeProtos = response.getData().stream()
-                .map(Route::toProto)
-                .collect(Collectors.toList());
-
-        // Build a Protocol Buffers message containing the status, message, and data
-        RouteProto.ResponseMessage.Builder responseMessageBuilder = RouteProto.ResponseMessage.newBuilder()
-                .setStatus(response.getStatus())
-                .setMsg(response.getMsg())
-                .addAllRoutes(routeProtos);
-
-        // Serialize the response message to bytes
-        byte[] responseBytes = responseMessageBuilder.build().toByteArray();
-
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.setContentType(MediaType.parseMediaType("application/x-protobuf"));
-        responseHeaders.setContentLength(responseBytes.length);
-
-        return new ResponseEntity<>(responseBytes, responseHeaders, HttpStatus.OK);
+        return ok(routeService.getAllRoutes(headers));
     }
 
 
