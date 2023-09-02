@@ -13,6 +13,7 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -403,7 +404,10 @@ public class BasicServiceImpl implements BasicService {
 
     private List<Route> getRoutesByRouteIds(List<String> routeIds, HttpHeaders headers) {
         BasicServiceImpl.LOGGER.info("[getRoutesByRouteIds][Get Route By Ids][Route IDs：{}]", routeIds);
-        HttpEntity requestEntity = new HttpEntity(routeIds, null);
+        HttpHeaders headers2 = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.valueOf("application/x-protobuf"))); // Set Protocol Buffers as the accepted content type
+
+        HttpEntity requestEntity = new HttpEntity(routeIds, headers2);
         String route_service_url=getServiceUrl("ts-route-service");
         ResponseEntity<Response> re = restTemplate.exchange(
                 route_service_url + ":11178/api/v1/routeservice/routes/byIds/",
