@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import route.entity.Route;
 import route.entity.RouteInfo;
 import route.entity.RouteOuterClass;
+import route.repository.RouteProtoRepository;
 import route.repository.RouteRepository;
 
 import java.util.ArrayList;
@@ -26,6 +27,10 @@ public class RouteServiceImpl implements RouteService {
 
     @Autowired
     private RouteRepository routeRepository;
+
+    @Autowired
+    private RouteProtoRepository routeProtoRepository;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(RouteServiceImpl.class);
 
     String success = "Success";
@@ -93,7 +98,7 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public RouteOuterClass.Response getRouteByIds(List<String> routeIds, HttpHeaders headers) {
-        List<RouteOuterClass.Route> routes = routeRepository.findRouteProtosByIds(routeIds);
+        List<RouteOuterClass.Route> routes = routeProtoRepository.findByIds(routeIds);
         if (routes == null || routes.isEmpty()) {
             RouteServiceImpl.LOGGER.error("[getRouteById][Find route error][Route not found][RouteIds: {}]",routeIds);
             return RouteOuterClass.Response.newBuilder()
@@ -106,7 +111,7 @@ public class RouteServiceImpl implements RouteService {
             return RouteOuterClass.Response.newBuilder()
                     .setStatus(1)
                     .setMsg("Success")
-                    .addAllRoutes(new ArrayList<>())
+                    .addAllRoutes(routes)
                     .build();
         }
     }
