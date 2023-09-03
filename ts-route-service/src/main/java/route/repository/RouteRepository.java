@@ -8,6 +8,7 @@ import route.entity.Route;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import route.entity.RouteOuterClass;
 
 /**
  * @author fdse
@@ -33,6 +34,34 @@ public interface RouteRepository extends CrudRepository<Route, String> {
     @NewSpan("databaseRead")
     @Query(value="SELECT * from route where id in ?1", nativeQuery = true)
     List<Route> findByIds(List<String> ids);
+
+    @Query(value = "SELECT r.id, r.stations, r.distances, r.startStation, r.endStation FROM Route r WHERE r.id IN ?1", nativeQuery = true)
+    List<Object[]> findRouteDataByIds(List<String> ids);
+
+    default List<RouteOuterClass.Route> findRouteProtosByIds(List<String> ids) {
+        List<Object[]> routeDataList = findRouteDataByIds(ids);
+        List<RouteOuterClass.Route> routeProtos = new ArrayList<>();
+
+        for (Object[] routeData : routeDataList) {
+            String id = (String) routeData[0];
+            List<String> stations = (List<String>) routeData[1];
+            List<Integer> distances = (List<Integer>) routeData[2];
+            String startStation = (String) routeData[3];
+            String endStation = (String) routeData[4];
+
+            RouteOuterClass.Route routeProto = RouteOuterClass.Route.newBuilder()
+                    .setId(id)
+                    .addAllStations(stations)
+                    .addAllDistances(distances)
+                    .setStartStation(startStation)
+                    .setEndStation(endStation)
+                    .build();
+
+            routeProtos.add(routeProto);
+        }
+
+        return routeProtos;
+    }
 
     /**
      * find all routes

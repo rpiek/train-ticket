@@ -93,7 +93,7 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public RouteOuterClass.Response getRouteByIds(List<String> routeIds, HttpHeaders headers) {
-        List<Route> routes = routeRepository.findByIds(routeIds);
+        List<RouteOuterClass.Route> routes = routeRepository.findRouteProtosByIds(routeIds);
         if (routes == null || routes.isEmpty()) {
             RouteServiceImpl.LOGGER.error("[getRouteById][Find route error][Route not found][RouteIds: {}]",routeIds);
             return RouteOuterClass.Response.newBuilder()
@@ -103,9 +103,6 @@ public class RouteServiceImpl implements RouteService {
                     .build();
 //            return new Response<>(0, "No content with the routeIds", null);
         } else {
-            List<RouteOuterClass.Route> routeProtos = routes.stream()
-                    .map(Route::toProto)
-                    .collect(Collectors.toList());
             return RouteOuterClass.Response.newBuilder()
                     .setStatus(1)
                     .setMsg("Success")
