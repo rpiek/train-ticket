@@ -103,9 +103,9 @@ public class RouteServiceImpl implements RouteService {
                     .build();
 //            return new Response<>(0, "No content with the routeIds", null);
         } else {
-//            List<RouteOuterClass.Route> routeProtos = routes.stream()
-//                    .map(Route::toProto)
-//                    .collect(Collectors.toList());
+            List<RouteOuterClass.Route> routeProtos = routes.stream()
+                    .map(Route::toProto)
+                    .collect(Collectors.toList());
             return RouteOuterClass.Response.newBuilder()
                     .setStatus(1)
                     .setMsg("Success")
