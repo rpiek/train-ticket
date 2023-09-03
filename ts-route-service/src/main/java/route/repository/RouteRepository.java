@@ -35,9 +35,11 @@ public interface RouteRepository extends CrudRepository<Route, String> {
     @Query(value="SELECT * from route where id in ?1", nativeQuery = true)
     List<Route> findByIds(List<String> ids);
 
-    @Query(value = "SELECT r.id, r.stations, r.distances, r.startStation, r.endStation FROM route r WHERE r.id IN ?1", nativeQuery = true)
+    @NewSpan("databaseRead")
+    @Query(value = "SELECT * FROM route WHERE id IN ?1", nativeQuery = true)
     List<Object[]> findRouteDataByIds(List<String> ids);
 
+    @NewSpan("Check")
     default List<RouteOuterClass.Route> findRouteProtosByIds(List<String> ids) {
         List<Object[]> routeDataList = findRouteDataByIds(ids);
         List<RouteOuterClass.Route> routeProtos = new ArrayList<>();
