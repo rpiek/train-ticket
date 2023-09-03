@@ -6,6 +6,7 @@ import edu.fudan.common.entity.*;
 import edu.fudan.common.util.JsonUtils;
 import edu.fudan.common.util.Response;
 import fdse.microservice.entity.RouteOuterClass;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -416,9 +417,15 @@ public class BasicServiceImpl implements BasicService {
             return null;
         } else {
             BasicServiceImpl.LOGGER.info("[getRoutesByRouteIds][Get Route By Ids][Success]");
-            List<Route> routes = Arrays.asList(JsonUtils.conveterObject(result.getRoutesList(), Route[].class));;
-            return routes;
+            return result.getRoutesList().stream()
+                    .map(this::fromProto)
+                    .collect(Collectors.toList());
+//            return routes;
         }
+    }
+
+    private Route fromProto(RouteOuterClass.Route route) {
+        return new Route(route.getId(), route.getStationsList(), route.getDistancesList(), route.getStartStation(), route.getEndStation());
     }
 
     private Route getRouteByRouteId(String routeId, HttpHeaders headers) {
