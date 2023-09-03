@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.fudan.common.entity.*;
 import edu.fudan.common.util.JsonUtils;
 import edu.fudan.common.util.Response;
+import fdse.microservice.entity.RouteOuterClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -404,18 +405,18 @@ public class BasicServiceImpl implements BasicService {
         BasicServiceImpl.LOGGER.info("[getRoutesByRouteIds][Get Route By Ids][Route IDs：{}]", routeIds);
         HttpEntity requestEntity = new HttpEntity(routeIds, null);
         String route_service_url=getServiceUrl("ts-route-service");
-        ResponseEntity<Response> re = restTemplate.exchange(
+        ResponseEntity<RouteOuterClass.Response> re = restTemplate.exchange(
                 route_service_url + ":11178/api/v1/routeservice/routes/byIds/",
                 HttpMethod.POST,
                 requestEntity,
-                Response.class);
-        Response<List<Route>> result = re.getBody();
+                RouteOuterClass.Response.class);
+        RouteOuterClass.Response result = re.getBody();
         if ( result.getStatus() == 0) {
             BasicServiceImpl.LOGGER.warn("[getRoutesByRouteIds][Get Route By Ids Failed][Fail msg: {}]", result.getMsg());
             return null;
         } else {
             BasicServiceImpl.LOGGER.info("[getRoutesByRouteIds][Get Route By Ids][Success]");
-            List<Route> routes = Arrays.asList(JsonUtils.conveterObject(result.getData(), Route[].class));;
+            List<Route> routes = Arrays.asList(JsonUtils.conveterObject(result.getRoutesList(), Route[].class));;
             return routes;
         }
     }

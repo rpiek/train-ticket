@@ -37,6 +37,13 @@
             <artifactId>ts-common</artifactId>
             <version>0.1.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.24.2</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>

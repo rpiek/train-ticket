@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package proto;
+
+message Route {
+  string id = 1;
+  repeated string stations = 2;
+  repeated int32 distances = 3;
+  string startStation = 4;
+  string endStation = 5;
+}
+
+message Response {
+  int32 status = 1;
+  string msg = 2;
+  repeated Route routes = 3;
+}

@@ -1,6 +1,7 @@
 package route.service;
 
 import edu.fudan.common.util.Response;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import route.entity.Route;
 import route.entity.RouteInfo;
+import route.entity.RouteOuterClass;
 import route.repository.RouteRepository;
 
 import java.util.ArrayList;
@@ -90,13 +92,25 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public Response getRouteByIds(List<String> routeIds, HttpHeaders headers) {
+    public RouteOuterClass.Response getRouteByIds(List<String> routeIds, HttpHeaders headers) {
         List<Route> routes = routeRepository.findByIds(routeIds);
         if (routes == null || routes.isEmpty()) {
             RouteServiceImpl.LOGGER.error("[getRouteById][Find route error][Route not found][RouteIds: {}]",routeIds);
-            return new Response<>(0, "No content with the routeIds", null);
+            return RouteOuterClass.Response.newBuilder()
+                    .setStatus(0)
+                    .setMsg("No content with the routeIds")
+                    .addAllRoutes(null)
+                    .build();
+//            return new Response<>(0, "No content with the routeIds", null);
         } else {
-            return new Response<>(1, success, routes);
+            List<RouteOuterClass.Route> routeProtos = routes.stream()
+                    .map(Route::toProto)
+                    .collect(Collectors.toList());
+            return RouteOuterClass.Response.newBuilder()
+                    .setStatus(1)
+                    .setMsg("Success")
+                    .addAllRoutes(routeProtos)
+                    .build();
         }
     }
 

@@ -56,4 +56,14 @@ public class Route {
         this.startStation = startStation;
         this.endStation = endStation;
     }
+
+    public RouteOuterClass.Route toProto() {
+        return RouteOuterClass.Route.newBuilder()
+                .setId(this.id)
+                .addAllStations(this.stations)
+                .addAllDistances(this.distances)
+                .setStartStation(this.startStation)
+                .setEndStation(this.endStation)
+                .build();
+    }
 }

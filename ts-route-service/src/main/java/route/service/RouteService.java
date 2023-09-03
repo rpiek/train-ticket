@@ -43,10 +43,10 @@ public interface RouteService {
      * get route by ids
      *
      * @param routeIds route ids
-     * @param headers headers
+     * @param headers  headers
      * @return Response
      */
-    Response getRouteByIds(List<String> routeIds, HttpHeaders headers);
+    RouteOuterClass.Response getRouteByIds(List<String> routeIds, HttpHeaders headers);
 
     /**
      * delete route by id
