@@ -21,4 +21,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: prometheus, health
+        include: '*'
+  endpoint:
+    metrics:
+      enabled: true
