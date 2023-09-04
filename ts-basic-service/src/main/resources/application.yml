@@ -16,3 +16,9 @@ spring:
 
 swagger:
   controllerPackage: fdse.microservice.controller
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
