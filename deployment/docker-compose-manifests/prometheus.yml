@@ -6,8 +6,8 @@ scrape_configs:
   - job_name: 'spring-boot-app'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: [ 'localhost:15680', 'localhost:11178', 'localhost:14578', 'localhost:11188', 'localhost:12342',
-                   'localhost:12347', 'localhost:14568', 'localhost:18856', 'localhost:12345', 'localhost:12346',
-                   'localhost:18898', 'localhost:15679', 'localhost:14567', 'localhost:16579', 'localhost:12031',
-                   'localhost:16111', 'localhost:16110']
+      - targets: [ 'ts-basic-service:15680', 'ts-route-service:11178', 'ts-route-plan-service:14578', 'ts-security-service:11188', 'ts-user-service:12342',
+                   'ts-contacts-service:12347', 'ts-preserve-service:14568', 'ts-food-service:18856', 'ts-station-service:12345', 'ts-travel-service:12346',
+                   'ts-seat-service:18898', 'ts-config-service:15679', 'ts-train-service:14567', 'ts-price-service:16579', 'ts-order-service:12031',
+                   'ts-consign-service:16111', 'ts-consign-price-service:16110']
     scrape_interval: 5s
