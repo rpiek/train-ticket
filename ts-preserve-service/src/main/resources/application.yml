@@ -23,5 +23,12 @@ spring:
     sampler:
       probability: 1.0
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+
+
 swagger:
   controllerPackage: preserve.controller

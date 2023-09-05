@@ -1,7 +1,13 @@
-global:
-  scrape_interval: 1s
-
 scrape_configs:
   - job_name: 'cadvisor'
     static_configs:
       - targets: ['cadvisor:8080']
+    scrape_interval: 1s
+  - job_name: 'spring-boot-app'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'localhost:15680', 'localhost:11178', 'localhost:14578', 'localhost:11188', 'localhost:12342',
+                   'localhost:12347', 'localhost:14568', 'localhost:18856', 'localhost:12345', 'localhost:12346',
+                   'localhost:18898', 'localhost:15679', 'localhost:14567', 'localhost:16579', 'localhost:12031',
+                   'localhost:16111', 'localhost:16110']
+    scrape_interval: 5s

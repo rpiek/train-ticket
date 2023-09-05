@@ -21,6 +21,13 @@ spring:
     sampler:
       probability: 1.0
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+
+
 # HTTP Server
 server:
   port: 11188  # HTTP (Tomcat) port
