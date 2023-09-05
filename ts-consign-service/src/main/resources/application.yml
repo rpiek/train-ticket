@@ -22,9 +22,6 @@ spring:
 # HTTP Server
 server:
   port: 16111
-  tomcat:
-    threads:
-      max: 5
 
 management:
   endpoints:

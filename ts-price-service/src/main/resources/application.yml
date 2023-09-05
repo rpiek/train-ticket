@@ -32,9 +32,6 @@ management:
 # HTTP Server
 server:
   port: 16579  # HTTP (Tomcat) port
-  tomcat:
-    threads:
-      max: 5
 
 swagger:
   controllerPackage: price.controller

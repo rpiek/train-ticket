@@ -33,9 +33,6 @@ management:
 # HTTP Server
 server:
   port: 15679  # HTTP (Tomcat) port
-  tomcat:
-    threads:
-      max: 5
 
 swagger:
   controllerPackage: config.controller

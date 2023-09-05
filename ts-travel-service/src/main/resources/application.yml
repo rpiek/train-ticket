@@ -1,9 +1,6 @@
 # HTTP Server
 server:
   port: 12346  # HTTP (Tomcat) port
-  tomcat:
-    threads:
-      max: 5
 
 spring:
   main:
