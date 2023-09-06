@@ -10,4 +10,4 @@ scrape_configs:
                    'ts-contacts-service:12347', 'ts-preserve-service:14568', 'ts-food-service:18856', 'ts-station-service:12345', 'ts-travel-service:12346',
                    'ts-seat-service:18898', 'ts-config-service:15679', 'ts-train-service:14567', 'ts-price-service:16579', 'ts-order-service:12031',
                    'ts-consign-service:16111', 'ts-consign-price-service:16110']
-    scrape_interval: 1s
+    scrape_interval: 10s
