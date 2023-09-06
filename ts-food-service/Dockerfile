@@ -4,6 +4,6 @@ RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shang
 RUN mkdir -p /test
 
 ADD ./target/ts-food-service-1.0.jar /app/
-CMD ["java", "-Xmx2G", "-jar", "/app/ts-food-service-1.0.jar"]
+CMD ["java", "-XX:MaxRAMPercentage=75", "-XX:MinHeapFreeRatio=10", "-XX:MaxHeapFreeRatio=20", "-jar", "/app/ts-food-service-1.0.jar"]
 
 EXPOSE 18856
