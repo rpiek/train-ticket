@@ -5,14 +5,14 @@ spring:
 #        server-addr: ${NACOS_ADDRS:nacos-0.nacos-headless.default.svc.cluster.local,nacos-1.nacos-headless.default.svc.cluster.local,nacos-2.nacos-headless.default.svc.cluster.local}
   application:
     name: ts-station-service
-#  datasource:
-#    url: jdbc:mysql://${STATION_MYSQL_HOST:ts-station-mysql}:${STATION_MYSQL_PORT:3306}/${STATION_MYSQL_DATABASE:ts-station-mysql}
-#    username: ${STATION_MYSQL_USER:root}
-#    password: ${STATION_MYSQL_PASSWORD:root}
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://${STATION_MYSQL_HOST:ts-station-mysql}:${STATION_MYSQL_PORT:3306}/${STATION_MYSQL_DATABASE:ts-station-mysql}
+    username: ${STATION_MYSQL_USER:root}
+    password: ${STATION_MYSQL_PASSWORD:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
 #  zipkin:
 #    base-url: http://zipkin:9411
 #  sleuth:
