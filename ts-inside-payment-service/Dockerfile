@@ -3,6 +3,6 @@ FROM openjdk:8
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
 
 ADD ./target/ts-inside-payment-service-1.0.jar /app/
-CMD ["java", "-Xmx2G",  "-jar", "/app/ts-inside-payment-service-1.0.jar"]
+CMD ["java",   "-jar", "/app/ts-inside-payment-service-1.0.jar"]
 
 EXPOSE 18673
