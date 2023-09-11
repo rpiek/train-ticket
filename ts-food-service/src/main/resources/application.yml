@@ -22,7 +22,7 @@ spring:
     base-url: http://zipkin:9411
   sleuth:
     sampler:
-      probability: 1.0
+      probability: 0.0
 
 management:
   endpoints:

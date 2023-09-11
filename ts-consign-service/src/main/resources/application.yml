@@ -17,7 +17,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
   sleuth:
     sampler:
-      probability: 1.0
+      probability: 0.0
 
 # HTTP Server
 server:
