@@ -15,11 +15,7 @@ spring:
 server:
   port: 14578 # HTTP (Tomcat) port
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: prometheus
+
 
 
 swagger:

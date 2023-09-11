@@ -23,11 +23,7 @@ spring:
 server:
   port: 16111
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: prometheus
+
 
 swagger:
   controllerPackage: consign.controller
