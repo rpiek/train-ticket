@@ -8,12 +8,4 @@ providers:
     disableDeletion: false
     editable: true
     options:
-      path: /etc/grafana/provisioning/dashboards/dashboard.json
-  - name: 'spring'
-    orgId: 1
-    folder: ''
-    type: file
-    disableDeletion: false
-    editable: true
-    options:
-      path: /etc/grafana/provisioning/dashboards/dashboard2.json
+      path: /etc/grafana/provisioning/dashboards
