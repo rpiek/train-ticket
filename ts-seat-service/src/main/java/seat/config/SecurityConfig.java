@@ -69,13 +69,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/seatservice/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/v1/seatservice/seats").hasAnyRole("ADMIN")
-                .antMatchers("/swagger-ui.html", "/webjars/**", "/images/**",
-                        "/configuration/**", "/swagger-resources/**", "/v2/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .addFilterBefore(new JWTFilter(), UsernamePasswordAuthenticationFilter.class);
+//                .antMatchers("/api/v1/seatservice/**").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/v1/seatservice/seats").hasAnyRole("ADMIN")
+//                .antMatchers("/swagger-ui.html", "/webjars/**", "/images/**",
+//                        "/configuration/**", "/swagger-resources/**", "/v2/**").permitAll()
+                .anyRequest().permitAll();
+//                .and()
+//                .addFilterBefore(new JWTFilter(), UsernamePasswordAuthenticationFilter.class);
 
         // close cache
         httpSecurity.headers().cacheControl();

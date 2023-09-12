@@ -68,15 +68,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/trainservice/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/v1/trainservice/trains").hasAnyRole(admin)
-                .antMatchers(HttpMethod.PUT, "/api/v1/trainservice/trains").hasAnyRole(admin)
-                .antMatchers(HttpMethod.DELETE, "/api/v1/trainservice/trains/*").hasAnyRole(admin)
-                .antMatchers("/swagger-ui.html", "/webjars/**", "/images/**",
-                        "/configuration/**", "/swagger-resources/**", "/v2/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .addFilterBefore(new JWTFilter(), UsernamePasswordAuthenticationFilter.class);
+//                .antMatchers("/api/v1/trainservice/**").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/v1/trainservice/trains").hasAnyRole(admin)
+//                .antMatchers(HttpMethod.PUT, "/api/v1/trainservice/trains").hasAnyRole(admin)
+//                .antMatchers(HttpMethod.DELETE, "/api/v1/trainservice/trains/*").hasAnyRole(admin)
+//                .antMatchers("/swagger-ui.html", "/webjars/**", "/images/**",
+//                        "/configuration/**", "/swagger-resources/**", "/v2/**").permitAll()
+                .anyRequest().permitAll();
+//                .and()
+//                .addFilterBefore(new JWTFilter(), UsernamePasswordAuthenticationFilter.class);
 
         // close cache
         httpSecurity.headers().cacheControl();
