@@ -1,7 +1,7 @@
 package fdse.microservice.service;
 
 import edu.fudan.common.util.Response;
-import edu.fudan.common.entity.Route;
+import fdse.microservice.entity.Route;
 import java.util.List;
 import org.springframework.http.HttpHeaders;
 import fdse.microservice.entity.RouteInfo;
@@ -39,7 +39,7 @@ public interface RouteService {
      */
     Response getRouteById(String routeId, HttpHeaders headers);
 
-    edu.fudan.common.entity.Route getRouteByIdIntra(String routeId);
+    Route getRouteByIdIntra(String routeId);
 
     /**
      * get route by ids

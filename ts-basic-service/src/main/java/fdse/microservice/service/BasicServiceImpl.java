@@ -2,6 +2,8 @@ package fdse.microservice.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fdse.microservice.entity.Route;
+import fdse.microservice.entity.TravelResult;
 import edu.fudan.common.entity.*;
 import edu.fudan.common.util.JsonUtils;
 import edu.fudan.common.util.Response;
@@ -422,7 +424,7 @@ public class BasicServiceImpl implements BasicService {
         }
     }
 
-    private edu.fudan.common.entity.Route getRouteByRouteId(String routeId, HttpHeaders headers) {
+    private Route getRouteByRouteId(String routeId, HttpHeaders headers) {
         BasicServiceImpl.LOGGER.info("[getRouteByRouteId][Get Route By Id][Route ID：{}]", routeId);
 //        HttpEntity requestEntity = new HttpEntity(null);
 //        String route_service_url=getServiceUrl("ts-route-service");

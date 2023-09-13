@@ -89,14 +89,13 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public edu.fudan.common.entity.Route getRouteByIdIntra(String routeId) {
+    public Route getRouteByIdIntra(String routeId) {
         Optional<Route> route = routeRepository.findById(routeId);
         if (!route.isPresent()) {
             RouteServiceImpl.LOGGER.error("[getRouteById][Find route error][Route not found][RouteId: {}]",routeId);
             return null;
         } else {
-            Route routeResult = route.get();
-            return new edu.fudan.common.entity.Route(routeResult.getId(), routeResult.getStations(), routeResult.getDistances(), routeResult.getStartStation(), routeResult.getEndStation());
+            return route.get();
         }
 
     }
@@ -113,15 +112,13 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public List<edu.fudan.common.entity.Route> getRouteByIdsIntra(List<String> routeIds) {
+    public List<Route> getRouteByIdsIntra(List<String> routeIds) {
         List<Route> routes = routeRepository.findByIds(routeIds);
         if (routes == null || routes.isEmpty()) {
             RouteServiceImpl.LOGGER.error("[getRouteById][Find route error][Route not found][RouteIds: {}]",routeIds);
             return null;
         } else {
-            ArrayList<edu.fudan.common.entity.Route> result = new ArrayList<>();
-            routes.forEach(route -> result.add(new edu.fudan.common.entity.Route(route.getId(), route.getStations(), route.getDistances(), route.getStartStation(), route.getEndStation())));
-            return result;
+            return routes;
         }
     }
 
