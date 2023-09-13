@@ -2,18 +2,18 @@ version: '3.9'
 services:
 
   # Used version 2.24.2
-#  zipkin:
-#    image: openzipkin/zipkin:2.24.2
-#    ports:
-#      - "9411:9411"
-#    environment:
-#      #      - STORAGE_TYPE=elasticsearch
-#      #      - ES_HOSTS=http://elasticsearch:9200
-#      - JAVA_OPTS=-Xmx8g
-#    #    volumes:
-#    #      - ./logs:/var/log/zipkin
-#    networks:
-#      - my-network
+  zipkin:
+    image: openzipkin/zipkin:2.24.2
+    ports:
+      - "9411:9411"
+    environment:
+      #      - STORAGE_TYPE=elasticsearch
+      #      - ES_HOSTS=http://elasticsearch:9200
+      - JAVA_OPTS=-Xmx8g
+    #    volumes:
+    #      - ./logs:/var/log/zipkin
+    networks:
+      - my-network
 
   #  kibana:
   #    image: docker.elastic.co/kibana/kibana:6.7.0
