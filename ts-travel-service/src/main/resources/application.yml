@@ -16,7 +16,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   sleuth:
     sampler:
-      probability: 1.0 0.0
+      probability: 0.0
   jpa:
     hibernate:
       ddl-auto: update
