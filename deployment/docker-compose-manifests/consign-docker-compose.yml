@@ -6,7 +6,7 @@ services:
     ports:
       - 9411:9411
     environment:
-      - JAVA_OPTS=-Xmx2g
+      - JAVA_OPTS=--Xmx2G
     networks:
       - my-network
 
